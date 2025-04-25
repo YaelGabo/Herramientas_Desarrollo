@@ -48,8 +48,8 @@ INSERT INTO `usuarios` (`id`, `nombre`, `primerApellido`, `dni`, `direccion`, `n
 (5, 'Ramiro', 'Ramirez', '78421137', 'Lince', '945875135', 'ramiroramirez@gmail.com', 'ARamiro18', '$2y$10$bXlV6RLZGZWP9uWIJ0SM4uMEX6iNVXEJ2IehvqWIb05zqaJCB/ZMm', 'Usuario'),
 (7, 'Sebastian', 'Barron', '730937771', 'San Luis', '9684799504', 'Sebitas123@gmail.com', 'ASebas123', '$2y$10$TAcuRry/nsl3S7X6A8hUVOtPh6VKjfWyW2hEG8k2lLKEI5WvgyHO6', 'Usuario'),
 (8, 'Oscar', 'Ibañez', '79611842', 'Milaflores', '78425846', 'oscaribanez@gmail.com', 'UOscar85', '$2y$10$ru5U8RGHVo6g0cDu5JEXGugPTNCIvmj3.3mAIsHdPcf5tbqT.zvoa', 'Usuario'),
-(11, 'Ronaldo', 'Rafael', '73254668', 'Independencia', '975748412', 'ronaldo@gmail.com', 'URonaldo07', '$2y$10$KidLeJywhyEsK3M39k98X.MrQqSfl0jYzhwvfTl5xbqmWkSOUlVqW', 'Usuario');
-
+(11, 'Ronaldo', 'Rafael', '73254668', 'Independencia', '975748412', 'ronaldo@gmail.com', 'URonaldo07', '$2y$10$KidLeJywhyEsK3M39k98X.MrQqSfl0jYzhwvfTl5xbqmWkSOUlVqW', 'Usuario'),
+(12, 'Yael', 'Ramos', '72642080', 'Jesús Maria', '987528751', 'yaelgabriel2019@gmail.com', 'Agabo', '$2y$10$59tjbJWmV5poKuIg/spwh.E5JBsI3SJ6Yt75pdFHs73N/BJplHs0G',  'Usuario');
 --
 -- Índices para tablas volcadas
 --
