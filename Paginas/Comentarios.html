@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comentarios - FarmaTotal</title>
+    <link rel="stylesheet" href="../Estilos/estilos3.css">
+    <style>
+        /* Estilos omitidos para brevedad */
+    </style>
+</head>
+<body>
+
+    <!-- Barra de navegación -->
+    <div class="navbar">
+        <div class="logo">FarmaTotal</div>
+        <nav>
+            <ul>
+                <li><a href="Medicamentos.html">Medicamentos</a></li>
+                <li><a href="Proovedores.html">Proveedores</a></li>
+                <li><a href="Usuario.html">Usuarios</a></li>
+                <li><a href="Ventas.html">Ventas</a></li>
+                <li><a href="Comentarios.html">Comentarios</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="container">
+        <div class="left-side">
+            <h2>¿Tienes alguna recomendación?</h2>
+            <form class="formulario-comentarios">
+                <label for="nombre-farmacia">Nombre de la Farmacia:</label>
+                <input type="text" id="nombre-farmacia" name="nombre-farmacia" placeholder="Nombre de la farmacia" required>
+                <p>Complete el espacio requerido</p>
+    
+                <label for="provincia">Provincia:</label>
+                <input type="text" id="provincia" name="provincia" placeholder="Tu provincia" required>
+                <p>Complete el espacio requerido</p>
+    
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+                <p>Complete el espacio requerido</p>
+    
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" name="email" placeholder="Tu correo electrónico" required>
+                <p>Complete el espacio requerido</p>
+    
+                <label for="telefono">Teléfono:</label>
+                <input type="tel" id="telefono" name="telefono" placeholder="Tu teléfono" required>
+                <p>Complete el espacio requerido</p>
+    
+                <label for="comentario">Comentario:</label>
+                <textarea id="comentario" name="comentario" rows="5" placeholder="Escribe tu comentario"></textarea>
+    
+                <div class="container-checkbox">
+                    <input type="checkbox" id="politica" name="politica" required>
+                    <label for="politica">Acepto la política de seguridad</label>
+                </div>
+    
+                <button type="submit">Enviar Comentario</button>
+                <button id="cerrarSesionBtn" onclick="cerrarSesion()">Cerrar Sesión</button>
+            </form>
+        </div>
+    
+        <!-- Lado derecho -->
+        <div class="right-side">
+            <img src="Imagenes/Consulta.jpg" alt="Imagen relacionada">
+        </div>
+    </div>
+    
+    <script>
+        // Validación en tiempo real
+        document.getElementById('nombre-farmacia').addEventListener('input', function () {
+            this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+        });
+
+        document.getElementById('provincia').addEventListener('input', function () {
+            this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+        });
+
+        document.getElementById('nombre').addEventListener('input', function () {
+            this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+        });
+
+        document.getElementById('telefono').addEventListener('input', function () {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+
+        function cerrarSesion() {
+            window.location.href = "../Inicio.html";
+        }
+    </script>
+
+</body>
+</html>

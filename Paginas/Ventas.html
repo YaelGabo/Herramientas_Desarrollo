@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>FarmaTotal - Ventas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="../Estilos/estilos2.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        #cerrarSesionBtn {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        #cerrarSesionBtn:hover {
+            background-color: #e60000;
+        }
+        #generarReporteBtn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        #generarReporteBtn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <div class="div1">
+            <h1>FarmaTotal</h1>
+            <ul>
+                <li><a href="Medicamentos.html">Medicamentos</a></li>
+                <li><a href="Proovedores.html">Proveedores</a></li>
+                <li><a href="Usuario.html">Usuarios</a></li>
+                <li><a href="Ventas.html">Ventas</a></li>
+                <li><a href="Comentarios.html">Comentarios</a></li>
+            </ul>
+            <button id="cerrarSesionBtn" onclick="cerrarSesion()">Cerrar Sesión</button>
+        </div>
+        <div class="div2">
+            <h2>Ventas Realizadas</h2>
+            <table id="tablaVentas">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Productos</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí se llenarán las ventas con JavaScript -->
+                </tbody>
+            </table>
+            <button id="generarReporteBtn" onclick="generarReporte()">Generar Reporte de Ventas</button>
+            <button id="generarReporteBtn" onclick="generarReporteGanancia()">Generar Reporte de Ganancia</button>
+        </div>
+    </div>
+
+    <script>
+        function cargarVentas() {
+            let ventas = JSON.parse(localStorage.getItem('ventas')) || [];
+            let tablaVentas = document.getElementById('tablaVentas').getElementsByTagName('tbody')[0];
+            tablaVentas.innerHTML = '';
+
+            ventas.forEach(venta => {
+                let fila = tablaVentas.insertRow();
+                // Columna para la fecha
+                let celdaFecha = fila.insertCell(0);
+                celdaFecha.textContent = venta.fecha;
+                
+                // Columna para los productos
+                let celdaProductos = fila.insertCell(1);
+                celdaProductos.textContent = venta.productos.map(producto => `${producto.nombre} (${producto.cantidad})`).join(', ');
+
+                // Columna para el total
+                let celdaTotal = fila.insertCell(2);
+                celdaTotal.textContent = `$${venta.total}`;
+            });
+        }
+
+        function generarReporte() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            let ventas = JSON.parse(localStorage.getItem('ventas')) || [];
+            
+            // Título
+            doc.text("Reporte de Ventas", 14, 10);
+
+            // Establecer las columnas de la tabla
+            const columns = ["Fecha", "Productos", "Total"];
+            const rows = ventas.map(venta => [
+                venta.fecha,
+                venta.productos.map(producto => `${producto.nombre} (${producto.cantidad})`).join(', '),
+                `$${venta.total}`
+            ]);
+
+            // Crear la tabla
+            doc.autoTable({
+                head: [columns],
+                body: rows,
+                startY: 20
+            });
+
+            // Descargar el PDF
+            doc.save('reporte_ventas.pdf');
+        }
+        function generarReporteGanancia() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            let ventas = JSON.parse(localStorage.getItem('ventas')) || [];
+            let gananciaTotal = ventas.reduce((suma, venta) => suma + venta.total, 0);
+            
+            doc.text("Reporte de Ganancia", 14, 10);
+            doc.text(`Ganancia Total del Día: $${gananciaTotal.toFixed(2)}`, 14, 20);
+
+            doc.save('reporte_ganancia.pdf');
+        }
+        function cerrarSesion() {
+            // Lógica para cerrar sesión
+            window.location.href = '../Inicio.html'; // Redirige a la página de login (puedes cambiar la URL)
+        }
+
+        cargarVentas(); // Cargar las ventas al cargar la página
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+</body>
+</html>
