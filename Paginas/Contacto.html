@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>FarmaTotal</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../Estilos/estilos5.css'>
+    <style>
+        .cerrar-sesion-btn {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: auto;
+        }
+
+        .cerrar-sesion-btn:hover {
+            background-color: #e60000;
+        }
+
+        .cerrar-sesion-btn:active {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>FarmaTotal</h1>
+        <nav>
+            <ul>
+                <li><a href="FarmaTotal.html">Inicio</a></li>
+                <li><a href="Acerca_de.html">Acerca de</a></li>
+                <li><a href="Productos.html">Productos</a></li>
+                <li><a href="Carrito.html">Carrito</a></li>
+                <li><a href="Equipo.html">Equipo</a></li>
+                <li><a href="Contacto.html">Contacto</a></li>
+                <li><button class="cerrar-sesion-btn" onclick="cerrarSesion()">Cerrar Sesión</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero-1">
+        <img src="../Imagenes/Contacto.jpg" alt="Logo FarmaTotal">
+        <h2>¿Necesitas Ayuda o Información sobre Nuestros Productos?</h2>
+        <p>En FarmaTotal, estamos aquí para ayudarte con cualquier consulta o duda que tengas sobre nuestros servicios o productos. Si deseas más información sobre nuestros medicamentos, cómo realizar pedidos, o si necesitas soporte técnico para nuestra plataforma en línea, nuestro equipo está listo para asistirte. Por favor, completa el formulario de contacto y nos pondremos en contacto contigo a la brevedad.</p>
+    </section>
+
+    <!-- Formulario de contacto -->
+    <section class="contact-form" style="margin: 20px;">
+        <div class="container-4">
+            <h3>Formulario de Contacto</h3>
+            <form id="contactForm">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" name="apellido" required>
+
+                <label for="correo">Correo Electrónico:</label>
+                <input type="email" id="correo" name="correo" required>
+
+                <label for="telefono">Teléfono:</label>
+                <input type="tel" id="telefono" name="telefono" required>
+
+                <label for="mensaje">Mensaje:</label>
+                <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Sección de contacto que ocupa toda la pantalla -->
+    <section class="contacto">
+        <div class="container-3">
+            <h3>Contacta con FarmaTotal</h3>
+            <p>Para más información sobre nuestros productos, asistencia en línea, o cualquier otra consulta, puedes comunicarte con nosotros a través de:</p>
+            <ul>
+                <li><strong>Email:</strong> contacto@farmatotal.com</li>
+                <li><strong>Teléfono:</strong> +34 123 456 789</li>
+                <li><strong>Dirección:</strong> Calle de la Salud, 45, Madrid, España</li>
+            </ul>
+            <p>También puedes seguirnos en nuestras redes sociales para enterarte de novedades, promociones, y actualizaciones sobre nuestros productos.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>(c)2024 Desarrollado por Ronaldo Rafael Vazquez</p>
+    </footer>
+
+    <script>
+        // Script para manejar el envío del formulario
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevenir el envío del formulario
+            
+            // Obtener los valores del formulario
+            const nombre = document.getElementById('nombre').value;
+            const apellido = document.getElementById('apellido').value;
+            const correo = document.getElementById('correo').value;
+            const telefono = document.getElementById('telefono').value;
+            const mensaje = document.getElementById('mensaje').value;
+
+            // Mostrar los datos en la consola (puedes cambiar esto según sea necesario)
+            console.log(`Nombre: ${nombre}`);
+            console.log(`Apellido: ${apellido}`);
+            console.log(`Correo: ${correo}`);
+            console.log(`Teléfono: ${telefono}`);
+            console.log(`Mensaje: ${mensaje}`);
+
+            // Limpiar el formulario después de enviar
+            document.getElementById('contactForm').reset();
+            alert('Gracias por tu mensaje. Nos pondremos en contacto contigo pronto.');
+        });
+        function cerrarSesion() {
+            window.location.href = "../Inicio.html"; // Redirige a la página de inicio o login
+        }
+    </script>
+</body>
+</html>
