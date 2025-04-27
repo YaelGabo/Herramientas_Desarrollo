@@ -1,0 +1,211 @@
+<!DOCTYPE html> 
+<html lang="es">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Usuarios - FarmaTotal</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../Estilos/estilos2.css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        #cerrarSesionBtn, #generarReporteBtn {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        #cerrarSesionBtn:hover, #generarReporteBtn:hover {
+            background-color: #e60000;
+        }
+
+        #cerrarSesionBtn:active, #generarReporteBtn:active {
+            background-color: #cc0000;
+        }
+
+        #generarReporteBtn {
+            background-color: #4caf50;
+            margin-left: 10px;
+        }
+
+        #generarReporteBtn:hover {
+            background-color: #45a049;
+        }
+
+        #generarReporteBtn:active {
+            background-color: #3e8e41;
+        }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <div class="div1">
+            <h1>FarmaTotal</h1>
+            <ul>
+                <li><a href="Medicamentos.html">Medicamentos</a></li>
+                <li><a href="Proovedores.html">Proveedores</a></li>
+                <li><a href="Usuario.html">Usuarios</a></li>
+                <li><a href="Ventas.html">Ventas</a></li>
+                <li><a href="Comentarios.html">Comentarios</a></li>
+            </ul>
+            <button id="cerrarSesionBtn" onclick="cerrarSesion()">Cerrar Sesión</button>
+        </div>
+        <div class="div2">
+            <h2>Ingresar Usuarios</h2>
+            <form id="formularioUsuarios">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Nombre" oninput="validarNombre()"><br><br>
+
+                <label for="correo">Correo:</label>
+                <input type="email" id="correo" name="correo" placeholder="Correo"><br><br>
+                
+                <button type="button" onclick="agregarUsuario()">Agregar Usuario</button>
+            </form>
+        </div>
+        <div class="div3">
+            <h2>Usuarios Registrados</h2>
+            <table border="1" id="tablaUsuarios">
+                <thead>
+                    <tr>
+                        <th>Número</th>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Borrar</th>
+                        <th>Editar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Filas de usuarios se agregarán aquí -->
+                </tbody>
+            </table>
+            <button id="generarReporteBtn" onclick="generarReporte()">Generar Reporte de Inscripción</button>
+        </div>
+    </div>
+
+    <script>
+        let contadorUsuarios = 1; // Variable para llevar el conteo de usuarios registrados
+        function validarNombre() {
+        const nombre = document.getElementById('nombre').value;
+        const regex = /[^a-zA-Z\s]/g; // Solo permite letras y espacios
+        if (regex.test(nombre)) {
+            alert("El nombre no puede contener números ni caracteres especiales.");
+            document.getElementById('nombre').value = nombre.replace(regex, ''); // Eliminar caracteres no permitidos
+            }
+        }
+        // Cargar usuarios desde el localStorage cuando se carga la página
+        function cargarUsuarios() {
+            let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+            const tabla = document.getElementById("tablaUsuarios").getElementsByTagName("tbody")[0];
+            tabla.innerHTML = "";
+
+            usuarios.forEach((usuario, index) => {
+                const nuevaFila = tabla.insertRow();
+                nuevaFila.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${usuario.nombre}</td>
+                    <td>${usuario.correo}</td>
+                    <td><button onclick="borrarFila(${index})">Borrar</button></td>
+                    <td><button onclick="editarFila(this, ${index})">Editar</button></td>
+                `;
+            });
+        }
+
+        function agregarUsuario() {
+            const nombre = document.getElementById("nombre").value;
+            const correo = document.getElementById("correo").value;
+            const fechaInscripcion = new Date().toLocaleDateString();
+
+            if (!nombre || !correo) {
+                alert("Por favor, complete todos los campos.");
+                return;
+            }
+
+            let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+            usuarios.push({ nombre, correo, fechaInscripcion });
+            localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
+            cargarUsuarios(); // Actualiza la tabla
+            document.getElementById("formularioUsuarios").reset(); // Limpia el formulario
+        }
+
+        function borrarFila(index) {
+            let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+            usuarios.splice(index, 1);
+            localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
+            cargarUsuarios(); // Actualiza la tabla después de borrar
+        }
+
+        function editarFila(boton, id) {
+            const fila = boton.parentNode.parentNode;
+            const celdas = fila.getElementsByTagName("td");
+
+            if (boton.textContent === "Editar") {
+                // Cambiar a modo edición
+                for (let i = 1; i < 3; i++) { // Solo editar las celdas de "Nombre" y "Correo"
+                    const valorActual = celdas[i].textContent;
+                    celdas[i].innerHTML = `<input type="text" value="${valorActual}" />`;
+                }
+                boton.textContent = "Guardar";
+            } else {
+                // Guardar cambios
+                const nuevoUsuario = {
+                    id: id,
+                    nombre: celdas[1].getElementsByTagName("input")[0].value,
+                    correo: celdas[2].getElementsByTagName("input")[0].value,
+                    fechaInscripcion: celdas[3].textContent // No se edita la fecha de inscripción
+                };
+
+                // Actualizar la fila
+                celdas[1].textContent = nuevoUsuario.nombre;
+                celdas[2].textContent = nuevoUsuario.correo;
+
+                boton.textContent = "Editar";
+
+                // Actualizar en LocalStorage
+                actualizarEnLocalStorage(nuevoUsuario);
+            }
+        }
+
+        function actualizarEnLocalStorage(usuarioActualizado) {
+            let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+            const index = usuarios.findIndex(u => u.id === usuarioActualizado.id);
+            if (index !== -1) {
+                usuarios[index] = usuarioActualizado;
+                localStorage.setItem('usuarios', JSON.stringify(usuarios));
+            }
+        }
+
+        function generarReporte() {
+            let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.setFont("helvetica", "normal");
+            doc.text("Reporte de Inscripción de Usuarios", 20, 20);
+            doc.text("Fecha: " + new Date().toLocaleDateString(), 20, 30);
+            doc.autoTable({
+                head: [["Número", "Nombre", "Correo", "Fecha de Inscripción"]],
+                body: usuarios.map((usuario, index) => [
+                    index + 1,
+                    usuario.nombre,
+                    usuario.correo,
+                    usuario.fechaInscripcion // Incluir la fecha de inscripción en el reporte
+                ])
+            });
+            doc.save("reporte_inscripciones.pdf");
+        }
+
+        function cerrarSesion() {
+            window.location.href = "../Inicio.html";
+        }
+
+        cargarUsuarios(); // Cargar usuarios cuando se carga la página
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+</body>
+</html>
