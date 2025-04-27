@@ -23,7 +23,7 @@
                     <input type="password" name="password" required="">
                     <label>Password</label>
                 </div>
-                <button type="submit" class="submit-button">Submit</button>
+                <button type="submit" class="submit-button">Ingresar</button>
                 <!-- Nueva sección para registrarse -->
                 <div class="extra-options">
                     <a href="./Paginas/Registrarse.html" class="animated-link">Registrarse</a>
@@ -31,6 +31,15 @@
             </form>
         </div>
     </div>
-
+    <script>
+        function verificarUsuario() {
+            const username = document.getElementById("username").value;
+            if (!username.startsWith("U") && !username.startsWith("A")) {
+                alert("El nombre de usuario debe comenzar con 'U' para usuarios o 'A' para administradores.");
+                return false; // Evita el envío del formulario
+            }
+            return true; // Permite el envío si el prefijo es correcto
+        }
+    </script>
 </body>
 </html>
