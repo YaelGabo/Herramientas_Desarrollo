@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras - FarmaTotal</title>
+    <link rel="stylesheet" href="../Estilos/estilos6.css">
+    <style>
+        .cerrar-sesion-btn {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: auto;
+        }
+
+        .cerrar-sesion-btn:hover {
+            background-color: #e60000;
+        }
+
+        .cerrar-sesion-btn:active {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Carrito de Compras</h1>
+        <nav>
+            <ul>
+                <li><a href="FarmaTotal.html">Inicio</a></li>
+                <li><a href="Acerca_de.html">Acerca de</a></li>
+                <li><a href="Productos.html">Productos</a></li>
+                <li><a href="Carrito.html">Carrito</a></li>
+                <li><a href="Equipo.html">Equipo</a></li>
+                <li><a href="Contacto.html">Contacto</a></li>
+                <li><button class="cerrar-sesion-btn" onclick="cerrarSesion()">Cerrar Sesión</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="carrito">
+        <div id="productosCarrito"></div>
+        <div id="total" class="total"></div>
+        <button id="hacerCompraBtn" onclick="hacerCompra()">Hacer Compra</button>
+    </section>
+    <script>
+        function cargarCarrito() {
+            let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            let productosCarrito = document.getElementById('productosCarrito');
+            productosCarrito.innerHTML = '';
+            let total = 0;
+
+            carrito.forEach((producto, index) => {
+                let productoCarrito = document.createElement('div');
+                productoCarrito.classList.add('producto-carrito');
+
+                productoCarrito.innerHTML = `
+                    <h3>${producto.nombre}</h3>
+                    <p>Precio: $${producto.precio} | Cantidad: ${producto.cantidad}</p>
+                    <p>Total: $${producto.precioTotal}</p>
+                    <button onclick="eliminarDelCarrito(${index})">Eliminar</button>
+                `;
+                productosCarrito.appendChild(productoCarrito);
+                total += producto.precioTotal;
+            });
+
+            document.getElementById('total').textContent = `Total: $${total}`;
+        }
+
+        function eliminarDelCarrito(index) {
+            let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            carrito.splice(index, 1);
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+            cargarCarrito();
+        }
+
+        function hacerCompra() {
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    if (carrito.length > 0) {
+        // Calcular el total de la compra
+        let totalCompra = carrito.reduce((total, producto) => total + producto.precioTotal, 0);
+
+        // Guardar la venta en el localStorage
+        let ventas = JSON.parse(localStorage.getItem('ventas')) || [];
+        let fecha = new Date().toLocaleString();
+        ventas.push({
+            productos: carrito,
+            total: totalCompra,
+            fecha: fecha
+        });
+        localStorage.setItem('ventas', JSON.stringify(ventas));
+
+        // Vaciar el carrito
+        localStorage.setItem('carrito', JSON.stringify([]));
+        alert('Compra exitosa. ¡Gracias por tu compra!');
+        cargarCarrito(); // Actualizar la vista del carrito vacío
+    } else {
+        alert('El carrito está vacío. No se puede realizar la compra.');
+    }
+}
+
+        cargarCarrito(); // Cargar los productos al cargar la página
+        function cerrarSesion() {
+            window.location.href = "../Inicio.html"; // Redirige a la página de inicio o login
+        }
+    </script>
+</body>
+</html>
