@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>FarmaTotal - Medicamentos</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../Estilos/estilos2.css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        #cerrarSesionBtn, #generarReporteBtn {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        #cerrarSesionBtn:hover, #generarReporteBtn:hover {
+            background-color: #e60000;
+        }
+
+        #cerrarSesionBtn:active, #generarReporteBtn:active {
+            background-color: #cc0000;
+        }
+
+        #generarReporteBtn {
+            background-color: #4caf50;
+        }
+
+        #generarReporteBtn:hover {
+            background-color: #45a049;
+        }
+
+        #generarReporteBtn:active {
+            background-color: #3e8e41;
+        }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <div class="div1">
+            <h1>FarmaTotal</h1>
+            <ul>
+                <li><a href="Medicamentos.html">Medicamentos</a></li>
+                <li><a href="Proovedores.html">Proveedores</a></li>
+                <li><a href="Usuario.html">Usuarios</a></li>
+                <li><a href="Ventas.html">Ventas</a></li>
+                <li><a href="Comentarios.html">Comentarios</a></li>
+            </ul>
+            <button id="cerrarSesionBtn" onclick="cerrarSesion()">Cerrar Sesión</button>
+        </div>
+        <div class="div2">
+            <h2>Medicamentos Farmacéuticos</h2>
+            <form id="medicamentoForm">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Nombre" oninput="validarNombre()"><br><br>
+
+                <label for="precio">Precio:</label>
+                <input type="number" id="precio" name="precio" placeholder="Precio" oninput="validarPrecio()"><br><br>
+
+                <label for="cantidad">Cantidad de paquetes:</label>
+                <input type="number" id="cantidad" name="cantidad" placeholder="Cantidad" oninput="validarCantidad()"><br><br>
+
+                <label for="fecha">Fecha de Vencimiento:</label>
+                <input type="date" id="fecha" name="fecha_vencimiento"><br><br>
+
+                <button type="button" onclick="agregarMedicamento()">Agregar Medicamento</button>
+                <button type="button" id="generarReporteBtn" onclick="generarReporte()">Generar Reporte Por Fecha</button>
+                <button type="button" id="generarReporteBtn" onclick="generarReporteCantidad()">Generar Reporte Cantidad</button>
+                <button type="button" id="generarReporteBtn" onclick="generarReporteCostos()">Generar Reporte de Costos</button>
+
+            </form>
+        </div>
+        <div class="div3">
+            <h2>Lista de Medicamentos</h2>
+            <table border="1" id="medicamentosTable">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Cantidad de paquetes</th>
+                        <th>Fecha de Vencimiento</th>
+                        <th>Borrar</th>
+                        <th>Editar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí se añadirán las filas dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Al cargar la página, cargar datos desde localStorage
+        document.addEventListener("DOMContentLoaded", function () {
+            cargarDatos();
+        });
+        function validarNombre() {
+        const nombre = document.getElementById('nombre').value;
+        const regex = /[^a-zA-Z\s]/g; // Solo permite letras y espacios
+        if (regex.test(nombre)) {
+            alert("El nombre no puede contener números ni caracteres especiales.");
+            document.getElementById('nombre').value = nombre.replace(regex, ''); // Eliminar caracteres no permitidos
+            }
+        }
+
+        // Validar que el precio sea un número válido
+        function validarPrecio() {
+            const precio = document.getElementById('precio').value;
+            if (isNaN(precio) || precio <= 0) {
+                alert("Por favor, ingresa un precio válido.");
+                document.getElementById('precio').value = ""; // Limpiar campo
+            }
+        }
+
+        // Validar que la cantidad sea un número válido
+        function validarCantidad() {
+            const cantidad = document.getElementById('cantidad').value;
+            if (isNaN(cantidad) || cantidad <= 0) {
+                alert("Por favor, ingresa una cantidad válida.");
+                document.getElementById('cantidad').value = ""; // Limpiar campo
+            }
+        }
+        function agregarMedicamento() {
+            var nombre = document.getElementById('nombre').value;
+            var precio = document.getElementById('precio').value;
+            var cantidad = document.getElementById('cantidad').value;
+            var fecha = document.getElementById('fecha').value;
+            var fechaInscripcion = new Date().toLocaleDateString();
+
+            var medicamento = {
+                nombre: nombre,
+                precio: precio,
+                cantidad: cantidad,
+                fecha: fecha,
+                fechaInscripcion: fechaInscripcion
+            };
+
+            guardarEnLocalStorage(medicamento);
+            agregarFilaATabla(medicamento);
+
+            document.getElementById('medicamentoForm').reset();
+        }
+
+        function agregarFilaATabla(medicamento) {
+            var table = document.getElementById("medicamentosTable").getElementsByTagName('tbody')[0];
+            var newRow = table.insertRow();
+
+            newRow.innerHTML = `
+                <td>${medicamento.nombre}</td>
+                <td>${medicamento.precio}</td>
+                <td>${medicamento.cantidad}</td>
+                <td>${medicamento.fecha}</td>
+                <td><button onclick="borrarFila(this)">Borrar</button></td>
+                <td><button onclick="editarFila(this)">Editar</button></td>
+            `;
+        }
+
+        function borrarFila(button) {
+            var row = button.parentNode.parentNode;
+            var index = row.rowIndex - 1; // Ajustar por encabezados
+            row.parentNode.removeChild(row);
+            eliminarDeLocalStorage(index);
+        }
+
+        function editarFila(button) {
+    var row = button.parentNode.parentNode;
+    var cells = row.cells;
+
+    if (button.textContent === "Editar") {
+        cells[0].innerHTML = `<input type="text" value="${cells[0].textContent}">`;
+        cells[1].innerHTML = `<input type="number" value="${cells[1].textContent}">`;
+        cells[2].innerHTML = `<input type="number" value="${cells[2].textContent}">`;
+        cells[3].innerHTML = `<input type="date" value="${cells[3].textContent}">`;
+
+        button.textContent = "Guardar";
+    } else {
+        // Recuperar los valores editados
+        var inputs = row.querySelectorAll("input");
+        var medicamentoActualizado = {
+            nombre: inputs[0].value,
+            precio: inputs[1].value,
+            cantidad: inputs[2].value,
+            fecha: inputs[3].value,
+            fechaInscripcion: cells[4]?.textContent || new Date().toLocaleDateString()
+        };
+
+        // Actualizar localStorage
+        actualizarEnLocalStorage(row.rowIndex - 1, medicamentoActualizado);
+
+        // Reemplazar valores editados en la tabla
+        cells[0].textContent = medicamentoActualizado.nombre;
+        cells[1].textContent = medicamentoActualizado.precio;
+        cells[2].textContent = medicamentoActualizado.cantidad;
+        cells[3].textContent = medicamentoActualizado.fecha;
+        button.textContent = "Editar";
+    }
+}
+
+        function guardarEnLocalStorage(medicamento) {
+            var medicamentos = JSON.parse(localStorage.getItem('medicamentos')) || [];
+            medicamentos.push(medicamento);
+            localStorage.setItem('medicamentos', JSON.stringify(medicamentos));
+        }
+
+        function cargarDatos() {
+            var medicamentos = JSON.parse(localStorage.getItem('medicamentos')) || [];
+            medicamentos.forEach(agregarFilaATabla);
+        }
+
+        function actualizarEnLocalStorage(index, medicamento) {
+            var medicamentos = JSON.parse(localStorage.getItem('medicamentos'));
+            medicamentos[index] = medicamento;
+            localStorage.setItem('medicamentos', JSON.stringify(medicamentos));
+        }
+
+        function eliminarDeLocalStorage(index) {
+            var medicamentos = JSON.parse(localStorage.getItem('medicamentos'));
+            medicamentos.splice(index, 1);
+            localStorage.setItem('medicamentos', JSON.stringify(medicamentos));
+        }
+
+        function cerrarSesion() {
+            window.location.href = "../Inicio.html";
+        }
+
+        async function generarReporte() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    // Título centrado
+    doc.setFontSize(18);
+    doc.text("FarmaTotal", doc.internal.pageSize.getWidth() / 2, 20, { align: "center" });
+
+    doc.setFontSize(14);
+    doc.text("Reporte de Medicamentos", doc.internal.pageSize.getWidth() / 2, 30, { align: "center" });
+
+    // Encabezados de tabla (sin la columna de cantidad)
+    const encabezados = [["#", "Nombre", "Fecha de Inscripción"]];
+    const data = [];
+
+    const tableRows = document.querySelectorAll("#medicamentosTable tbody tr");
+    tableRows.forEach((row, index) => {
+        const cells = row.cells;
+        const nombre = cells[0].textContent;
+        const fechaInscripcion = new Date().toLocaleDateString(); // Puedes ajustar si tienes otra forma de registrar la fecha
+
+        // Añadir datos a la tabla (sin cantidad)
+        data.push([index + 1, nombre, fechaInscripcion]);
+    });
+
+    // Configurar la tabla
+    doc.autoTable({
+        head: encabezados,
+        body: data,
+        startY: 40, // Posición donde empieza la tabla
+        theme: 'grid', // Tema de la tabla
+        styles: {
+            fontSize: 12,
+            cellPadding: 3,
+        },
+        headStyles: {
+            fillColor: [0, 102, 204], // Color del encabezado
+            textColor: 255, // Color del texto
+            halign: 'center',
+        },
+        bodyStyles: {
+            textColor: 50,
+        },
+    });
+
+    doc.save("reporte_medicamentos.pdf");
+}
+
+        function generarReporteCantidad() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    doc.setFontSize(18);
+    doc.text("FarmaTotal", doc.internal.pageSize.getWidth() / 2, 20, { align: "center" });
+
+    doc.setFontSize(14);
+    doc.text("Reporte de Cantidad de Medicamentos", doc.internal.pageSize.getWidth() / 2, 30, { align: "center" });
+
+    const encabezados = [["#", "Nombre", "Cantidad"]];
+    const data = [];
+
+    const medicamentos = JSON.parse(localStorage.getItem('medicamentos')) || [];
+    medicamentos.forEach((med, index) => {
+        let mensaje = "";
+
+        if (med.cantidad > 30) {
+            mensaje = "Exceso";
+        } else if (med.cantidad < 10) {
+            mensaje = "Bajo Stock";
+        }
+
+        data.push([index + 1, med.nombre, `${med.cantidad} ${mensaje}`]);
+    });
+
+    doc.autoTable({
+        head: encabezados,
+        body: data,
+        startY: 40,
+        theme: 'grid',
+        styles: { fontSize: 12, cellPadding: 3 },
+        headStyles: { fillColor: [255, 69, 0], textColor: 255 },
+    });
+
+    doc.save("reporte_cantidad_medicamentos.pdf");
+}
+function generarReporteCostos() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    doc.setFontSize(18);
+    doc.text("FarmaTotal", doc.internal.pageSize.getWidth() / 2, 20, { align: "center" });
+
+    doc.setFontSize(14);
+    doc.text("Reporte de Costos de Medicamentos", doc.internal.pageSize.getWidth() / 2, 30, { align: "center" });
+
+    // Encabezados de tabla
+    const encabezados = [["#", "Nombre", "Costo Unitario", "Cantidad", "Costo Total"]];
+    const data = [];
+
+    const medicamentos = JSON.parse(localStorage.getItem('medicamentos')) || [];
+
+    let maxProducto = { nombre: "", costoTotal: 0 };
+    let minProducto = { nombre: "", costoTotal: Infinity };
+    let sumaCostosTotales = 0;
+
+    medicamentos.forEach((med, index) => {
+        const costoUnitario = parseFloat(med.precio);
+        const cantidad = parseInt(med.cantidad);
+        const costoTotal = costoUnitario * cantidad;
+
+        // Llenar datos de la tabla
+        data.push([index + 1, med.nombre, `$${costoUnitario.toFixed(2)}`, cantidad, `$${costoTotal.toFixed(2)}`]);
+
+        // Determinar el máximo y el mínimo basados en el costo total
+        if (costoTotal > maxProducto.costoTotal) {
+            maxProducto = { nombre: med.nombre, costoTotal: costoTotal };
+        }
+        if (costoTotal < minProducto.costoTotal) {
+            minProducto = { nombre: med.nombre, costoTotal: costoTotal };
+        }
+
+        sumaCostosTotales += costoTotal;
+    });
+
+    // Calcular el promedio de los costos totales
+    const promedioCostosTotales = sumaCostosTotales / medicamentos.length;
+
+    // Agregar la tabla al PDF
+    doc.autoTable({
+        head: encabezados,
+        body: data,
+        startY: 40,
+        theme: 'grid',
+        styles: { fontSize: 12, cellPadding: 3 },
+        headStyles: { fillColor: [0, 102, 204], textColor: 255 },
+    });
+
+    // Mostrar estadísticas finales basadas en el costo total
+    doc.setFontSize(12);
+    doc.text(`Producto más costoso: ${maxProducto.nombre} - $${maxProducto.costoTotal.toFixed(2)}`, 14, doc.lastAutoTable.finalY + 10);
+    doc.text(`Producto menos costoso: ${minProducto.nombre} - $${minProducto.costoTotal.toFixed(2)}`, 14, doc.lastAutoTable.finalY + 20);
+    doc.text(`Promedio de costos totales: $${promedioCostosTotales.toFixed(2)}`, 14, doc.lastAutoTable.finalY + 30);
+
+    doc.save("reporte_costos_medicamentos.pdf");
+}
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+</body>
+</html>
