@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos - FarmaTotal</title>
+    <link rel="stylesheet" href="../Estilos/estilos6.css">
+    <style>
+        .cerrar-sesion-btn {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: auto;
+        }
+
+        .cerrar-sesion-btn:hover {
+            background-color: #e60000;
+        }
+
+        .cerrar-sesion-btn:active {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Productos en Venta</h1>
+        <nav>
+            <ul>
+                <li><a href="FarmaTotal.html">Inicio</a></li>
+                <li><a href="Acerca_de.html">Acerca de</a></li>
+                <li><a href="Productos.html">Productos</a></li>
+                <li><a href="Carrito.html">Carrito</a></li>
+                <li><a href="Equipo.html">Equipo</a></li>
+                <li><a href="Contacto.html">Contacto</a></li>
+                <li><button class="cerrar-sesion-btn" onclick="cerrarSesion()">Cerrar Sesión</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="productos">
+        <div class="producto" onclick="agregarAlCarrito('Paracetamol 500mg', 15)">
+            <img src="../Imagenes/Paracetamol.png" alt="Paracetamol 500mg">
+            <h3>Paracetamol 500mg</h3>
+            <p>Precio: $15</p>
+            <button>Agregar al Carrito</button>
+        </div>
+        <div class="producto" onclick="agregarAlCarrito('Ibuprofeno 400mg', 25)">
+            <img src="../Imagenes/Ibuprofeno.png" alt="Ibuprofeno 400mg">
+            <h3>Ibuprofeno 600mg</h3>
+            <p>Precio: $25</p>
+            <button>Agregar al Carrito</button>
+        </div>
+        <div class="producto" onclick="agregarAlCarrito('Omeprazol 20mg', 18)">
+            <img src="../Imagenes/Omeprazol.jpg" alt="Omeprazol 20mg">
+            <h3>Omeprazol 20mg</h3>
+            <p>Precio: $18</p>
+            <button>Agregar al Carrito</button>
+        </div>
+        <div class="producto" onclick="agregarAlCarrito('Loratadina 10mg', 22)">
+            <img src="../Imagenes/Loratadina.png" alt="Loratadina 10mg">
+            <h3>Loratadina 10mg</h3>
+            <p>Precio: $22</p>
+            <button>Agregar al Carrito</button>
+        </div>
+        <div class="producto" onclick="agregarAlCarrito('Amoxicilina 500mg', 30)">
+            <img src="../Imagenes/Amoxicilina.png" alt="Amoxicilina 500mg">
+            <h3>Amoxicilina 500mg</h3>
+            <p>Precio: $30</p>
+            <button>Agregar al Carrito</button>
+        </div>
+        <div class="producto" onclick="agregarAlCarrito('Salbutamol Inhalador', 27)">
+            <img src="../Imagenes/Salbutamol.jpg" alt="Salbutamol Inhalador">
+            <h3>Salbutamol Inhalador</h3>
+            <p>Precio: $27</p>
+            <button>Agregar al Carrito</button>
+        </div>
+        <div class="producto" onclick="agregarAlCarrito('Metformina 850mg', 20)">
+            <img src="../Imagenes/Metformina.jpg" alt="Metformina 850mg">
+            <h3>Metformina 850mg</h3>
+            <p>Precio: $20</p>
+            <button>Agregar al Carrito</button>
+        </div>
+        <div class="producto" onclick="agregarAlCarrito('Cetirizina 10mg', 19)">
+            <img src="../Imagenes/Cetirizina.jpg" alt="Cetirizina 10mg">
+            <h3>Cetirizina Jarabe</h3>
+            <p>Precio: $19</p>
+            <button>Agregar al Carrito</button>
+        </div>
+        <div class="producto" onclick="agregarAlCarrito('Diclofenaco 75mg', 35)">
+            <img src="../Imagenes/Diclofenaco.jpg" alt="Diclofenaco 75mg">
+            <h3>Diclofenaco 75mg</h3>
+            <p>Precio: $35</p>
+            <button>Agregar al Carrito</button>
+        </div>
+        <div class="producto" onclick="agregarAlCarrito('Azitromicina 500mg', 40)">
+            <img src="../Imagenes/Azitromicina.jpg" alt="Azitromicina 500mg">
+            <h3>Azitromicina 500mg</h3>
+            <p>Precio: $40</p>
+            <button>Agregar al Carrito</button>
+        </div>
+    </section>
+    <footer>
+        <p>(c)2024 Desarrollado por Ronaldo Rafael Vazquez</p>
+    </footer>
+    <script>
+        function agregarAlCarrito(nombre, precio) {
+            let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+            // Verificar si el producto ya está en el carrito
+            let productoExistente = carrito.find(producto => producto.nombre === nombre);
+            if (productoExistente) {
+                // Si el producto ya existe, sumamos la cantidad y actualizamos el precio total
+                productoExistente.cantidad += 1;
+                productoExistente.precioTotal = productoExistente.precio * productoExistente.cantidad;
+            } else {
+                // Si no existe, agregamos el producto con cantidad 1
+                carrito.push({
+                    nombre: nombre,
+                    precio: precio,
+                    cantidad: 1,
+                    precioTotal: precio
+                });
+            }
+
+            // Guardar los cambios en el localStorage
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+        }
+        function cerrarSesion() {
+            window.location.href = "../Inicio.html"; // Redirige a la página de inicio o login
+        }
+    </script>
+</body>
+</html>
+
