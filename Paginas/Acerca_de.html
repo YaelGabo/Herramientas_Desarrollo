@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>FarmaTotal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="../Estilos/estilos5.css">
+    <style>
+        .cerrar-sesion-btn {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: auto;
+        }
+
+        .cerrar-sesion-btn:hover {
+            background-color: #e60000;
+        }
+
+        .cerrar-sesion-btn:active {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>FarmaTotal</h1>
+        <nav>
+            <ul>
+                <li><a href="FarmaTotal.html">Inicio</a></li>
+                <li><a href="Acerca_de.html">Acerca de</a></li>
+                <li><a href="Productos.html">Productos</a></li>
+                <li><a href="Carrito.html">Carrito</a></li>
+                <li><a href="Equipo.html">Equipo</a></li>
+                <li><a href="Contacto.html">Contacto</a></li>
+                <li><button class="cerrar-sesion-btn" onclick="cerrarSesion()">Cerrar Sesión</button></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="hero-1">
+        <img src="../Imagenes/Farmacia.png" alt="Edificio FarmaTotal">
+        <h2>Conoce a FarmaTotal</h2>
+        <p>FarmaTotal es una farmacia comprometida con la salud y el bienestar de nuestra comunidad. Ofrecemos una amplia variedad de productos farmacéuticos, desde medicamentos hasta productos de cuidado personal, además de asesoría profesional en salud. Nuestra misión es brindar a nuestros clientes un servicio confiable, eficiente y cercano, para que puedan cuidar su salud de manera integral. En FarmaTotal, creemos en la importancia de ofrecer un servicio de calidad que inspire confianza y tranquilidad.</p>
+    </section>
+    <section class="vision-mision">
+        <div class="container">
+            <div class="columna">
+                <h3>Visión</h3>
+                <p>Ser la farmacia de referencia en el país, reconocida por su dedicación a la salud y su compromiso con el bienestar de nuestros clientes. Aspiramos a convertirnos en un pilar de confianza en cada comunidad en la que operamos, ofreciendo productos y servicios de alta calidad.</p>
+            </div>
+            <div class="columna">
+                <h3>Misión</h3>
+                <p>Nuestra misión es proporcionar productos farmacéuticos y asesoría en salud accesibles y confiables, apoyando a nuestros clientes en su bienestar diario. Nos comprometemos a ser una farmacia ética, responsable y orientada al servicio, siempre en sintonía con las necesidades de nuestra comunidad.</p>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <p>(c)2024 Desarrollado por Ronaldo Rafael Vazquez</p>
+    </footer>
+
+    <script>
+        function cerrarSesion() {
+            window.location.href = "../Inicio.html"; // Redirige a la página de inicio o login
+        }
+    </script>
+</body>
+</html>
