@@ -13,6 +13,37 @@ document.addEventListener("DOMContentLoaded", function () {
             cargarProductos();
         });
     }
+    // 🔍 BÚSQUEDA DE PRODUCTO POR NOMBRE AL PRESIONAR ENTER
+    const inputBuscar = document.getElementById("buscarProducto");
+    if (inputBuscar) {
+        inputBuscar.addEventListener("keypress", function (e) {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                const termino = this.value.trim();
+                if (termino !== "") {
+                    buscarProductoPorNombre(termino);
+                }
+            }
+        });
+    }
+
+    function buscarProductoPorNombre(nombre) {
+        fetch("buscar_producto.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ nombre: nombre })
+        })
+        .then(response => response.json())
+        .then(data => {
+            mostrarProductos(data);
+        })
+        .catch(error => {
+            console.error('Error al buscar producto:', error);
+        });
+    }
+
     function mostrarProductos(data) {
         productosBody.innerHTML = "";
 
@@ -212,4 +243,141 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error("Error al eliminar:", err);
         });
     };
+
+    // ✅ GUARDAR NUEVO PRODUCTO
+    if (btnGuardarProducto) {
+        btnGuardarProducto.addEventListener("click", function () {
+            if (!formNuevoProducto.checkValidity()) {
+                formNuevoProducto.classList.add("was-validated");
+                return;
+            }
+
+            const formData = new FormData(formNuevoProducto);
+
+            fetch("../PHP/insertar_producto.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Producto guardado exitosamente");
+                    formNuevoProducto.reset();
+                    formNuevoProducto.classList.remove("was-validated");
+                    const modal = bootstrap.Modal.getInstance(document.getElementById("myModal"));
+                    if (modal) modal.hide();
+                    cargarProductos();
+                } else {
+                    alert("Error al guardar el producto: " + (data.message || "Respuesta desconocida"));
+                }
+            })
+            .catch(error => {
+                console.error("Error al guardar producto:", error);
+                alert("Error al guardar el producto.");
+            });
+        });
+    }
+    if (btnSave) {
+    btnSave.addEventListener("click", function (e) {
+        e.preventDefault(); // ✅ Evita que se recargue la página
+
+        const barcode = document.getElementById("barcode").value.trim();
+        const stockNuevo = parseInt(document.getElementById("stock").value.trim());
+
+        if (!barcode || isNaN(stockNuevo)) {
+            alert("Por favor ingresa un ID y un valor de stock válido.");
+            return;
+        }
+
+        fetch("../PHP/actualizar_stock.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                id_producto: barcode,
+                stock_nuevo: stockNuevo
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Stock actualizado correctamente");
+                document.getElementById("stock").value = ""; // limpiar campo stock
+                cargarProductos(); // recarga la tabla sin recargar la página
+            } else {
+                alert("Error al actualizar el stock: " + (data.error || "Error desconocido"));
+            }
+        })
+        .catch(error => {
+            console.error("Error al actualizar stock:", error);
+            alert("Error al enviar los datos al servidor.");
+        });
+     });
+    }
+    if (btnBuscarPorFechas) {
+        btnBuscarPorFechas.addEventListener("click", mostrarFechas);
+    }
+
+    function mostrarFechas() {
+    const fechaDesde = document.getElementById('fechaDe').value;
+    const fechaHasta = document.getElementById('fechaHasta').value;
+    const btnGenerar = document.getElementById('btnGenerarReporte');
+
+    // Ocultar el botón de reporte por defecto
+    btnGenerar.style.display = 'none';
+
+    if (!fechaDesde || !fechaHasta) {
+        alert("Por favor, selecciona ambas fechas.");
+        return;
+    }
+
+    fetch('../PHP/filtrarVentas.php', {
+        method: 'POST',
+        body: JSON.stringify({ fechaDesde, fechaHasta }),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        const tablaBody = document.getElementById('tablaVentasBody');
+
+        if (!tablaBody) {
+            console.error("No se encontró el elemento con id 'tablaVentasBody'.");
+            return;
+        }
+
+        tablaBody.innerHTML = '';
+
+        if (data.length === 0) {
+            tablaBody.innerHTML = `<tr><td colspan="7" class="text-center">No se encontraron ventas en el rango de fechas.</td></tr>`;
+            return;
+        }
+
+        data.forEach(venta => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${venta.id_venta}</td>
+                <td>${venta.id_producto}</td>
+                <td>${venta.cantidad}</td>
+                <td>S/. ${venta.precio}</td>
+                <td>S/. ${venta.total}</td>
+                <td>${venta.fecha}</td>
+                <td>${venta.id_usuario}</td>
+            `;
+            tablaBody.appendChild(row);
+        });
+
+        // Guardar las ventas filtradas en localStorage
+        localStorage.setItem('ventas', JSON.stringify(data));
+
+        // Mostrar el botón de generar reporte
+        btnGenerar.style.display = 'inline-block';
+    })
+        .catch(error => {
+            console.error('Error al filtrar ventas:', error);
+        });
+    }
+
 });
