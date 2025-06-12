@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>FarmaTotal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="../Estilos/estilos5.css">
+    <style>
+        .cerrar-sesion-btn {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: auto;
+        }
+
+        .cerrar-sesion-btn:hover {
+            background-color: #e60000;
+        }
+
+        .cerrar-sesion-btn:active {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>FarmaTotal</h1>
+        <nav>
+            <ul>
+                <li><a href="FarmaTotal.html">Inicio</a></li>
+                <li><a href="Acerca_de.html">Acerca de</a></li>
+                <li><a href="Productos.html">Productos</a></li>
+                <li><a href="Carrito.html">Carrito</a></li>
+                <li><a href="Equipo.html">Equipo</a></li>
+                <li><a href="Contacto.html">Contacto</a></li>
+                <li><button class="cerrar-sesion-btn" onclick="cerrarSesion()">Cerrar Sesión</button></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="hero-1">
+        <img src="../Imagenes/Equipo.jpg" alt="Equipo FarmaTotal">
+        <h2>Conoce a Nuestro Equipo</h2>
+        <p>En FarmaTotal, contamos con un equipo dedicado y profesional comprometido con la salud y el bienestar de nuestros clientes. Cada miembro de nuestro equipo es un especialista en su área, desde farmacéuticos experimentados hasta expertos en soporte técnico, todos enfocados en ofrecer un servicio de calidad, eficiente y cercano. Juntos, nos aseguramos de que cada cliente reciba la atención que merece y que nuestra farmacia funcione de manera óptima en cada aspecto.</p>
+    </section>
+    
+    <section class="equipo">
+        <div class="container-5">
+            <div class="columna">
+                <h3>Nuestros Especialistas</h3>
+                <p>El equipo de FarmaTotal incluye:</p>
+                <ul>
+                    <li><strong>Farmacéuticos:</strong> Profesionales capacitados que ofrecen asesoría y supervisan la calidad de los medicamentos.</li>
+                    <li><strong>Asistentes de Farmacia:</strong> Apoyan en la gestión del inventario y en la atención al cliente, asegurando una experiencia ágil y satisfactoria.</li>
+                    <li><strong>Equipo de Logística:</strong> Encargado de mantener el suministro de productos, especialmente durante temporadas de alta demanda.</li>
+                    <li><strong>Soporte Técnico:</strong> Asegura que nuestro sistema de gestión de ventas y el sitio web estén siempre en funcionamiento. Brindan soporte continuo tanto al equipo interno como a los usuarios en línea.</li>
+                    <li><strong>Consultores de Salud:</strong> Disponibles para ofrecer orientación en productos y servicios de salud, ayudando a los clientes a encontrar lo que necesitan.</li>
+                </ul>
+            </div>
+            <div class="columna">
+                <h3>Compromiso con la Excelencia</h3>
+                <p>En FarmaTotal, nos esforzamos por mantener un equipo en constante formación y actualización en prácticas de salud y atención al cliente. Promovemos un ambiente de colaboración y mejora continua, donde cada miembro puede desarrollar sus habilidades al máximo para brindar un servicio de excelencia.</p>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>(c)2024 Desarrollado por Ronaldo Rafael Vazquez</p>
+    </footer>
+    <script>
+        function cerrarSesion() {
+            window.location.href = "../Inicio.html"; // Redirige a la página de inicio o login
+        }
+    </script>
+</body>
+</html>

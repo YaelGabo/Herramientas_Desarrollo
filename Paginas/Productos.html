@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Estilos/estilos6.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="../js/index.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <div class="container-hero">
+            <div class="container hero">
+                <div class="customer-support">
+                    <i class="fa-solid fa-headset"></i>
+                    <div class="content-customar-support">
+                        <span class="text">Soporte al cliente</span><br>
+                        <span class="number">979-486-180</span>
+                    </div>
+                </div>
+                <div class="container-logo">
+                    <img src="../Imagenes/logoC.png" alt="Logo">
+                </div>
+                <div class="container-user">
+                    <i class="fa-solid fa-user"></i>
+                    <i class="fa-solid fa-cart-shopping" id="cart-icon"></i>
+                    <div class="content-shopping-cart">
+                        <span class="text">Carrito</span>
+                        <span class="number">(0)</span>
+                    </div>
+                    <!-- Cuadro del carrito -->
+                    <!-- Dentro de <div class="container-user"> -->
+                        <div class="cart-dropdown" style="display: none;">
+                            <div class="header-carrito">
+                                <h2>Tu Carrito</h2>
+                            </div>
+                        
+                            <div class="carrito-items">
+                              
+                            </div>
+                            <div class="carrito-total">
+                                <div class="fila">
+                                    <strong>Tu Total</strong>
+                                    <span class="carrito-precio-total">
+                                        $41.40 <!-- Esto es 4.60 * 9 productos -->
+                                    </span>
+                                </div>
+                                <form action="http://localhost/HD_2025/PHP/guardar_detalle_venta.php" method="post">
+                                    <button type="submit" class="btn-pagar">Pagar<i class="fa-solid fa-bag-shopping"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-navbar">
+        <nav class="navbar container">
+            <i class="fa-solid fa-bars"></i>
+            <ul class="menu">
+                <li><a href="FarmaTotal.html">Inicio</a></li>
+                <li><a href="Productos.html">Productos</a></li>
+                <li><a href="Acerca_de.html">Nosotros</a></li>
+                <li><a href="Contacto.html">Contacto</a></li>
+            </ul>
+            <form class="search-form">
+                <input type="search" placeholder="Buscar">
+                <button class="btn-search">
+                    <i class="fa-brands fa-searchengin"></i>
+                </button>
+            </form>
+        </nav>
+    </div>
+    </header>
+<section class="banner">
+    <div style="position: relative; width: 100%; height: 0; padding-top: 20%;
+ padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: -1em; margin-bottom: 0.9em; overflow: hidden;
+ border-radius: 0px; will-change: transform;">
+  <img src="../Imagenes/produc.png" 
+  style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; object-fit: cover; z-index: -1;" 
+  alt="Interior de una farmacia">
+
+</div>
+    </section>
+    <br>
+<main class="main-content">
+    <section class="container top-products">
+        <br>
+        <img src="../Imagenes/dscnt.avif" alt="">
+        <div class="container-options">
+            <span class="active">Medicamentos</span>
+            <span onclick="funcion()">Accesorios</span>
+        </div>
+        <div class="container-products">
+            <div class="card-product" data-id="1">
+                <div class="container-img">
+                    <img src="../Imagenes/Omeprazol.jpg" alt="Omeprazol">
+                    <span class="discount">80%</span>
+                    <div class="button-group">
+                        <span><i class="fa-regular fa-eye"></i></span> 
+                        <span><i class="fa-regular fa-heart"></i></span> 
+                        <span><i class="fa-solid fa-code-compare"></i></span>
+                    </div>
+                </div>
+                <div class="content-card-product">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <h3>Omeprazol</h3>
+                    <button id="btnTortaChocolate">
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping add-to-cart" data-product-id="1"></i>
+                        </span>
+                    </button>
+                    <p class="price">26 <span>S/30</span></p>
+                </div>
+            </div>
+
+            <div class="card-product" data-id="2">
+                <div class="container-img">
+                    <img src="../Imagenes/Amoxicilina.png" alt="Amoxicilina">
+                    <span class="discount">80%</span>
+                    <div class="button-group">
+                        <span><i class="fa-regular fa-eye"></i></span> 
+                        <span><i class="fa-regular fa-heart"></i></span> 
+                        <span><i class="fa-solid fa-code-compare"></i></span>
+                    </div>
+                </div>
+                <div class="content-card-product">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <h3>Amoxicilina</h3>
+                    <button id="btnTortaTresLeches">
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping add-to-cart" data-product-id="2"></i>
+                        </span>
+                    </button>
+                    <p class="price">14 <span>S/20</span></p>
+                </div>
+            </div>
+
+            <div class="card-product" data-id="3">
+                <div class="container-img">
+                    <img src="../Imagenes/Diclofenaco.jpg" alt="Diclofenaco">
+                    <span class="discount">80%</span>
+                    <div class="button-group">
+                        <span><i class="fa-regular fa-eye"></i></span> 
+                        <span><i class="fa-regular fa-heart"></i></span> 
+                        <span><i class="fa-solid fa-code-compare"></i></span>
+                    </div>
+                </div>
+                <div class="content-card-product">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <h3>Diclofenaco</h3>
+                    <button id="btnSouffleDeFresa">
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping add-to-cart" data-product-id="3"></i>
+                        </span>
+                    </button>
+                    <p class="price">S/.7 <span>S/21</span></p>
+                </div>
+            </div>
+
+            <div class="card-product" data-id="4">
+                <div class="container-img">
+                    <img src="../Imagenes/Loratadina.png" alt="Loratadina">
+                    <span class="discount">80%</span>
+                    <div class="button-group">
+                        <span><i class="fa-regular fa-eye"></i></span> 
+                        <span><i class="fa-regular fa-heart"></i></span> 
+                        <span><i class="fa-solid fa-code-compare"></i></span>
+                    </div>
+                </div>
+                <div class="content-card-product">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <h3>Loratadina</h3>
+                    <button id="btnTortaSelvaNegra">
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping add-to-cart" data-product-id="4"></i>
+                        </span>
+                    </button>
+                    <p class="price">S/.12 <span>S/20</span></p>
+                </div>
+            </div>
+
+            <div class="card-product" data-id="5">
+                <div class="container-img">
+                    <img src="../Imagenes/Azitromicina.jpg" alt="Azitromicina">
+                    <span class="discount">80%</span>
+                    <div class="button-group">
+                        <span><i class="fa-regular fa-eye"></i></span> 
+                        <span><i class="fa-regular fa-heart"></i></span> 
+                        <span><i class="fa-solid fa-code-compare"></i></span>
+                    </div>
+                </div>
+                <div class="content-card-product">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <h3>Azitromicina</h3>
+                    <button id="btnChocolate">
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping add-to-cart" data-product-id="5"></i>
+                        </span>
+                    </button>
+                    <p class="price">S/.26 <span>S/28</span></p>
+                </div>
+            </div>
+
+            <div class="card-product" data-id="6">
+                <div class="container-img">
+                    <img src="../Imagenes/Cetirizina.jpg" alt="Cetirizina">
+                    <span class="discount">80%</span>
+                    <div class="button-group">
+                        <span><i class="fa-regular fa-eye"></i></span> 
+                        <span><i class="fa-regular fa-heart"></i></span> 
+                        <span><i class="fa-solid fa-code-compare"></i></span>
+                    </div>
+                </div>
+                <div class="content-card-product">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <h3>Cetirizina</h3>
+                    <button id="btnStrawberry">
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping add-to-cart" data-product-id="6"></i>
+                        </span>
+                    </button>
+                    <p class="price">S/.16 <span>S/22</span></p>
+                </div>
+            </div>
+
+            <div class="card-product" data-id="7">
+                <div class="container-img">
+                    <img src="../Imagenes/Ibuprofeno.png" alt="Ibuprofeno">
+                    <span class="discount">80%</span>
+                    <div class="button-group">
+                        <span><i class="fa-regular fa-eye"></i></span> 
+                        <span><i class="fa-regular fa-heart"></i></span> 
+                        <span><i class="fa-solid fa-code-compare"></i></span>
+                    </div>
+                </div>
+                <div class="content-card-product">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <h3>Ibuprofeno</h3>
+                    <button id="btnStrawberryAntoinette">
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping add-to-cart" data-product-id="7"></i>
+                        </span>
+                    </button>
+                    <p class="price">S/.10 <span>S/20</span></p>
+                </div>
+            </div>
+
+            <div class="card-product" data-id="8">
+                <div class="container-img">
+                    <img src="../Imagenes/Metformina.jpg" alt="Metformina">
+                    <span class="discount">80%</span>
+                    <div class="button-group">
+                        <span><i class="fa-regular fa-eye"></i></span> 
+                        <span><i class="fa-regular fa-heart"></i></span> 
+                        <span><i class="fa-solid fa-code-compare"></i></span>
+                    </div>
+                </div>
+                <div class="content-card-product">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <h3>Metformina</h3>
+                    <button id="btnMariposa">
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping add-to-cart" data-product-id="8"></i>
+                        </span>
+                    </button>
+                    <p class="price">S/.12 <span>S/15</span></p>
+                </div>
+            </div>
+
+            <div class="card-product" data-id="9">
+                <div class="container-img">
+                    <img src="../Imagenes/Paracetamol.png" alt="Paracetamol">
+                    <span class="discount">80%</span>
+                    <div class="button-group">
+                        <span><i class="fa-regular fa-eye"></i></span> 
+                        <span><i class="fa-regular fa-heart"></i></span> 
+                        <span><i class="fa-solid fa-code-compare"></i></span>
+                    </div>
+                </div>
+                <div class="content-card-product">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <h3>Paracetamol</h3>
+                    <button id="btnRosetas">
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping add-to-cart" data-product-id="9"></i>
+                        </span>
+                    </button>
+                    <p class="price">S/.25 <span>S/28</span></p>
+                </div>
+            </div>
+
+            <div class="card-product" data-id="10">
+                <div class="container-img">
+                    <img src="../Imagenes/Salbutamol.jpg" alt="Salbutamol">
+                    <span class="discount">80%</span>
+                    <div class="button-group">
+                        <span><i class="fa-regular fa-eye"></i></span> 
+                        <span><i class="fa-regular fa-heart"></i></span> 
+                        <span><i class="fa-solid fa-code-compare"></i></span>
+                    </div>
+                </div>
+                <div class="content-card-product">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <h3>Salbutamol</h3>
+                    <button id="btnStand">
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping add-to-cart" data-product-id="10"></i>
+                        </span>
+                    </button>
+                    <p class="price">S/.18 <span>S/25</span></p>
+                </div>
+            </div>
+
+            <div class="card-product" data-id="11">
+                <div class="container-img">
+                    <img src="../Imagenes/alcohol.jpg" alt="alcohol">
+                    <span class="discount">80%</span>
+                    <div class="button-group">
+                        <span><i class="fa-regular fa-eye"></i></span> 
+                        <span><i class="fa-regular fa-heart"></i></span> 
+                        <span><i class="fa-solid fa-code-compare"></i></span>
+                    </div>
+                </div>
+                <div class="content-card-product">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <h3>Alcohol</h3>
+                    <button id="btnStrawberryAntoinette2">
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping add-to-cart" data-product-id="11"></i>
+                        </span>
+                    </button>
+                    <p class="price">S/.10 <span>S/20</span></p>
+                </div>
+            </div>
+
+            <div class="card-product" data-id="12">
+                <div class="container-img">
+                    <img src="../Imagenes/algodon.jpg" alt="algodon">
+                    <span class="discount">50%</span>
+                    <div class="button-group">
+                        <span><i class="fa-regular fa-eye"></i></span> 
+                        <span><i class="fa-regular fa-heart"></i></span> 
+                        <span><i class="fa-solid fa-code-compare"></i></span>
+                    </div>
+                </div>
+                <div class="content-card-product">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <h3>Algodon</h3>
+                    <button id="btnTortaDeAjedrez">
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping add-to-cart" data-product-id="12"></i>
+                        </span>
+                    </button>
+                    <p class="price">S/.15 <span>S/20</span></p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    
+    <footer class="footer">
+        <div class="container container-footer">
+            <div class="menu-footer">
+                <div class="container-logo">
+                    <img src="../Imagenes/logoC.png" alt="Logo">
+                </div>
+                <div class="contact-info">
+                    <p class="title-footer">Informacion de contacto</p>
+                    <ul>
+                        <li>Dirección: Av.Arequipa-Lima Centro, Perú</li>
+                        <li>Telefono: 979-486-180</li>
+                        <li>Correo electronico: centroFarma@gmail.com</li>
+                    </ul>
+                    <div class="social-icons">
+                        <span class="facebook"><i class="fa-brands fa-facebook"></i></span>
+                        <span class="instagram"><i class="fa-brands fa-instagram"></i></span>
+                        <span class="twitter"><i class="fa-brands fa-x-twitter"></i></span>
+                        <span class="youtube"><i class="fa-brands fa-youtube"></i></span>
+                        <span class="tiktok"><i class="fa-brands fa-tiktok"></i></span>
+                    </div>
+                </div>
+                <div class="information">
+                    <p class="title-footer">Información</p>
+                        <ul>
+                            <li><a href="#"></a>Acerca de nosotros</li>
+                            <li><a href="#"></a>Informacion</li>
+                            <li><a href="#"></a>Politicas de privacidad</li>
+                            <li><a href="#"></a>Terminos y condiciones</li>
+                            <li><a href="#"></a>Contactanos </li>
+                        </ul>
+                </div>
+                <div class="newletter">
+                    <p class="title-footer">NUESTRAS PROMOCIONES</p>
+                    <div class="content">
+                        <p>
+                            Enterate a nuestros proximas promociones donde te mantendremos al 
+                            día con todas nuestras ofertas exclusivas.
+                        </p>
+                        <input type="email" placeholder="Ingresa tu correo aqui mano...">
+                        <button>INGRESA</button>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>
+                    Farmacias CentroFarma &copy; 2025
+                </p>
+                <img src="../Imagenes/payment.png" alt="">
+            </div>
+        </div>
+    </footer>
+</main>
+<div class="whatsapp-container">
+    <div class="whatsapp-button">
+        <a href="https://wa.me/1234567890" target="_blank">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+    </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const menuIcon = document.querySelector(".fa-bars");
+        const menu = document.querySelector(".menu");
+
+        menuIcon.addEventListener("click", function () {
+            menu.classList.toggle("responsive");
+        });
+    });
+</script>
+
+</body>
+</html>

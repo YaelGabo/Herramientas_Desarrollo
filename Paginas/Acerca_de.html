@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CentroFarma</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="../Estilos/estilos5.css">
+
+   
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container-hero">
+            <div class="container hero">
+                <div class="customer-support">
+                    <i class="fa-solid fa-headset"></i>
+                    <div class="content-customar-support">
+                        <span class="text">Soporte al cliente</span><br>
+                        <span class="number">979-486-180</span>
+                    </div>
+                </div>
+                <div class="container-logo">
+                    <img src="../Imagenes/logoC.png" alt="Logo">
+                </div>
+                <div class="container-user">
+                    <i class="fa-solid fa-user"></i>
+                    <i class="fa-solid fa-cart-shopping" id="cart-icon"></i>
+                    <div class="content-shopping-cart">
+                        <span class="text">Carrito</span>
+                        <span class="number">(0)</span>
+                    </div>
+                    <!-- Cuadro del carrito -->
+                    <!-- Dentro de <div class="container-user"> -->
+                        <div class="cart-dropdown" style="display: none;">
+                            <div class="header-carrito">
+                                <h2>Tu Carrito</h2>
+                            </div>
+                        
+                            <div class="carrito-items">
+                              
+                            </div>
+                            <div class="carrito-total">
+                                <div class="fila">
+                                    <strong>Tu Total</strong>
+                                    <span class="carrito-precio-total">
+                                        $41.40 <!-- Esto es 4.60 * 9 productos -->
+                                    </span>
+                                </div>
+                                <form action="http://localhost/HD_2025/PHP/guardar_detalle_venta.php" method="post">
+                                    <button type="submit" class="btn-pagar">Pagar<i class="fa-solid fa-bag-shopping"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-navbar">
+        <nav class="navbar container">
+            <i class="fa-solid fa-bars"></i>
+            <ul class="menu">
+                <li><a href="FarmaTotal.html">Inicio</a></li>
+                <li><a href="Productos.html">Productos</a></li>
+                <li><a href="Acerca_de.html">Nosotros</a></li>
+                <li><a href="Contacto.html">Contacto</a></li>
+            </ul>
+            <form class="search-form">
+                <input type="search" placeholder="Buscar">
+                <button class="btn-search">
+                    <i class="fa-brands fa-searchengin"></i>
+                </button>
+            </form>
+        </nav>
+    </div>
+    </header>
+<section class="banners">
+    <div style="position: relative; width: 100%; height: 0; padding-top: 30%;
+ padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: -1em; margin-bottom: 0.9em; overflow: hidden;
+ border-radius: 0px; will-change: transform;">
+  <img src="../Imagenes/noso.jpg" 
+  style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; object-fit: cover; z-index: -1;" 
+  alt="Interior de una farmacia">
+
+</div>
+<section class="nos">
+            <br><br><br><br><br>
+            <div class="n">
+                <div class="c1" onclick="">
+                    <br>
+                    <h1>Misión</h1>
+                    <p class="text-center" style="text-align: center; font-size: 13px;">Brindar productos farmacéuticos, de cuidado personal y bienestar con calidad y responsabilidad, ofreciendo una atención personalizada, confiable y accesible que contribuya a mejorar la salud y calidad de vida de nuestros clientes.</p>
+
+                </div>  
+                <div class="c2">
+                    <br>
+                    <h1>Visión</h1>
+                    <p class="text-center" style="text-align: center; font-size: 13px;">Ser la farmacia líder en nuestra comunidad, reconocida por su compromiso con la salud, la innovación en el servicio y la excelencia en la atención, posicionándonos como la primera opción en productos farmacéuticos y cuidado integral.</p>
+
+                </div>  
+            </div>
+        </section>
+
+
+    
+
+    <section class="container my-5" >
+        <h2 class="section-title">NUESTRA HISTORIA</h2>
+                <img src="../Imagenes/" alt="">
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <h3>2018: FUNDACIÓN</h3>
+                <p>Nacimos con el compromiso de cuidar la salud de nuestra comunidad, ofreciendo medicamentos confiables y atención cercana.</p>
+            </div>
+            <div class="timeline-item">
+                <h3>2019: CONFIANZA</h3>
+                <p>Nos consolidamos como una farmacia de confianza, priorizando siempre el bienestar y la orientación responsable a cada cliente.</p>
+            </div>
+            <div class="timeline-item">
+                <h3>2021: CRECIMIENTO</h3>
+                <p>Ampliamos nuestra oferta con productos de cuidado personal, suplementos y servicios adicionales, fortaleciendo nuestro vínculo con la comunidad.</p>
+            </div>
+            <div class="timeline-item">
+                <h3>2023: TRANSFORMACIÓN</h3>
+                <p>Renovamos nuestra imagen y modernizamos nuestros procesos para brindar una experiencia más rápida, digital y personalizada.</p>
+            </div>
+            <div class="timeline-item">
+                <h3>2024: COMPROMISO</h3>
+                <p>Hoy seguimos creciendo, impulsados por la confianza de nuestros clientes y el compromiso de seguir cuidando de su salud cada día.</p>
+            </div>
+            
+        </div>
+    </section>
+
+    <section class="container my-5">
+        <h2 class="section-title">NUESTRO EQUIPO</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="testimonial-card">
+                    <div class="text-center mb-3">
+                        <img src="../Imagenes/h1.png" alt="Daniel" class="rounded-circle" style="width: 200px; height: 200px; object-fit: cover;">
+                    </div>
+                    <h3 class="text-center">Daniel Calderón</h3>
+                    <p class="text-center">FUNDADOR</p>
+                    <p style="text-align: center;">Con más de 30 años de experiencia, ha sido el pionero en nuestra farmacia, brindando confianza y asesoría de calidad a cada uno de nuestros clientes. Su pasión por la salud y el bienestar es lo que nos motiva a seguir creciendo..</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="testimonial-card">
+                    <div class="text-center mb-3">
+                        <img src="../Imagenes/h2.png" alt="Carla Martinez" class="rounded-circle" style="width: 200px; height: 200px; object-fit: cover;">
+                    </div>
+                    <h3 class="text-center">Carla Martínez</h3>
+                    <p class="text-center">DIRECTORA DE FARMACIA</p>
+                    <p style="text-align: center;">Carla es la encargada de liderar nuestro equipo con su conocimiento profundo en farmacología y atención al cliente. Su enfoque siempre está en brindar el mejor servicio y asesoría personalizada para mejorar la salud de nuestros pacientes.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="testimonial-card">
+                    <div class="text-center mb-3">
+                        <img src="../Imagenes/h3.png" alt="José Perez" class="rounded-circle" style="width: 200px; height: 200px; object-fit: cover;">
+                    </div>
+                    <h3 class="text-center">José Pérez</h3>
+                    <p class="text-center">TÉCNICO FARMACÉUTICO</p>
+                    <p style="text-align: center;">José es nuestro experto en la gestión y distribución de medicamentos, asegurándose de que nuestros clientes reciban sus productos con total seguridad. Siempre está disponible para responder cualquier duda sobre el uso adecuado de los medicamentos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="container my-5">
+        <h2 class="section-title">VALORES</h2>
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <div class="p-4 bg-white rounded shadow">
+                    <i class="fas fa-hand-holding-heart text-primary mb-3" style="font-size: 48px;"></i>
+                    <h3>Compromiso con la salud</h3>
+                    <p>Nos dedicamos a brindar productos y servicios que contribuyan al bienestar y la calidad de vida de nuestros clientes.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="p-4 bg-white rounded shadow">
+                    <i class="fas fa-leaf text-primary mb-3" style="font-size: 48px;"></i>
+                    <h3>Responsabilidad</h3>
+                    <p>Cumplimos con los más altos estándares en el manejo y dispensación de medicamentos, garantizando seguridad y eficacia.
+
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="p-4 bg-white rounded shadow">
+                    <i class="fas fa-users text-primary mb-3" style="font-size: 48px;"></i>
+                    <h3>Atención personalizada</h3>
+                    <p>Cada cliente es único. Ofrecemos una atención cercana, empática y profesional, resolviendo sus dudas con claridad.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container my-5">
+        <h2 class="section-title">ALGUNOS TESTIMONIOS DE CLIENTES</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="testimonial-card">
+                    <div class="text-center mb-3">
+                        <img src="../Imagenes/h4.png" alt="Cliente 1" class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover;">
+                    </div>
+                    <h3 class="text-center">Ana López</h3>
+                    <p class="text-center">"Siempre encuentro lo que necesito y a buen precio. El personal es muy amable y me explican con paciencia cómo tomar mis medicamentos. ¡Recomiendo esta farmacia 100%!"</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="testimonial-card">
+                    <div class="text-center mb-3">
+                        <img src="../Imagenes/h5.png" alt="Cliente 2" class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover;">
+                    </div>
+                    <h3 class="text-center">Javier Martínez</h3>
+                    <p class="text-center">"Una farmacia de confianza. Me encanta que tienen delivery rápido y que puedo consultar por WhatsApp. Muy profesionales."</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="testimonial-card">
+                    <div class="text-center mb-3">
+                        <img src="../Imagenes/h6.png" alt="Cliente 3" class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover;">
+                    </div>
+                    <h3 class="text-center">Lucía Fernández</h3>
+                    <p class="text-center">"He comparado precios con otras farmacias y aquí siempre encuentro opciones más económicas. Además, la atención es rápida y cordial."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container container-footer">
+            <div class="menu-footer">
+                <div class="container-logo">
+                    <img src="../Imagenes/logoC.png" alt="Logo">
+                </div>
+                <div class="contact-info">
+                    <p class="title-footer">Informacion de contacto</p>
+                    <ul>
+                        <li>Dirección: Av.Arequipa-Lima Centro, Perú</li>
+                        <li>Telefono: 979-486-180</li>
+                        <li>Correo electronico: centroFarma@gmail.com</li>
+                    </ul>
+                    <div class="social-icons">
+                        <span class="facebook"><i class="fa-brands fa-facebook"></i></span>
+                        <span class="instagram"><i class="fa-brands fa-instagram"></i></span>
+                        <span class="twitter"><i class="fa-brands fa-x-twitter"></i></span>
+                        <span class="youtube"><i class="fa-brands fa-youtube"></i></span>
+                        <span class="tiktok"><i class="fa-brands fa-tiktok"></i></span>
+                    </div>
+                </div>
+                <div class="information">
+                    <p class="title-footer">Información</p>
+                        <ul>
+                            <li><a href="#"></a>Acerca de nosotros</li>
+                            <li><a href="#"></a>Informacion</li>
+                            <li><a href="#"></a>Politicas de privacidad</li>
+                            <li><a href="#"></a>Terminos y condiciones</li>
+                            <li><a href="#"></a>Contactanos </li>
+                        </ul>
+                </div>
+                <div class="newletter">
+                    <p class="title-footer">NUESTRAS PROMOCIONES</p>
+                    <div class="content">
+                        <p>
+                            Enterate a nuestros proximas promociones donde te mantendremos al 
+                            día con todas nuestras ofertas exclusivas.
+                        </p>
+                        <input type="email" placeholder="Ingresa tu correo aqui mano...">
+                        <button>INGRESA</button>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>
+                    Farmacias CentroFarma &copy; 2025
+                </p>
+                <img src="../Imagenes/payment.png" alt="">
+            </div>
+        </div>
+    </footer>
+    <div class="whatsapp-container">
+        <div class="whatsapp-button">
+            <a href="https://wa.me/1234567890" target="_blank">
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
+        </div>
+    </div>
+</body></html>

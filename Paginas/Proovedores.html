@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>FarmaTotal - Proveedores</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../Estilos/estilos2.css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    <style>
+        #cerrarSesionBtn, #generarReporteBtn {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        #cerrarSesionBtn:hover, #generarReporteBtn:hover {
+            background-color: #e60000;
+        }
+
+        #cerrarSesionBtn:active, #generarReporteBtn:active {
+            background-color: #cc0000;
+        }
+
+        #generarReporteEliminadosBtn {
+            background-color: #4caf50;
+        }
+
+        #generarReporteEliminadosBtn:hover {
+            background-color: #45a049;
+        }
+
+        #generarReporteEliminadosBtn:active {
+            background-color: #3e8e41;
+        }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <div class="div1">
+            <h1>FarmaTotal</h1>
+            <ul>
+                <li><a href="Medicamentos.html">Medicamentos</a></li>
+                <li><a href="Proovedores.html">Proveedores</a></li>
+                <li><a href="Usuario.html">Usuarios</a></li>
+                <li><a href="Ventas.html">Ventas</a></li>
+                <li><a href="Comentarios.html">Comentarios</a></li>
+            </ul>
+            <button id="cerrarSesionBtn" onclick="cerrarSesion()">Cerrar Sesión</button>
+        </div>
+        <div class="div2">
+            <h2>Ingresar Proveedores</h2>
+            <form id="formularioProveedores">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Nombre" oninput="validarNombre()"><br><br>
+                
+                <label for="telefono">Teléfono:</label>
+                <input type="tel" id="telefono" name="telefono" placeholder="Teléfono" oninput="validarTelefono()"><br><br>
+                
+                <label for="direccion">Dirección:</label>
+                <input type="text" id="direccion" name="direccion" placeholder="Dirección"><br><br>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Email"><br><br>
+                
+                <button type="button" onclick="agregarProveedor()">Agregar Proveedor</button>
+                <button type="button" id="generarReporteEliminadosBtn" onclick="generarReporteEliminados()">Reporte Eliminados</button>
+            </form>
+        </div>
+        <div class="div3">
+            <h2>Proveedores Registrados</h2>
+            <table border="1" id="tablaProveedores">
+                <thead>
+                    <tr>
+                        <th>Número</th>
+                        <th>Nombre</th>
+                        <th>Teléfono</th>
+                        <th>Dirección</th>
+                        <th>Email</th>
+                        <th>Borrar</th>
+                        <th>Editar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Filas de proveedores se agregarán aquí -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        let contador = 1;
+
+        document.addEventListener("DOMContentLoaded", function() {
+            cargarDatos();
+        });
+        // Validación del nombre: solo permite letras y espacios
+        function validarNombre() {
+            const nombre = document.getElementById('nombre').value;
+            const regex = /[^a-zA-Z\s]/g; // Solo permite letras y espacios
+            if (regex.test(nombre)) {
+                alert("El nombre no puede contener números ni caracteres especiales.");
+                document.getElementById('nombre').value = nombre.replace(regex, ''); // Eliminar caracteres no permitidos
+            }
+        }
+        // Validación del teléfono: solo permite números y caracteres especiales como +, -, (, )
+        function validarTelefono() {
+            const telefono = document.getElementById('telefono').value;
+            const regex = /[^0-9+\-\(\)\s]/g; // Solo permite números, +, -, (, ), y espacio
+            if (regex.test(telefono)) {
+                alert("El teléfono solo puede contener números y los signos (+, -, (, ), espacio).");
+                document.getElementById('telefono').value = telefono.replace(regex, ''); // Eliminar caracteres no permitidos
+            }
+        }
+
+        function agregarProveedor() {
+            const nombre = document.getElementById("nombre").value;
+            const telefono = document.getElementById("telefono").value;
+            const direccion = document.getElementById("direccion").value;
+            const email = document.getElementById("email").value;
+            const fechaInscripcion = new Date().toLocaleDateString();
+
+            if (!nombre || !telefono || !direccion || !email) {
+                alert("Por favor, complete todos los campos.");
+                return;
+            }
+
+            const proveedor = { 
+                id: contador, 
+                nombre, 
+                telefono, 
+                direccion, 
+                email, 
+                fechaInscripcion 
+            };
+
+            guardarEnLocalStorage(proveedor);
+            agregarFila(proveedor);
+            document.getElementById("formularioProveedores").reset();
+        }
+
+        function agregarFila(proveedor) {
+            const tabla = document.getElementById("tablaProveedores").getElementsByTagName("tbody")[0];
+            const nuevaFila = tabla.insertRow();
+
+            nuevaFila.innerHTML = `
+                <td>${proveedor.id}</td>
+                <td>${proveedor.nombre}</td>
+                <td>${proveedor.telefono}</td>
+                <td>${proveedor.direccion}</td>
+                <td>${proveedor.email}</td>
+                <td><button onclick="borrarFila(this, ${proveedor.id})">Borrar</button></td>
+                <td><button onclick="editarFila(this, ${proveedor.id})">Editar</button></td>
+            `;
+
+            contador++;
+        }
+
+        function borrarFila(boton, id) {
+            const fila = boton.parentNode.parentNode;
+            fila.parentNode.removeChild(fila);
+            eliminarDeLocalStorage(id);
+            actualizarNumeros();
+        }
+
+        function guardarEnLocalStorage(proveedor) {
+            let proveedores = JSON.parse(localStorage.getItem('proveedores')) || [];
+            proveedores.push(proveedor);
+            localStorage.setItem('proveedores', JSON.stringify(proveedores));
+        }
+
+        function cargarDatos() {
+            const proveedores = JSON.parse(localStorage.getItem('proveedores')) || [];
+            proveedores.forEach(proveedor => {
+                agregarFila(proveedor);
+                if (proveedor.id >= contador) {
+                    contador = proveedor.id + 1;
+                }
+            });
+        }
+
+        function eliminarDeLocalStorage(id) {
+            let proveedores = JSON.parse(localStorage.getItem('proveedores'));
+            proveedores = proveedores.filter(proveedor => proveedor.id !== id);
+            localStorage.setItem('proveedores', JSON.stringify(proveedores));
+        }
+
+        let proveedoresEliminados = [];
+
+function borrarFila(boton, id) {
+    const fila = boton.parentNode.parentNode;
+    const proveedorEliminado = obtenerProveedorPorId(id);
+
+    if (proveedorEliminado) {
+        proveedorEliminado.fechaEliminacion = new Date().toLocaleDateString();
+        guardarProveedorEliminado(proveedorEliminado);
+    }
+
+    fila.parentNode.removeChild(fila);
+    eliminarDeLocalStorage(id);
+    actualizarNumeros();
+}
+
+function guardarProveedorEliminado(proveedor) {
+    proveedoresEliminados.push(proveedor);
+    localStorage.setItem('proveedoresEliminados', JSON.stringify(proveedoresEliminados));
+}
+
+function cargarProveedoresEliminados() {
+    proveedoresEliminados = JSON.parse(localStorage.getItem('proveedoresEliminados')) || [];
+}
+
+function obtenerProveedorPorId(id) {
+    let proveedores = JSON.parse(localStorage.getItem('proveedores')) || [];
+    return proveedores.find(proveedor => proveedor.id === id);
+}
+        // Editar proveedor
+        function editarFila(boton, id) {
+            const fila = boton.parentNode.parentNode;
+            const celdas = fila.getElementsByTagName("td");
+
+            if (boton.textContent === "Editar") {
+                for (let i = 1; i < 5; i++) {
+                    const valorActual = celdas[i].textContent;
+                    celdas[i].innerHTML = `<input type="text" value="${valorActual}" />`;
+                }
+                boton.textContent = "Guardar";
+            } else {
+                const nuevoProveedor = {
+                    id: id,
+                    nombre: celdas[1].getElementsByTagName("input")[0].value,
+                    telefono: celdas[2].getElementsByTagName("input")[0].value,
+                    direccion: celdas[3].getElementsByTagName("input")[0].value,
+                    email: celdas[4].getElementsByTagName("input")[0].value
+                };
+
+                celdas[1].textContent = nuevoProveedor.nombre;
+                celdas[2].textContent = nuevoProveedor.telefono;
+                celdas[3].textContent = nuevoProveedor.direccion;
+                celdas[4].textContent = nuevoProveedor.email;
+
+                boton.textContent = "Editar";
+
+                actualizarEnLocalStorage(nuevoProveedor);
+            }
+        }
+
+        // Actualizar proveedor en localStorage
+        function actualizarEnLocalStorage(proveedorActualizado) {
+            let proveedores = JSON.parse(localStorage.getItem('proveedores')) || [];
+            const index = proveedores.findIndex(p => p.id === proveedorActualizado.id);
+            if (index !== -1) {
+                proveedores[index] = proveedorActualizado;
+                localStorage.setItem('proveedores', JSON.stringify(proveedores));
+            }
+        }
+
+function generarReporteEliminados() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    doc.setFontSize(18);
+    doc.text("FarmaTotal", doc.internal.pageSize.getWidth() / 2, 20, { align: "center" });
+
+    doc.setFontSize(14);
+    doc.text("Reporte de Proveedores Eliminados", doc.internal.pageSize.getWidth() / 2, 30, { align: "center" });
+
+    const encabezados = [["#", "Nombre", "Número", "Fecha de Eliminación"]];
+    const data = [];
+
+    cargarProveedoresEliminados();
+
+    proveedoresEliminados.forEach((proveedor, index) => {
+        data.push([
+            index + 1,
+            proveedor.nombre,
+            proveedor.telefono,
+            proveedor.fechaEliminacion || "N/A" // Fecha de eliminación
+        ]);
+    });
+
+    doc.autoTable({
+        head: encabezados,
+        body: data,
+        startY: 40,
+        theme: 'grid',
+        styles: { fontSize: 12, cellPadding: 3 },
+        headStyles: { fillColor: [255, 99, 71], textColor: 255, halign: 'center' },
+        bodyStyles: { textColor: 50 },
+    });
+
+    doc.save("reporte_proveedores_eliminados.pdf");
+}
+function cerrarSesion() {
+            window.location.href = "../Inicio.html";
+        }
+    </script>
+</body>
+</html>

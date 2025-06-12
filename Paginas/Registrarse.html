@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="../Estilos/estilos4.css">
+    <style>
+        /* Estilo para la barra de seguridad */
+        .password-strength {
+            width: 100%;
+            height: 10px;
+            background-color: #ddd;
+            margin-top: 5px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .strength-bar {
+            height: 100%;
+            width: 0;
+            transition: width 0.3s;
+        }
+        .weak { background-color: red; }
+        .medium { background-color: orange; }
+        .strong { background-color: green; }
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="register-box">
+            <h2>Registro</h2>
+            <form action="../PHP/registro.php" method="post" onsubmit="return validarFormulario()">
+                <div class="user-box">
+                    <input type="text" id="nombre" name="nombre" required="">
+                    <label>Nombre</label>
+                </div>
+                <div class="user-box">
+                    <input type="text" id="primerApellido" name="primerApellido" required="">
+                    <label>Primer Apellido</label>
+                </div>
+                <div class="user-box">
+                    <input type="text" name="dni" id="dni" required="" maxlength="8" oninput="validarDNI()">
+                    <label>DNI</label>
+                    <p id="dni-error" class="error"></p>
+                </div>
+                <div class="user-box">
+                    <input type="text" name="direccion" required="">
+                    <label>Dirección</label>
+                </div>
+                <div class="user-box">
+                    <input type="text" name="NumeroTelefonico" id="NumeroTelefonico" required="" maxlength="9" oninput="validarTelefono()">
+                    <label>Numero Telefonico</label>
+                    <p id="telefono-error" class="error"></p>
+                </div>
+                <div class="user-box">
+                    <input type="email" name="correoElectronico" required="">
+                    <label>Correo Electrónico</label>
+                </div>
+                <div class="user-box">
+                    <input type="text" name="nombreUsuario" id="nombreUsuario" required="">
+                    <label>Nombre de Usuario</label>
+                    <p id="username-error" class="error"></p>
+                </div>
+                <div class="user-box">
+                    <input type="password" name="contrasena" id="password" required="" oninput="evaluarSeguridad()">
+                    <label>Contraseña</label>
+                    <!-- Barra de seguridad -->
+                    <div class="password-strength">
+                        <div id="strength-bar" class="strength-bar"></div>
+                    </div>
+                    <p id="password-error" class="error"></p>
+                </div>
+                <div class="user-box">
+                    <input type="password" name="confirmarContrasena" id="confirmarPassword" required="">
+                    <label>Confirmar Contraseña</label>
+                    <p id="confirm-password-error" class="error"></p>
+                </div>
+                <div class="button-container">
+                    <input type="submit" value="Register">
+                    <button type="button" onclick="window.location.href='../Inicio.html'">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function evaluarSeguridad() {
+            const password = document.getElementById("password").value;
+            const strengthBar = document.getElementById("strength-bar");
+            let strength = 0;
+
+            if (password.length >= 8) strength++;  // Longitud mínima
+            if (/[A-Z]/.test(password)) strength++;  // Letra mayúscula
+            if (/[a-z]/.test(password)) strength++;  // Letra minúscula
+            if (/[0-9]/.test(password)) strength++;  // Número
+            if (/[@$!%*?&]/.test(password)) strength++;  // Carácter especial
+
+            // Actualizar el ancho y el color de la barra según la fuerza
+            strengthBar.style.width = (strength * 20) + "%";
+            strengthBar.className = "strength-bar"; // Resetea la clase
+
+            if (strength <= 2) {
+                strengthBar.classList.add("weak");
+            } else if (strength <= 4) {
+                strengthBar.classList.add("medium");
+            } else {
+                strengthBar.classList.add("strong");
+            }
+        }
+
+        function validarFormulario() {
+            let valid = true;
+            const username = document.getElementById("nombreUsuario").value;
+            const usernameError = document.getElementById("username-error");
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmarPassword").value;
+            const passwordError = document.getElementById("password-error");
+            const confirmPasswordError = document.getElementById("confirm-password-error");
+            const dniError = document.getElementById("dni-error").textContent;
+            const telefonoError = document.getElementById("telefono-error").textContent;
+            validarDNI();  // Validación adicional del DNI
+            validarTelefono();  // Validación adicional del teléfono
+            if (dniError || telefonoError) {
+            valid = false;
+            }
+            // Validación del nombre de usuario
+            if (!/^[UA]/.test(username)) {
+                usernameError.textContent = "El nombre de usuario debe comenzar con 'U' (Usuario) o 'A' (Administrador).";
+                valid = false;
+            } else {
+                usernameError.textContent = "";
+            }
+
+            // Verificar si la contraseña cumple con los requisitos
+            const passwordRequirements = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+            if (!passwordRequirements.test(password)) {
+                passwordError.textContent = "La contraseña debe tener al menos 8 caracteres, incluir mayúsculas, minúsculas, números y caracteres especiales.";
+                valid = false;
+            } else {
+                passwordError.textContent = "";
+            }
+
+            // Verificar si la contraseña y la confirmación coinciden
+            if (password !== confirmPassword) {
+                confirmPasswordError.textContent = "Las contraseñas no coinciden.";
+                valid = false;
+            } else {
+                confirmPasswordError.textContent = "";
+            }
+
+            return valid;  // Si todo es válido, el formulario se enviará
+        }
+        function validarDNI() {
+        const dni = document.getElementById("dni").value;
+        const dniError = document.getElementById("dni-error");
+
+        if (!/^\d{0,8}$/.test(dni)) {
+            dniError.textContent = "El DNI debe contener solo números y un máximo de 8 dígitos.";
+        } else {
+            dniError.textContent = "";
+        }
+    }
+
+    function validarTelefono() {
+        const telefono = document.getElementById("NumeroTelefonico").value;
+        const telefonoError = document.getElementById("telefono-error");
+
+        if (!/^\d{0,9}$/.test(telefono)) {
+            telefonoError.textContent = "El número telefónico debe contener solo números y un máximo de 9 dígitos.";
+        } else {
+            telefonoError.textContent = "";
+        }
+    }
+    document.getElementById('nombre').addEventListener('input', function () {
+            this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+        });
+        document.getElementById('primerApellido').addEventListener('input', function () {
+            this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+        });
+
+    </script>
+</body>
+</html>

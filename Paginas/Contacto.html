@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>FarmaTotal</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../Estilos/estilos5.css'>
+    <style>
+        .cerrar-sesion-btn {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: auto;
+        }
+
+        .cerrar-sesion-btn:hover {
+            background-color: #e60000;
+        }
+
+        .cerrar-sesion-btn:active {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container-hero">
+            <div class="container hero">
+                <div class="customer-support">
+                    <i class="fa-solid fa-headset"></i>
+                    <div class="content-customar-support">
+                        <span class="text">Soporte al cliente</span><br>
+                        <span class="number">979-486-180</span>
+                    </div>
+                </div>
+                <div class="container-logo">
+                    <img src="../Imagenes/logoC.png" alt="Logo">
+                </div>
+                <div class="container-user">
+                    <i class="fa-solid fa-user"></i>
+                    <i class="fa-solid fa-cart-shopping" id="cart-icon"></i>
+                    <div class="content-shopping-cart">
+                        <span class="text">Carrito</span>
+                        <span class="number">(0)</span>
+                    </div>
+                    <!-- Cuadro del carrito -->
+                    <!-- Dentro de <div class="container-user"> -->
+                        <div class="cart-dropdown" style="display: none;">
+                            <div class="header-carrito">
+                                <h2>Tu Carrito</h2>
+                            </div>
+                        
+                            <div class="carrito-items">
+                              
+                            </div>
+                            <div class="carrito-total">
+                                <div class="fila">
+                                    <strong>Tu Total</strong>
+                                    <span class="carrito-precio-total">
+                                        $41.40 <!-- Esto es 4.60 * 9 productos -->
+                                    </span>
+                                </div>
+                                <form action="http://localhost/HD_2025/PHP/guardar_detalle_venta.php" method="post">
+                                    <button type="submit" class="btn-pagar">Pagar<i class="fa-solid fa-bag-shopping"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-navbar">
+        <nav class="navbar container">
+            <i class="fa-solid fa-bars"></i>
+            <ul class="menu">
+                <li><a href="FarmaTotal.html">Inicio</a></li>
+                <li><a href="Productos.html">Productos</a></li>
+                <li><a href="Acerca_de.html">Nosotros</a></li>
+                <li><a href="Contacto.html">Contacto</a></li>
+            </ul>
+            <form class="search-form">
+                <input type="search" placeholder="Buscar">
+                <button class="btn-search">
+                    <i class="fa-brands fa-searchengin"></i>
+                </button>
+            </form>
+        </nav>
+    </div>
+    </header>
+
+    <section class="hero-1">
+        
+        
+
+    <section class="contacto-section">
+  <div class="contacto-info">
+    <h2>¿Necesitas Ayuda o Información?</h2>
+    <p>
+      En FarmaTotal, estamos aquí para ayudarte con cualquier consulta o duda que tengas sobre nuestros
+      servicios o productos. Si deseas más información sobre nuestros medicamentos, cómo realizar pedidos,
+      o si necesitas soporte técnico para nuestra plataforma en línea, nuestro equipo está listo para asistirte.
+      Por favor, completa el formulario de contacto y nos pondremos en contacto contigo a la brevedad.
+    </p>
+  </div>
+
+  <div class="contacto-contenido">
+    <form id="contactForm" class="form-contacto">
+      <h3>Formulario de Contacto</h3>
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" required>
+
+      <label for="apellido">Apellido:</label>
+      <input type="text" id="apellido" name="apellido" required>
+
+      <label for="correo">Correo Electrónico:</label>
+      <input type="email" id="correo" name="correo" required>
+
+      <label for="telefono">Teléfono:</label>
+      <input type="tel" id="telefono" name="telefono" required>
+
+      <label for="mensaje">Mensaje:</label>
+      <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+
+      <button type="submit">Enviar</button>
+    </form>
+
+    <div class="info-extra">
+      <h3>Contacta con FarmaTotal</h3>
+      <ul>
+        <li><strong>Email:</strong> centroFarma@gmail.com</li>
+        <li><strong>Teléfono:</strong> 979-486-180</li>
+        <li><strong>Dirección:</strong> Av.Arequipa-Lima Centro, Perú</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+        <div class="container container-footer">
+            <div class="menu-footer">
+                <div class="container-logo">
+                    <img src="../Imagenes/logoC.png" alt="Logo">
+                </div>
+                <div class="contact-info">
+                    <p class="title-footer">Informacion de contacto</p>
+                    <ul>
+                        <li>Dirección: Av.Arequipa-Lima Centro, Perú</li>
+                        <li>Telefono: 979-486-180</li>
+                        <li>Correo electronico: centroFarma@gmail.com</li>
+                    </ul>
+                    <div class="social-icons">
+                        <span class="facebook"><i class="fa-brands fa-facebook"></i></span>
+                        <span class="instagram"><i class="fa-brands fa-instagram"></i></span>
+                        <span class="twitter"><i class="fa-brands fa-x-twitter"></i></span>
+                        <span class="youtube"><i class="fa-brands fa-youtube"></i></span>
+                        <span class="tiktok"><i class="fa-brands fa-tiktok"></i></span>
+                    </div>
+                </div>
+                <div class="information">
+                    <p class="title-footer">Información</p>
+                        <ul>
+                            <li><a href="#"></a>Acerca de nosotros</li>
+                            <li><a href="#"></a>Informacion</li>
+                            <li><a href="#"></a>Politicas de privacidad</li>
+                            <li><a href="#"></a>Terminos y condiciones</li>
+                            <li><a href="#"></a>Contactanos </li>
+                        </ul>
+                </div>
+                <div class="newletter">
+                    <p class="title-footer">NUESTRAS PROMOCIONES</p>
+                    <div class="content">
+                        <p>
+                            Enterate a nuestros proximas promociones donde te mantendremos al 
+                            día con todas nuestras ofertas exclusivas.
+                        </p>
+                        <input type="email" placeholder="Ingresa tu correo aqui mano...">
+                        <button>INGRESA</button>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>
+                    Farmacias CentroFarma &copy; 2025
+                </p>
+                <img src="../Imagenes/payment.png" alt="">
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Script para manejar el envío del formulario
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevenir el envío del formulario
+            
+            // Obtener los valores del formulario
+            const nombre = document.getElementById('nombre').value;
+            const apellido = document.getElementById('apellido').value;
+            const correo = document.getElementById('correo').value;
+            const telefono = document.getElementById('telefono').value;
+            const mensaje = document.getElementById('mensaje').value;
+
+            // Mostrar los datos en la consola (puedes cambiar esto según sea necesario)
+            console.log(`Nombre: ${nombre}`);
+            console.log(`Apellido: ${apellido}`);
+            console.log(`Correo: ${correo}`);
+            console.log(`Teléfono: ${telefono}`);
+            console.log(`Mensaje: ${mensaje}`);
+
+            // Limpiar el formulario después de enviar
+            document.getElementById('contactForm').reset();
+            alert('Gracias por tu mensaje. Nos pondremos en contacto contigo pronto.');
+        });
+        function cerrarSesion() {
+            window.location.href = "../Inicio.html"; // Redirige a la página de inicio o login
+        }
+    </script>
+</body>
+</html>
