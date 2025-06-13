@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartItemsContainer = cartDropdown.querySelector('.carrito-items');
     const totalElement = cartDropdown.querySelector('.carrito-precio-total');
     const payButton = cartDropdown.querySelector('.btn-pagar');
-    const API_URL = 'http://localhost/HD_2025/HD_2025/PHP/guardar_detalle_venta.php';
+    const API_URL = 'http://localhost/PROYECTO_HD/PHP/guardar_detalle_venta.php';
 
     // Mostrar/ocultar el carrito
     cartIcon.addEventListener('click', () => {

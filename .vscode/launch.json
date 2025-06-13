@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Abrir desde localhost con XAMPP",
+            "url": "http://localhost/PROYECTO_HD/Paginas/Productos.html",
+            "webRoot": "${workspaceFolder}"
+        }
+    ]
+}

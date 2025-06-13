@@ -6,7 +6,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    background: #5887bc; /* Color de fondo */
+    background: #243b55; /* Color de fondo */
     height: 100%;
 }
 
@@ -191,4 +191,4 @@ body {
     50%, 100% {
         bottom: 100%;
     }
-}  
+}
