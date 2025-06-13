@@ -13,6 +13,37 @@ document.addEventListener("DOMContentLoaded", function () {
             cargarProductos();
         });
     }
+    // 🔍 BÚSQUEDA DE PRODUCTO POR NOMBRE AL PRESIONAR ENTER
+    const inputBuscar = document.getElementById("buscarProducto");
+    if (inputBuscar) {
+        inputBuscar.addEventListener("keypress", function (e) {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                const termino = this.value.trim();
+                if (termino !== "") {
+                    buscarProductoPorNombre(termino);
+                }
+            }
+        });
+    }
+
+    function buscarProductoPorNombre(nombre) {
+        fetch("buscar_producto.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ nombre: nombre })
+        })
+        .then(response => response.json())
+        .then(data => {
+            mostrarProductos(data);
+        })
+        .catch(error => {
+            console.error('Error al buscar producto:', error);
+        });
+    }
+
     function mostrarProductos(data) {
         productosBody.innerHTML = "";
 

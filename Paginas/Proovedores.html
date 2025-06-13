@@ -1,305 +1,106 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>FarmaTotal - Proveedores</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='../Estilos/estilos2.css'>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
-    <style>
-        #cerrarSesionBtn, #generarReporteBtn {
-            background-color: #ff4d4d;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 10px;
-        }
-
-        #cerrarSesionBtn:hover, #generarReporteBtn:hover {
-            background-color: #e60000;
-        }
-
-        #cerrarSesionBtn:active, #generarReporteBtn:active {
-            background-color: #cc0000;
-        }
-
-        #generarReporteEliminadosBtn {
-            background-color: #4caf50;
-        }
-
-        #generarReporteEliminadosBtn:hover {
-            background-color: #45a049;
-        }
-
-        #generarReporteEliminadosBtn:active {
-            background-color: #3e8e41;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link href="../Estilos/estilos2.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <title>CentroFarma - Panel</title>
 </head>
 <body>
-    <div class="parent">
-        <div class="div1">
-            <h1>FarmaTotal</h1>
-            <ul>
-                <li><a href="Medicamentos.html">Medicamentos</a></li>
-                <li><a href="Proovedores.html">Proveedores</a></li>
-                <li><a href="Usuario.html">Usuarios</a></li>
-                <li><a href="Ventas.html">Ventas</a></li>
-                <li><a href="Comentarios.html">Comentarios</a></li>
-            </ul>
-            <button id="cerrarSesionBtn" onclick="cerrarSesion()">Cerrar Sesión</button>
-        </div>
-        <div class="div2">
-            <h2>Ingresar Proveedores</h2>
-            <form id="formularioProveedores">
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Nombre" oninput="validarNombre()"><br><br>
-                
-                <label for="telefono">Teléfono:</label>
-                <input type="tel" id="telefono" name="telefono" placeholder="Teléfono" oninput="validarTelefono()"><br><br>
-                
-                <label for="direccion">Dirección:</label>
-                <input type="text" id="direccion" name="direccion" placeholder="Dirección"><br><br>
-                
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" placeholder="Email"><br><br>
-                
-                <button type="button" onclick="agregarProveedor()">Agregar Proveedor</button>
-                <button type="button" id="generarReporteEliminadosBtn" onclick="generarReporteEliminados()">Reporte Eliminados</button>
-            </form>
-        </div>
-        <div class="div3">
-            <h2>Proveedores Registrados</h2>
-            <table border="1" id="tablaProveedores">
-                <thead>
-                    <tr>
-                        <th>Número</th>
-                        <th>Nombre</th>
-                        <th>Teléfono</th>
-                        <th>Dirección</th>
-                        <th>Email</th>
-                        <th>Borrar</th>
-                        <th>Editar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Filas de proveedores se agregarán aquí -->
-                </tbody>
-            </table>
-        </div>
+
+  <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">CentroFarma</a>
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <input id="buscarProducto" class="form-control form-control-dark w-100" type="text" placeholder="Buscar" aria-label="Buscar">
+    <div class="navbar-nav">
+      <div class="nav-item text-nowrap">
+        <a class="nav-link px-3" href="index.html">Cerrar sesión</a>
+      </div>
     </div>
+  </header>
 
-    <script>
-        let contador = 1;
+  <div class="container-fluid">
+    <div class="row">
+      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+        <div class="position-sticky pt-3">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="Ventas.html">
+                <i class="fa-solid fa-house"></i> Ventas
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Medicamentos.html">
+                <i class="fa fa-shopping-cart"></i> Productos
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="colaboradores.html">
+                <i class="fa fa-user"></i> Usuarios
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Proovedores.html">
+                <i class="fa fa-truck"></i> Proveedores
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
 
-        document.addEventListener("DOMContentLoaded", function() {
-            cargarDatos();
-        });
-        // Validación del nombre: solo permite letras y espacios
-        function validarNombre() {
-            const nombre = document.getElementById('nombre').value;
-            const regex = /[^a-zA-Z\s]/g; // Solo permite letras y espacios
-            if (regex.test(nombre)) {
-                alert("El nombre no puede contener números ni caracteres especiales.");
-                document.getElementById('nombre').value = nombre.replace(regex, ''); // Eliminar caracteres no permitidos
-            }
-        }
-        // Validación del teléfono: solo permite números y caracteres especiales como +, -, (, )
-        function validarTelefono() {
-            const telefono = document.getElementById('telefono').value;
-            const regex = /[^0-9+\-\(\)\s]/g; // Solo permite números, +, -, (, ), y espacio
-            if (regex.test(telefono)) {
-                alert("El teléfono solo puede contener números y los signos (+, -, (, ), espacio).");
-                document.getElementById('telefono').value = telefono.replace(regex, ''); // Eliminar caracteres no permitidos
-            }
-        }
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <h1 class="h2 mt-3">Dashboard</h1>
 
-        function agregarProveedor() {
-            const nombre = document.getElementById("nombre").value;
-            const telefono = document.getElementById("telefono").value;
-            const direccion = document.getElementById("direccion").value;
-            const email = document.getElementById("email").value;
-            const fechaInscripcion = new Date().toLocaleDateString();
+        <form id="frmProductos" autocomplete="off">
+          <div class="card mb-2">
+            <div class="card-body">
+              <input type="hidden" id="id_product" name="id_product">
+              <div class="row">
+                
+                <input type="text" id="buscador" class="form-control mb-3" placeholder="Buscar proveedor..">
+            <div class="card-footer text-end">
+              
+          
+              <button type="button" class="btn btn-primary" id="btnMostrarProveedores">Mostrar  Provedor </button>
+            </div>
+          </div>
+        </form>
 
-            if (!nombre || !telefono || !direccion || !email) {
-                alert("Por favor, complete todos los campos.");
-                return;
-            }
+        <table id="tablaProveedores" class="table table-striped table-bordered">
+          <thead class="table-dark">
+            <tr>
+              <th>id_proveedor</th>
+              <th >nombre </th>
+              <th>ruc</th>
+              <th>direccion</th>
+              <th>telefono</th>
+            
+              
+            </tr>
+          </thead>
+          <tbody id="tablaProveedoresBody">
+            <!-- Los productos se cargarán aquí -->
+          </tbody>
+        </table>
+      </main>
+    </div>
+  </div>
 
-            const proveedor = { 
-                id: contador, 
-                nombre, 
-                telefono, 
-                direccion, 
-                email, 
-                fechaInscripcion 
-            };
+  
 
-            guardarEnLocalStorage(proveedor);
-            agregarFila(proveedor);
-            document.getElementById("formularioProveedores").reset();
-        }
 
-        function agregarFila(proveedor) {
-            const tabla = document.getElementById("tablaProveedores").getElementsByTagName("tbody")[0];
-            const nuevaFila = tabla.insertRow();
+       
 
-            nuevaFila.innerHTML = `
-                <td>${proveedor.id}</td>
-                <td>${proveedor.nombre}</td>
-                <td>${proveedor.telefono}</td>
-                <td>${proveedor.direccion}</td>
-                <td>${proveedor.email}</td>
-                <td><button onclick="borrarFila(this, ${proveedor.id})">Borrar</button></td>
-                <td><button onclick="editarFila(this, ${proveedor.id})">Editar</button></td>
-            `;
-
-            contador++;
-        }
-
-        function borrarFila(boton, id) {
-            const fila = boton.parentNode.parentNode;
-            fila.parentNode.removeChild(fila);
-            eliminarDeLocalStorage(id);
-            actualizarNumeros();
-        }
-
-        function guardarEnLocalStorage(proveedor) {
-            let proveedores = JSON.parse(localStorage.getItem('proveedores')) || [];
-            proveedores.push(proveedor);
-            localStorage.setItem('proveedores', JSON.stringify(proveedores));
-        }
-
-        function cargarDatos() {
-            const proveedores = JSON.parse(localStorage.getItem('proveedores')) || [];
-            proveedores.forEach(proveedor => {
-                agregarFila(proveedor);
-                if (proveedor.id >= contador) {
-                    contador = proveedor.id + 1;
-                }
-            });
-        }
-
-        function eliminarDeLocalStorage(id) {
-            let proveedores = JSON.parse(localStorage.getItem('proveedores'));
-            proveedores = proveedores.filter(proveedor => proveedor.id !== id);
-            localStorage.setItem('proveedores', JSON.stringify(proveedores));
-        }
-
-        let proveedoresEliminados = [];
-
-function borrarFila(boton, id) {
-    const fila = boton.parentNode.parentNode;
-    const proveedorEliminado = obtenerProveedorPorId(id);
-
-    if (proveedorEliminado) {
-        proveedorEliminado.fechaEliminacion = new Date().toLocaleDateString();
-        guardarProveedorEliminado(proveedorEliminado);
-    }
-
-    fila.parentNode.removeChild(fila);
-    eliminarDeLocalStorage(id);
-    actualizarNumeros();
-}
-
-function guardarProveedorEliminado(proveedor) {
-    proveedoresEliminados.push(proveedor);
-    localStorage.setItem('proveedoresEliminados', JSON.stringify(proveedoresEliminados));
-}
-
-function cargarProveedoresEliminados() {
-    proveedoresEliminados = JSON.parse(localStorage.getItem('proveedoresEliminados')) || [];
-}
-
-function obtenerProveedorPorId(id) {
-    let proveedores = JSON.parse(localStorage.getItem('proveedores')) || [];
-    return proveedores.find(proveedor => proveedor.id === id);
-}
-        // Editar proveedor
-        function editarFila(boton, id) {
-            const fila = boton.parentNode.parentNode;
-            const celdas = fila.getElementsByTagName("td");
-
-            if (boton.textContent === "Editar") {
-                for (let i = 1; i < 5; i++) {
-                    const valorActual = celdas[i].textContent;
-                    celdas[i].innerHTML = `<input type="text" value="${valorActual}" />`;
-                }
-                boton.textContent = "Guardar";
-            } else {
-                const nuevoProveedor = {
-                    id: id,
-                    nombre: celdas[1].getElementsByTagName("input")[0].value,
-                    telefono: celdas[2].getElementsByTagName("input")[0].value,
-                    direccion: celdas[3].getElementsByTagName("input")[0].value,
-                    email: celdas[4].getElementsByTagName("input")[0].value
-                };
-
-                celdas[1].textContent = nuevoProveedor.nombre;
-                celdas[2].textContent = nuevoProveedor.telefono;
-                celdas[3].textContent = nuevoProveedor.direccion;
-                celdas[4].textContent = nuevoProveedor.email;
-
-                boton.textContent = "Editar";
-
-                actualizarEnLocalStorage(nuevoProveedor);
-            }
-        }
-
-        // Actualizar proveedor en localStorage
-        function actualizarEnLocalStorage(proveedorActualizado) {
-            let proveedores = JSON.parse(localStorage.getItem('proveedores')) || [];
-            const index = proveedores.findIndex(p => p.id === proveedorActualizado.id);
-            if (index !== -1) {
-                proveedores[index] = proveedorActualizado;
-                localStorage.setItem('proveedores', JSON.stringify(proveedores));
-            }
-        }
-
-function generarReporteEliminados() {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-
-    doc.setFontSize(18);
-    doc.text("FarmaTotal", doc.internal.pageSize.getWidth() / 2, 20, { align: "center" });
-
-    doc.setFontSize(14);
-    doc.text("Reporte de Proveedores Eliminados", doc.internal.pageSize.getWidth() / 2, 30, { align: "center" });
-
-    const encabezados = [["#", "Nombre", "Número", "Fecha de Eliminación"]];
-    const data = [];
-
-    cargarProveedoresEliminados();
-
-    proveedoresEliminados.forEach((proveedor, index) => {
-        data.push([
-            index + 1,
-            proveedor.nombre,
-            proveedor.telefono,
-            proveedor.fechaEliminacion || "N/A" // Fecha de eliminación
-        ]);
-    });
-
-    doc.autoTable({
-        head: encabezados,
-        body: data,
-        startY: 40,
-        theme: 'grid',
-        styles: { fontSize: 12, cellPadding: 3 },
-        headStyles: { fillColor: [255, 99, 71], textColor: 255, halign: 'center' },
-        bodyStyles: { textColor: 50 },
-    });
-
-    doc.save("reporte_proveedores_eliminados.pdf");
-}
-function cerrarSesion() {
-            window.location.href = "../Inicio.html";
-        }
-    </script>
+      
+    </div>
+  </div>
+  <script src="../JS/crudProvedor.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../JS/main.js"></script>
 </body>
 </html>
+

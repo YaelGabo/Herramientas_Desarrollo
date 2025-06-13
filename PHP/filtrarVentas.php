@@ -10,7 +10,7 @@ header('Content-Type: application/json');
 // Datos de conexión a la base de datos
 $servername = "localhost:3306";
 $username = "root";
-$password = "";
+$password = "G@bo1007";
 $dbname = "herramientas_desarrollo";
 
 // Crear conexión

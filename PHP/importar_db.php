@@ -8,7 +8,7 @@ if (session_status() == PHP_SESSION_NONE) {
 // Parámetros de conexión
 $servername = "localhost:3306";
 $username = "root";
-$password = "";
+$password = "G@bo1007";
 $dbname = "herramientas_desarrollo";
 
 // 1) Conectar al servidor

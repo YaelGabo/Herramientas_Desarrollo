@@ -12,19 +12,21 @@
 </head>
 <body>
 
-    <!-- Barra de navegación -->
-    <div class="navbar">
-        <div class="logo">FarmaTotal</div>
-        <nav>
-            <ul>
-                <li><a href="Medicamentos.html">Medicamentos</a></li>
-                <li><a href="Proovedores.html">Proveedores</a></li>
-                <li><a href="Usuario.html">Usuarios</a></li>
-                <li><a href="Ventas.html">Ventas</a></li>
-                <li><a href="Comentarios.html">Comentarios</a></li>
-            </ul>
-        </nav>
-    </div>
+   <!-- Barra de navegación -->
+<div class="navbar" id="navbar">
+    <div class="logo">FarmaTotal</div>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <nav>
+        <ul>
+            <li><a href="Medicamentos.html">Medicamentos</a></li>
+            <li><a href="Proovedores.html">Proveedores</a></li>
+            <li><a href="Usuario.html">Usuarios</a></li>
+            <li><a href="Ventas.html">Ventas</a></li>
+            <li><a href="Comentarios.html">Comentarios</a></li>
+        </ul>
+    </nav>
+</div>
+
 
     <!-- Contenido principal -->
     <div class="container">
@@ -71,6 +73,13 @@
     </div>
     
     <script>
+        
+  function toggleMenu() {
+    const navbar = document.getElementById('navbar');
+    navbar.classList.toggle('show');
+  }
+
+
         // Validación en tiempo real
         document.getElementById('nombre-farmacia').addEventListener('input', function () {
             this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
@@ -95,3 +104,4 @@
 
 </body>
 </html>
+
