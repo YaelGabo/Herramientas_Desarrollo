@@ -1,122 +1,170 @@
+/* === FUENTE BASE === */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fdfaf6;
+  color: #151515;
 }
 
+/* === NAVBAR === */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #0bdde8; /* Color de fondo */
-    padding: 10px 20px;
-    color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #c7a17a;
+  padding: 10px 20px;
+  color: white;
+  flex-wrap: wrap;
 }
-
 .navbar .logo {
-    font-size: 24px;
-    font-weight: bold;
+  font-size: 24px;
+  font-weight: bold;
 }
-
 .navbar nav ul {
-    list-style: none; /* Eliminar los puntos de la lista */
-    padding: 0; /* Sin padding */
-    margin: 0; /* Sin margin */
-    display: flex; /* Para que los elementos estén en línea */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
 }
-
 .navbar nav ul li {
-    margin: 0 15px; /* Espaciado entre elementos de la lista */
+  margin: 0 10px;
 }
-
 .navbar nav ul li a {
-    color: white;
-    text-decoration: none;
-    padding: 10px 15px; /* Añadir un poco de padding para hacer clic más fácil */
-    transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease; /* Transiciones */
-    border-radius: 5px; /* Bordes redondeados */
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
 }
-
 .navbar nav ul li a:hover {
-    background-color: rgba(10, 189, 186, 0.673); /* Fondo semitransparente al pasar el mouse */
-    color: #f2f2f2; /* Color al pasar el mouse */
-    transform: scale(1.05); /* Aumenta el tamaño ligeramente al pasar el mouse */
+  background-color: #b58b63;
+  color: #f2f2f2;
+  transform: scale(1.05);
 }
 
+/* === CONTENEDOR PRINCIPAL === */
 .container {
-    display: flex;
-    padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  gap: 20px;
 }
-
-.left-side {
-    flex: 1;
-    padding-right: 20px;
-}
-
+.left-side,
 .right-side {
-    flex: 1;
-    text-align: center;
+  flex: 1 1 100%;
 }
-
 .right-side img {
-    max-width: 100%;
-    height: auto;
+  max-width: 100%;
+  height: auto;
 }
 
+/* === FORMULARIO DE COMENTARIOS === */
 .formulario-comentarios {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
-
 .formulario-comentarios label {
-    margin-top: 10px;
-    font-weight: bold;
+  margin-top: 10px;
+  font-weight: bold;
 }
-
-.formulario-comentarios input, 
+.formulario-comentarios input,
 .formulario-comentarios textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
-
 .formulario-comentarios input[type="checkbox"] {
-    margin-top: 15px; /* Margen superior para el checkbox */
+  margin-top: 15px;
 }
-
 .formulario-comentarios button {
-    margin-top: 15px;
-    padding: 10px;
-    background-color: #03e9f4; /* Color del botón */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Transición para el botón */
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #c7a17a;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
-
 .formulario-comentarios button:hover {
-    background-color: #02c4e0; /* Color al pasar el cursor sobre el botón */
+  background-color: #b58b63;
 }
 
-/* Estilo para el mensaje de advertencia */
+/* === MENSAJE DE ADVERTENCIA === */
 .formulario-comentarios p {
-    color: red; /* Color de advertencia */
-    font-size: 14px;
-    margin: 5px 0; /* Espacio alrededor del texto */
+  color: red;
+  font-size: 14px;
+  margin: 5px 0;
 }
+
+/* === CHECKBOX ACOMODADO === */
 .container-checkbox {
-    display: flex; /* Para alinear checkbox y etiqueta en una línea */
-    align-items: center; /* Centra verticalmente el checkbox y la etiqueta */
-    margin-top: 15px; /* Espacio superior para el contenedor */
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  gap: 10px;
 }
-
 .container-checkbox input[type="checkbox"] {
-    margin-right: -444px; /* Eliminar margen derecho para que esté pegado a la etiqueta */
+  transform: scale(1.2);
 }
 
-.container-checkbox input {
-    margin-left: -454px; /* Espacio a la izquierda de la etiqueta (opcional) */
-} 
+/* === RESPONSIVE DESIGN === */
+@media (min-width: 768px) {
+  .left-side,
+  .right-side {
+    flex: 1 1 45%;
+  }
+  .container {
+    justify-content: space-between;
+  }
+}
+/* Estilos para el botón hamburguesa */
+.menu-toggle {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: white;
+}
+
+/* Responsive: navbar se adapta a pantallas pequeñas */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .menu-toggle {
+    display: block;
+    align-self: flex-end;
+  }
+
+  .navbar nav {
+    display: none;
+    width: 100%;
+  }
+
+  .navbar nav ul {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .navbar nav ul li {
+    width: 100%;
+  }
+
+  .navbar nav ul li a {
+    display: block;
+    padding: 12px 20px;
+  }
+
+  .navbar.show nav {
+    display: flex;
+  }
+}
+
