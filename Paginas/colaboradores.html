@@ -60,48 +60,33 @@
             <div class="card-body">
               <input type="hidden" id="id_product" name="id_product">
               <div class="row">
-                <div class="col-md-3">
-                  <label for="barcode">ID <span class="text-danger">*</span></label>
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="fas fa-barcode"></i></span>
-                    </div>
-                    <input type="text" class="form-control" id="barcode" name="barcode" placeholder="ID Producto">
-                  </div>
-                </div>
-                <div class="col-md-2">
-                  <label for="stock">Stock <span class="text-danger">*</span></label>
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="fas fa-barcode"></i></span>
-                    </div>
-                    <input type="text" class="form-control" id="stock" name="stock" placeholder="0">
-                  </div>
-                </div>
-              </div>
-            </div>
+                
+                <input type="text" id="buscador" class="form-control mb-3" placeholder="Buscar usuario...">
             <div class="card-footer text-end">
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Nuevo Producto</button>
-              <button type="submit" class="btn btn-primary" id="btn-save">Guardar</button>
-              <button type="button" class="btn btn-primary" id="btnMostrarProductos">Mostrar Productos</button>
+              
+          
+              <button type="button" class="btn btn-primary" id="btnMostrarUsuarios">Mostrar Usuarios</button>
             </div>
           </div>
         </form>
 
-        <table class="table table-striped table-bordered">
+        <table id="tablaUsuarios" class="table table-striped table-bordered">
           <thead class="table-dark">
             <tr>
-              <th style="cursor: pointer;">ID <i class="fa fa-sort"></i></th>
-              <th style="cursor: pointer;">Nombre <i class="fa fa-sort"></i></th>
-              <th>Precio</th>
-              <th>Stock</th>
-              <th>Proveedor</th>
-              <th>Estado</th>
-              <th>Imágenes</th>
-              <th>Acciones</th>
+              <th>id </th>
+              <th>nombre </th>
+              <th>primerApellido</th>
+              <th>dni</th>
+              <th>direccion</th>
+              <th>numeroTelefonico</th>
+              <th>correoElectronico</th>
+              <th>nombreUsuario</th>
+              <th>contrasena</th>
+              <th>tipoUsuario</th>
+              
             </tr>
           </thead>
-          <tbody id="productosBody">
+          <tbody id="tablaUsuariosBody">
             <!-- Los productos se cargarán aquí -->
           </tbody>
         </table>
@@ -173,7 +158,7 @@
       </div>
     </div>
   </div>
-
+  <script src="../JS/crudUsuarios.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../JS/main.js"></script>
 </body>

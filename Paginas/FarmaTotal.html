@@ -1,76 +1,551 @@
-<!DOCTYPE html> 
-<html lang="es">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>FarmaTotal</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="../Estilos/estilos5.css">
-    <style>
-        nav ul {
-            display: flex;
-            list-style: none;
-            padding: 0;
-        }
-
-        nav ul li {
-            margin-right: 15px;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: black;
-            font-weight: bold;
-        }
-
-        .cerrar-sesion-btn {
-            background-color: #ff4d4d;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-left: auto;
-        }
-
-        .cerrar-sesion-btn:hover {
-            background-color: #e60000;
-        }
-
-        .cerrar-sesion-btn:active {
-            background-color: #cc0000;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Estilos/estilos5.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="../js/index.js"></script>
+<title>Doña Julia</title>
 </head>
 <body>
     <header>
-        <h1>FarmaTotal</h1>
-        <nav>
-            <ul>
+        <div class="container-hero">
+            <div class="container hero">
+                <div class="customer-support">
+                    <i class="fa-solid fa-headset"></i>
+                    <div class="content-customar-support">
+                        <span class="text">Soporte al cliente</span><br>
+                        <span class="number">979-486-180</span>
+                    </div>
+                </div>
+                <div class="container-logo">
+                    <img src="../Imagenes/LOGO.png">
+                    <h1 class="logo"><a href="index.html">Farmacia CentroFarma</a></h1>
+                </div>
+                
+                <div class="container-user">
+                    <!-- Aca es para cuando se haga cliek en el icono de usario -->
+
+                    <a href="login-cliente.html"><i class="fa-solid fa-user"></i></a>
+                    
+                    <i class="fa-solid fa-basket-shopping"></i>
+                    <div class="content-shopping-cart">
+                        <span class="text">Carrito</span>
+                        <span class="number">(0)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-navbar">
+        <nav class="navbar container">
+            <i class="fa-solid fa-bars"></i>
+            <ul class="menu">
                 <li><a href="FarmaTotal.html">Inicio</a></li>
-                <li><a href="Acerca_de.html">Acerca de</a></li>
                 <li><a href="Productos.html">Productos</a></li>
-                <li><a href="Carrito.html">Carrito</a></li>
-                <li><a href="Equipo.html">Equipo</a></li>
+                <li><a href="Acerca_de.html">Nosotros</a></li>
                 <li><a href="Contacto.html">Contacto</a></li>
-                <li><button class="cerrar-sesion-btn" onclick="cerrarSesion()">Cerrar Sesión</button></li>
             </ul>
+            <form class="search-form">
+                <input type="search" placeholder="Buscar">
+                <button class="btn-search">
+                    <i class="fa-brands fa-searchengin"></i>
+                </button>
+            </form>
         </nav>
+    </div>
     </header>
-    <section class="hero">
-        <img src="../Imagenes/Imagen1.jpg" alt="Logo FarmaTotal">
-        <h2>Bienvenidos a FarmaTotal</h2>
-        <p>FarmaTotal es su farmacia de confianza, dedicada a cuidar la salud de toda la comunidad. Ofrecemos una amplia gama de productos farmacéuticos, asesoría personalizada y atención de calidad para que encuentre todo lo que necesita para su bienestar. Desde medicamentos hasta suplementos y productos de cuidado personal, en FarmaTotal estamos comprometidos con su salud. ¡Visítenos y descubra cómo podemos ayudarlo a vivir mejor!</p>
-        <button>Explorar Productos</button>
+    <section class="banner">
+        <div class="content-banner">
+            <p>Tortas increibles</p>
+            <h2>Las mejores tortas <br>
+                en todo el Perú</h2>
+            <a href="productos.html">Comprar ahora</a>
+        </div>
     </section>
-    <footer>
-        <p>(c)2024 Desarrollado por Ronaldo Rafael Vazquez</p>
-    </footer>
-    <script>
-        function cerrarSesion() {
-            window.location.href = "../Inicio.html"; // Redirige a la página de inicio o login
-        }
-    </script>
+    <main class="main-content">
+        <section class="container container-features">
+            <div class="card-feature">
+                <i class="fa-solid fa-plane-up"></i>
+                <div class="feature-content">
+                    <span>Envio gratuito a todo el Perú</span>
+                    <p>Compra superior a 50 soles</p>
+                </div>
+            </div>
+            <div class="card-feature">
+                <i class="fa-brands fa-cc-visa"></i>
+                <div class="feature-content">
+                    <span>Metodos de pago</span>
+                    <p>Yape, Plin y tarjeta de credito</p>
+                </div>
+            </div>
+            <div class="card-feature">
+                <i class="fa-solid fa-sack-dollar"></i>
+                <div class="feature-content">
+                    <span>Bonificaciones</span>
+                    <p>Todos los martes tenemos premios <br>
+                        para nuestros clientes</p>
+                </div>
+            </div>
+            <div class="card-feature">
+                <i class="fa-solid fa-headset"></i>
+                <div class="feature-content">
+                    <span>Servicio al cliente</span>
+                    <p>Llamanos al 979-486-180</p>
+                </div>
+            </div>
+        </section>
+        <section class="container top-categories">
+            <h1 class="heading-1">NUESTROS PRODUCTOS</h1>
+            <div class="container-categories">
+                <div class="card-category category-noca" onclick="">
+                    <p>medicamentos</p>
+                    <span>Ver mas</span>
+                </div>  
+                <div class="card-category category-fresas">
+                    <p>cuidado Personal</p>
+                    <span>Ver mas</span>
+                </div>  
+                <div class="card-category category-drip">
+                    <p>Productos para bebés</p>
+                    <span>Ver mas</span>
+                </div>  
+                <div class="card-category category-leches">
+                    <p>Equipos y productos</p>
+                    <span>Ver mas</span>
+                </div>  
+            </div>
+        </section>
+        <section class="container top-products">
+            <h1 class="heading-1">¡LAS MAS PEDIDAS!</h1>
+            <div class="container-options">
+                <span class="active">Mas vendidos</span>
+                <span>lo mas Nuevo</span>
+                <span>Lo mas relavantes</span>
+            </div>
+
+            <div class="container-products">
+                <div class="card-product">
+                    <div class="container-img">
+                        <img src="../recursos/imagenes/choco.webp" alt="Torta de chocolate">
+                        <span class="discount">80%</span>
+                        <div class="button-group">
+                        <span>
+                            <i class="fa-regular fa-eye"></i>
+                        </span> 
+                        <span>
+                            <i class="fa-regular fa-heart"></i>
+                        </span> 
+                        <span>
+                            <i class="fa-solid fa-code-compare"></i>
+                        </span>
+                        </div>
+                    </div>
+                    <div class="content-card-product">
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <h3>Torta de chocolate</h3>
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping"></i>
+                        </span>
+                        <p class="price">$4.60 <span>$5.30</span></p>
+                    </div>
+                </div>
+                <div class="card-product">
+                    <div class="container-img">
+                        <img src="../recursos/imagenes/leche.webp" alt="Torta tres leches">
+                        <span class="discount">80%</span>
+                        <div class="button-group">
+                        <span>
+                            <i class="fa-regular fa-eye"></i>
+                        </span> 
+                        <span>
+                            <i class="fa-regular fa-heart"></i>
+                        </span> 
+                        <span>
+                            <i class="fa-solid fa-code-compare"></i>
+                        </span>
+                        </div>
+                    </div>
+                    <div class="content-card-product">
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                        <h3>Torta de Tres leches</h3>
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping"></i>
+                        </span>
+                        <p class="price">$4.60 <span>$5.30</span></p>
+                    </div>
+                </div>
+                <div class="card-product">
+                    <div class="container-img">
+                        <img src="../recursos/imagenes/fresa.png" alt="Soufflé de fresas">
+                        <span class="discount">80%</span>
+                        <br>
+                        <br>
+                        <br>
+                        <div class="button-group">
+                        <span>
+                            <i class="fa-regular fa-eye"></i>
+                        </span> 
+                        <span>
+                            <i class="fa-regular fa-heart"></i>
+                        </span> 
+                        <span>
+                            <i class="fa-solid fa-code-compare"></i>
+                        </span>
+                        </div>
+                    </div>
+                    <div class="content-card-product">
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                        <h3>Soufflé de fresas</h3>
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping"></i>
+                        </span>
+                        <p class="price">$4.60 <span>$5.30</span></p>
+                    </div>
+                </div>
+                <div class="card-product">
+                    <div class="container-img">
+                        <img src="../recursos/imagenes/selva.webp" alt="Torta selva negra">
+                        <span class="discount">80%</span>
+                        <div class="button-group">
+                        <span>
+                            <i class="fa-regular fa-eye"></i>
+                        </span> 
+                        <span>
+                            <i class="fa-regular fa-heart"></i>
+                        </span> 
+                        <span>
+                            <i class="fa-solid fa-code-compare"></i>
+                        </span>
+                        </div>
+                    </div>
+                    <div class="content-card-product">
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                        <h3>Torta de selva negra</h3>
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping"></i>
+                        </span>
+                        <p class="price">$4.60 <span>$5.30</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="gallery">
+            <img 
+            src="../Imagenes/decoracion6.jpg" 
+            alt="Gallery Img1" 
+            class="gallery-img-1"
+            /><img
+            src="../Imagenes/decoracion5.jpg" 
+            alt="Gallery Img2" 
+            class="gallery-img-2"
+            /><img
+            src="../Imagenes/decoracion4.jpg" 
+            alt="Gallery Img3" 
+            class="gallery-img-3"
+            /><img
+            src="../Imagenes/decoracion2.jpg" 
+            alt="Gallery Img4" 
+            class="gallery-img-4"
+            /><img
+            src="../Imagenes/Imagen1.jpg" 
+            alt="Gallery Img5" 
+            class="gallery-img-5"
+            />
+        </section>
+        <section class="container top-products">
+            <h1 class="heading-1">ALGUNOS DE NUESTROS ACCESORIOS</h1>
+
+            <div class="container-products">
+                <div class="card-product">
+                    <div class="container-img">
+                        <img src="../Imagenes/guantes.jpg" alt="Guantes medicos">
+                        <span class="discount">80%</span>
+                        <div class="button-group">
+                        <span>
+                            <i class="fa-regular fa-eye"></i>
+                        </span> 
+                        <span>
+                            <i class="fa-regular fa-heart"></i>
+                        </span> 
+                        <span>
+                            <i class="fa-solid fa-code-compare"></i>
+                        </span>
+                        </div>
+                    </div>
+                    <div class="content-card-product">
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <h3>Guantes médicos</h3>
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping"></i>
+                        </span>
+                        <p class="price">$4.60 <span>$5.30</span></p>
+                    </div>
+                </div>
+                <div class="card-product">
+                    <div class="container-img">
+                        <img src="../Imagenes/mascarilla.webp" alt="Torta tres leches">
+                        <span class="discount">80%</span>
+                        <div class="button-group">
+                        <span>
+                            <i class="fa-regular fa-eye"></i>
+                        </span> 
+                        <span>
+                            <i class="fa-regular fa-heart"></i>
+                        </span> 
+                        <span>
+                            <i class="fa-solid fa-code-compare"></i>
+                        </span>
+                        </div>
+                    </div>
+                    <div class="content-card-product">
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                        <h3 style="text-align: center;">mascarilla</h3>
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping"></i>
+                        </span>
+                        <p class="price">$4.60 <span>$5.30</span></p>
+                    </div>
+                </div>
+                <div class="card-product">
+                    <div class="container-img">
+                        <img src="../Imagenes/cortauñas.jpg" alt="Soufflé de fresas">
+                        <span class="discount">10%</span>
+                        <br>
+                        <br>
+                        <br>
+                        <div class="button-group">
+                        <span>
+                            <i class="fa-regular fa-eye"></i>
+                        </span> 
+                        <span>
+                            <i class="fa-regular fa-heart"></i>
+                        </span> 
+                        <span>
+                            <i class="fa-solid fa-code-compare"></i>
+                        </span>
+                        </div>
+                    </div>
+                    <div class="content-card-product">
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                        <h3>cortauñas</h3>
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping"></i>
+                        </span>
+                        <p class="price">$4.60 <span>$5.30</span></p>
+                    </div>
+                </div>
+                <div class="card-product">
+                    <div class="container-img">
+                        <img src="../Imagenes/durex.jpg" alt="Torta selva negra">
+                        <span class="discount">80%</span>
+                        <div class="button-group">
+                        <span>
+                            <i class="fa-regular fa-eye"></i>
+                        </span> 
+                        <span>
+                            <i class="fa-regular fa-heart"></i>
+                        </span> 
+                        <span>
+                            <i class="fa-solid fa-code-compare"></i>
+                        </span>
+                        </div>
+                    </div>
+                    <div class="content-card-product">
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                        <h3 style="text-align: center;">Durex</h3>
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping"></i>
+                        </span>
+                        <p class="price">$4.60 <span>$5.30</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="container blogs">
+            <h1 class="heading-1">ÚLTIMOS BLOGS</h1>
+                <div class="container-blogs">
+                    <div class="card-blog">
+                        <div class="container-img">
+                            <img src="../recursos/imagenes/ch1.jpg" alt="Imagen Blog 1">
+                            <div class="button-group-blog">
+                                <span>
+                                    <i class="fa-brands fa-searchengin"></i>
+                                </span>
+                                <span>
+                                    <i class="fa-solid fa-link"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="content-blog">
+                            <h3>Minicheesecakes con salsa de caramelo</h3>
+                            <span>3 enero 2024</span>
+                            <p>
+                                Aprende a preparar unas mini cheesecakes sin 
+                                horno, con salsa de caramelo y pecanas. Receta 
+                                fácil con vídeo, trucos y consejos.
+                            </p>
+                            <div class="btn-read-more">Leer más</div>
+                        </div>
+                    </div>
+                    <div class="card-blog">
+                        <div class="container-img">
+                            <img src="../recursos/imagenes/helada.jpg" alt="Imagen Blog 2">
+                            <div class="button-group-blog">
+                                <span>
+                                    <i class="fa-brands fa-searchengin"></i>
+                                </span>
+                                <span>
+                                    <i class="fa-solid fa-link"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="content-blog">
+                            <h3>Cheesecake helada de chocolate y café</h3>
+                            <span>6 de agosto 2024</span>
+                            <p>
+                                Aprende a preparar esta deliciosa tarta fácil de 
+                                queso helada, de chocolate y café. Receta paso
+                                a paso en vídeo, con trucos y consejos.
+                            </p>
+                            <div class="btn-read-more">Leer más</div>
+                        </div>
+                    </div>
+                    <div class="card-blog">
+                        <div class="container-img">
+                            <img src="../recursos/imagenes/cake.jpg" alt="Imagen Blog 3">
+                            <div class="button-group-blog">
+                                <span>
+                                    <i class="fa-brands fa-searchengin"></i>
+                                </span>
+                                <span>
+                                    <i class="fa-solid fa-link"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="content-blog">
+                            <h3>Bundt cake con frutas confitadas</h3>
+                            <span>10 de junio 2024</span>
+                            <p>
+                                Descubre cómo preparar este riquísimo bundt 
+                                cake con fruta confitada, perfecto para celebrar
+                                 el Día mundial del bundt cake, o incluso para 
+                                 Navidad.
+                            </p>
+                            <div class="btn-read-more">Leer más</div>
+                        </div>
+                    </div>
+                </div>   
+        </section>
+        <footer class="footer">
+            <div class="container container-footer">
+                <div class="menu-footer">
+                    <div class="container-logo">
+                        <img src="../Imagenes/LOGO.png" alt="Logo">
+                        <h1 class="logo"><a href="FarmaTotal.html">Farmacia CentroFarma</a></h1>
+                    </div>
+                    <div class="contact-info">
+                        <p class="title-footer">Informacion de contacto</p>
+                        <ul>
+                            <li>Dirección: Av.Arequipa-Lima Centro, Perú</li>
+                            <li>Telefono: 979-486-180</li>
+                            <li>Correo electronico: xxxxxxxxxxx@gmail.com</li>
+                        </ul>
+                        <div class="social-icons">
+                            <span class="facebook"><i class="fa-brands fa-facebook"></i></span>
+                            <span class="instagram"><i class="fa-brands fa-instagram"></i></span>
+                            <span class="twitter"><i class="fa-brands fa-x-twitter"></i></span>
+                            <span class="youtube"><i class="fa-brands fa-youtube"></i></span>
+                            <span class="tiktok"><i class="fa-brands fa-tiktok"></i></span>
+                        </div>
+                    </div>
+                    <div class="information">
+                        <p class="title-footer">Información</p>
+                            <ul>
+                                <li><a href="#"></a>Acerca de nosotros</li>
+                                <li><a href="#"></a>Informacion</li>
+                                <li><a href="#"></a>Politicas de privacidad</li>
+                                <li><a href="#"></a>Terminos y condiciones</li>
+                                <li><a href="#"></a>Contactanos </li>
+                            </ul>
+                    </div>
+                    <div class="newletter">
+                        <p class="title-footer">NUESTRAS PROMOCIONES</p>
+                        <div class="content">
+                            <p>
+                                Enterate a nuestros proximas promociones donde te mantendremos al 
+                                día con todas nuestras ofertas exclusivas.
+                            </p>
+                            <input type="email" placeholder="Ingresa tu correo aqui mano...">
+                            <button>INGRESA</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>
+                        Gabriel Ramos &copy; 2024
+                    </p>
+                    <img src="../Imagenes/payment.png" alt="">
+                </div>
+            </div>
+        </footer>
+    </main>
+    <div class="whatsapp-container">
+        <div class="whatsapp-button">
+            <a href="https://wa.me/1234567890" target="_blank">
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
+        </div>
+    </div>
 </body>
 </html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>

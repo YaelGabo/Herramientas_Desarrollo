@@ -1,72 +1,385 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>FarmaTotal</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="../Estilos/estilos5.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosotros - CentroFarma</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="../Estilos/estilos5.css">
+
     <style>
-        .cerrar-sesion-btn {
-            background-color: #ff4d4d;
+        :root {
+            --color-primary: #9e7443;
+            --color-secondary: #FFC0CB;
+            --color-background: #ffefd8;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: var(--color-background);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .section-title {
+            font-weight: bold;
+            color: var(--color-primary);
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--color-primary);
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
             color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-left: auto;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        .cerrar-sesion-btn:hover {
-            background-color: #e60000;
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,%3Csvg width="100" height="100" xmlns="http://www.w3.org/2000/svg"%3E%3Cpattern id="pattern" patternUnits="userSpaceOnUse" width="50" height="50"%3E%3Cpath d="M25 0 L0 25 L25 50 L50 25 Z" fill="rgba(255,255,255,0.1)" /%3E%3C/pattern%3E%3Crect width="100%" height="100%" fill="url(%23pattern)" /%3E%3C/svg%3E');
+            opacity: 0.2;
         }
 
-        .cerrar-sesion-btn:active {
-            background-color: #cc0000;
+        .timeline {
+            position: relative;
+            padding: 50px 0;
+            background-color: transparent;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            background-color: var(--color-primary);
+        }
+
+        .timeline-item {
+            margin-bottom: 30px;
+            position: relative;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--color-primary);
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .timeline-item:nth-child(even)::before {
+            left: -40px;
+        }
+
+        .timeline-item:nth-child(odd)::before {
+            right: -40px;
+        }
+
+        .testimonial-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: scale(1.05);
+        }
+
+        .achievement {
+            text-align: center;
+            padding: 30px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .achievement:hover {
+            background-color: rgb(255, 219, 154);
+            transform: translateY(-10px);
+        }
+
+        .achievement i {
+            font-size: 48px;
+            color: var(--color-primary);
+            margin-bottom: 15px;
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <header>
-        <h1>FarmaTotal</h1>
-        <nav>
-            <ul>
-                <li><a href="FarmaTotal.html">Inicio</a></li>
-                <li><a href="Acerca_de.html">Acerca de</a></li>
-                <li><a href="Productos.html">Productos</a></li>
-                <li><a href="Carrito.html">Carrito</a></li>
-                <li><a href="Equipo.html">Equipo</a></li>
-                <li><a href="Contacto.html">Contacto</a></li>
-                <li><button class="cerrar-sesion-btn" onclick="cerrarSesion()">Cerrar Sesión</button></li>
-            </ul>
-        </nav>
-    </header>
-    <section class="hero-1">
-        <img src="../Imagenes/Farmacia.png" alt="Edificio FarmaTotal">
-        <h2>Conoce a FarmaTotal</h2>
-        <p>FarmaTotal es una farmacia comprometida con la salud y el bienestar de nuestra comunidad. Ofrecemos una amplia variedad de productos farmacéuticos, desde medicamentos hasta productos de cuidado personal, además de asesoría profesional en salud. Nuestra misión es brindar a nuestros clientes un servicio confiable, eficiente y cercano, para que puedan cuidar su salud de manera integral. En FarmaTotal, creemos en la importancia de ofrecer un servicio de calidad que inspire confianza y tranquilidad.</p>
-    </section>
-    <section class="vision-mision">
-        <div class="container">
-            <div class="columna">
-                <h3>Visión</h3>
-                <p>Ser la farmacia de referencia en el país, reconocida por su dedicación a la salud y su compromiso con el bienestar de nuestros clientes. Aspiramos a convertirnos en un pilar de confianza en cada comunidad en la que operamos, ofreciendo productos y servicios de alta calidad.</p>
+        <div class="container-hero">
+            <div class="container hero">
+                <div class="customer-support">
+                    <i class="fa-solid fa-headset"></i>
+                    <div class="content-customar-support">
+                        <span class="text">Soporte al cliente</span><br>
+                        <span class="number">979-486-180</span>
+                    </div>
+                </div>
+                <div class="container-logo">
+                    <img src="../Imagenes/LOGO.png">
+                    <h1 class="logo"><a href="index.html">Farmacia CentroFarma</a></h1>
+                </div>
+                
+                <div class="container-user">
+                    <a href="login-cliente.html"><i class="fa-solid fa-user"></i></a>
+                    <i class="fa-solid fa-basket-shopping"></i>
+                    <div class="content-shopping-cart">
+                        <span class="text">Carrito</span>
+                        <span class="number">(0)</span>
+                    </div>
+                </div>
             </div>
-            <div class="columna">
-                <h3>Misión</h3>
-                <p>Nuestra misión es proporcionar productos farmacéuticos y asesoría en salud accesibles y confiables, apoyando a nuestros clientes en su bienestar diario. Nos comprometemos a ser una farmacia ética, responsable y orientada al servicio, siempre en sintonía con las necesidades de nuestra comunidad.</p>
+        </div>
+
+        <div class="container-navbar">
+        <nav class="navbar container">
+            <i class="fa-solid fa-bars"></i>
+            <ul class="menu">
+                <li><a href="FarmaTotal.html">Inicio</a></li>
+                <li><a href="Productos.html">Productos</a></li>
+                <li><a href="Acerca_de.html">Nosotros</a></li>
+                <li><a href="Contacto.html">Contacto</a></li>
+            </ul>
+            <form class="search-form">
+                <input type="search" placeholder="Buscar">
+                <button class="btn-search">
+                    <i class="fa-brands fa-searchengin"></i>
+                </button>
+            </form>
+        </nav>
+    </div>
+    </header>
+
+    <section class="container my-5">
+        <h2 class="section-title">MISIÓN</h2>
+        <p class="text-center" style="text-align: center; font-size: 13px;">Brindar productos farmacéuticos, de cuidado personal y bienestar con calidad y responsabilidad, ofreciendo una atención personalizada, confiable y accesible que contribuya a mejorar la salud y calidad de vida de nuestros clientes.</p>
+    </section>
+
+    <section class="container my-5">
+        <h2 class="section-title">VISIÓN</h2>
+        <p class="text-center" style="text-align: center; font-size: 13px;">Ser la farmacia líder en nuestra comunidad, reconocida por su compromiso con la salud, la innovación en el servicio y la excelencia en la atención, posicionándonos como la primera opción en productos farmacéuticos y cuidado integral.</p>
+    </section>
+
+    <section class="container my-5" >
+        <h2 class="section-title">NUESTRA HISTORIA</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <h3>2018: FUNDACIÓN</h3>
+                <p>Nacimos con el compromiso de cuidar la salud de nuestra comunidad, ofreciendo medicamentos confiables y atención cercana.</p>
+            </div>
+            <div class="timeline-item">
+                <h3>2019: CONFIANZA</h3>
+                <p>Nos consolidamos como una farmacia de confianza, priorizando siempre el bienestar y la orientación responsable a cada cliente.</p>
+            </div>
+            <div class="timeline-item">
+                <h3>2021: CRECIMIENTO</h3>
+                <p>Ampliamos nuestra oferta con productos de cuidado personal, suplementos y servicios adicionales, fortaleciendo nuestro vínculo con la comunidad.</p>
+            </div>
+            <div class="timeline-item">
+                <h3>2023: TRANSFORMACIÓN</h3>
+                <p>Renovamos nuestra imagen y modernizamos nuestros procesos para brindar una experiencia más rápida, digital y personalizada.</p>
+            </div>
+            <div class="timeline-item">
+                <h3>2024: COMPROMISO</h3>
+                <p>Hoy seguimos creciendo, impulsados por la confianza de nuestros clientes y el compromiso de seguir cuidando de su salud cada día.</p>
+            </div>
+            
+        </div>
+    </section>
+
+    <section class="container my-5">
+        <h2 class="section-title">NUESTRO EQUIPO</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="testimonial-card">
+                    <div class="text-center mb-3">
+                        <img src="../recursos/imagenes/dJ.jfif" alt="Daniel" class="rounded-circle" style="width: 200px; height: 200px; object-fit: cover;">
+                    </div>
+                    <h3 class="text-center">Daniel Calderón</h3>
+                    <p class="text-center">FUNDADOR</p>
+                    <p style="text-align: center;">Con más de 30 años de experiencia, ha sido el pionero en nuestra farmacia, brindando confianza y asesoría de calidad a cada uno de nuestros clientes. Su pasión por la salud y el bienestar es lo que nos motiva a seguir creciendo..</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="testimonial-card">
+                    <div class="text-center mb-3">
+                        <img src="../recursos/imagenes/cf.jpg" alt="Carla Martinez" class="rounded-circle" style="width: 200px; height: 200px; object-fit: cover;">
+                    </div>
+                    <h3 class="text-center">Carla Martínez</h3>
+                    <p class="text-center">DIRECTORA DE FARMACIA</p>
+                    <p style="text-align: center;">Carla es la encargada de liderar nuestro equipo con su conocimiento profundo en farmacología y atención al cliente. Su enfoque siempre está en brindar el mejor servicio y asesoría personalizada para mejorar la salud de nuestros pacientes.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="testimonial-card">
+                    <div class="text-center mb-3">
+                        <img src="../recursos/imagenes/r.jpeg" alt="José Perez" class="rounded-circle" style="width: 200px; height: 200px; object-fit: cover;">
+                    </div>
+                    <h3 class="text-center">José Pérez</h3>
+                    <p class="text-center">TÉCNICO FARMACÉUTICO</p>
+                    <p style="text-align: center;">José es nuestro experto en la gestión y distribución de medicamentos, asegurándose de que nuestros clientes reciban sus productos con total seguridad. Siempre está disponible para responder cualquier duda sobre el uso adecuado de los medicamentos.</p>
+                </div>
             </div>
         </div>
     </section>
-    <footer>
-        <p>(c)2024 Desarrollado por Ronaldo Rafael Vazquez</p>
-    </footer>
 
-    <script>
-        function cerrarSesion() {
-            window.location.href = "../Inicio.html"; // Redirige a la página de inicio o login
-        }
-    </script>
-</body>
-</html>
+    
+    <section class="container my-5">
+        <h2 class="section-title">VALORES</h2>
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <div class="p-4 bg-white rounded shadow">
+                    <i class="fas fa-hand-holding-heart text-primary mb-3" style="font-size: 48px;"></i>
+                    <h3>Compromiso con la salud</h3>
+                    <p>Nos dedicamos a brindar productos y servicios que contribuyan al bienestar y la calidad de vida de nuestros clientes.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="p-4 bg-white rounded shadow">
+                    <i class="fas fa-leaf text-primary mb-3" style="font-size: 48px;"></i>
+                    <h3>Responsabilidad</h3>
+                    <p>Cumplimos con los más altos estándares en el manejo y dispensación de medicamentos, garantizando seguridad y eficacia.
+
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="p-4 bg-white rounded shadow">
+                    <i class="fas fa-users text-primary mb-3" style="font-size: 48px;"></i>
+                    <h3>Atención personalizada</h3>
+                    <p>Cada cliente es único. Ofrecemos una atención cercana, empática y profesional, resolviendo sus dudas con claridad.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container my-5">
+        <h2 class="section-title">ALGUNOS TESTIMONIOS DE CLIENTES</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="testimonial-card">
+                    <div class="text-center mb-3">
+                        <img src="../Imagenes/cli.png" alt="Cliente 1" class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover;">
+                    </div>
+                    <h3 class="text-center">Ana López</h3>
+                    <p class="text-center">"Siempre encuentro lo que necesito y a buen precio. El personal es muy amable y me explican con paciencia cómo tomar mis medicamentos. ¡Recomiendo esta farmacia 100%!"</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="testimonial-card">
+                    <div class="text-center mb-3">
+                        <img src="../Imagenes/cli.png" alt="Cliente 2" class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover;">
+                    </div>
+                    <h3 class="text-center">Javier Martínez</h3>
+                    <p class="text-center">"Una farmacia de confianza. Me encanta que tienen delivery rápido y que puedo consultar por WhatsApp. Muy profesionales."</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="testimonial-card">
+                    <div class="text-center mb-3">
+                        <img src="../Imagenes/cli.png" alt="Cliente 3" class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover;">
+                    </div>
+                    <h3 class="text-center">Lucía Fernández</h3>
+                    <p class="text-center">"He comparado precios con otras farmacias y aquí siempre encuentro opciones más económicas. Además, la atención es rápida y cordial."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container container-footer">
+            <div class="menu-footer">
+                <div class="container-logo">
+                    <img src="../Imagenes/LOGO.png">
+                    <h1 class="logo"><a href="index.html">Farmacia CentroFarma</a></h1>
+                </div>
+                <div class="contact-info">
+                    <p class="title-footer">Informacion de contacto</p>
+                    <ul>
+                        <li>Dirección: Av.Arequipa-Lima Centro, Perú</li>
+                        <li>Telefono: 979-486-180</li>
+                        <li>Correo electronico: utepinos@gmail.com</li>
+                    </ul>
+                    <div class="social-icons">
+                        <span class="facebook"><i class="fa-brands fa-facebook"></i></span>
+                        <span class="instagram"><i class="fa-brands fa-instagram"></i></span>
+                        <span class="twitter"><i class="fa-brands fa-x-twitter"></i></span>
+                        <span class="youtube"><i class="fa-brands fa-youtube"></i></span>
+                        <span class="tiktok"><i class="fa-brands fa-tiktok"></i></span>
+                    </div>
+                </div>
+                <div class="information">
+                    <p class="title-footer">Información</p>
+                        <ul>
+                            <li><a href="#"></a>Acerca de nosotros</li>
+                            <li><a href="#"></a>Informacion</li>
+                            <li><a href="#"></a>Politicas de privacidad</li>
+                            <li><a href="#"></a>Terminos y condiciones</li>
+                            <li><a href="#"></a>Contactanos </li>
+                        </ul>
+                </div>
+                <div class="newletter">
+                    <p class="title-footer">NUESTRAS PROMOCIONES</p>
+                    <div class="content">
+                        <p>
+                            Enterate a nuestros proximas promociones donde te mantendremos al 
+                            día con todas nuestras ofertas exclusivas.
+                        </p>
+                        <input type="email" placeholder="Ingresa tu correo aqui mano...">
+                        <button>INGRESA</button>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>
+                    Gabriel Ramos &copy; 2024
+                </p>
+                <img src="../Imagenes/payment.png" alt="">
+            </div>
+        </div>
+    </footer>
+    <div class="whatsapp-container">
+        <div class="whatsapp-button">
+            <a href="https://wa.me/1234567890" target="_blank">
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
+        </div>
+    </div>
+</body></html>
