@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../Estilos/estilos5.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="../js/index.js"></script>
-<title>Doña Julia</title>
+    <title>Document</title>
 </head>
 <body>
     <header>
@@ -20,20 +20,37 @@
                     </div>
                 </div>
                 <div class="container-logo">
-                    <img src="../Imagenes/LOGO.png">
-                    <h1 class="logo"><a href="index.html">Farmacia CentroFarma</a></h1>
+                    <img src="../Imagenes/logoC.png" alt="Logo">
                 </div>
-                
                 <div class="container-user">
-                    <!-- Aca es para cuando se haga cliek en el icono de usario -->
-
-                    <a href="login-cliente.html"><i class="fa-solid fa-user"></i></a>
-                    
-                    <i class="fa-solid fa-basket-shopping"></i>
+                    <i class="fa-solid fa-user"></i>
+                    <i class="fa-solid fa-cart-shopping" id="cart-icon"></i>
                     <div class="content-shopping-cart">
                         <span class="text">Carrito</span>
                         <span class="number">(0)</span>
                     </div>
+                    <!-- Cuadro del carrito -->
+                    <!-- Dentro de <div class="container-user"> -->
+                        <div class="cart-dropdown" style="display: none;">
+                            <div class="header-carrito">
+                                <h2>Tu Carrito</h2>
+                            </div>
+                        
+                            <div class="carrito-items">
+                              
+                            </div>
+                            <div class="carrito-total">
+                                <div class="fila">
+                                    <strong>Tu Total</strong>
+                                    <span class="carrito-precio-total">
+                                        $41.40 <!-- Esto es 4.60 * 9 productos -->
+                                    </span>
+                                </div>
+                                <form action="http://localhost/HD_2025/PHP/guardar_detalle_venta.php" method="post">
+                                    <button type="submit" class="btn-pagar">Pagar<i class="fa-solid fa-bag-shopping"></i></button>
+                                </form>
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>
@@ -58,8 +75,8 @@
     </header>
     <section class="banner">
         <div class="content-banner">
-            <p>Tortas increibles</p>
-            <h2>Las mejores tortas <br>
+            <p>Produtos increibles</p>
+            <h2>Los mejores medicamentos de las mejores marcas <br>
                 en todo el Perú</h2>
             <a href="productos.html">Comprar ahora</a>
         </div>
@@ -101,34 +118,34 @@
             <div class="container-categories">
                 <div class="card-category category-noca" onclick="">
                     <p>medicamentos</p>
-                    <span>Ver mas</span>
+                    <span>Ver más</span>
                 </div>  
                 <div class="card-category category-fresas">
                     <p>cuidado Personal</p>
-                    <span>Ver mas</span>
+                    <span>Ver más</span>
                 </div>  
                 <div class="card-category category-drip">
                     <p>Productos para bebés</p>
-                    <span>Ver mas</span>
+                    <span>Ver más</span>
                 </div>  
                 <div class="card-category category-leches">
                     <p>Equipos y productos</p>
-                    <span>Ver mas</span>
+                    <span>Ver más</span>
                 </div>  
             </div>
         </section>
         <section class="container top-products">
-            <h1 class="heading-1">¡LAS MAS PEDIDAS!</h1>
+            <h1 class="heading-1">¡LAS MÁS PEDIDAS!</h1>
             <div class="container-options">
-                <span class="active">Mas vendidos</span>
-                <span>lo mas Nuevo</span>
-                <span>Lo mas relavantes</span>
+                <span class="active">Más vendidos</span>
+                <span>lo más Nuevo</span>
+                <span>Lo más relavantes</span>
             </div>
 
             <div class="container-products">
                 <div class="card-product">
                     <div class="container-img">
-                        <img src="../recursos/imagenes/choco.webp" alt="Torta de chocolate">
+                        <img src="../Imagenes/roche.jpg" alt="Torta de chocolate">
                         <span class="discount">80%</span>
                         <div class="button-group">
                         <span>
@@ -150,16 +167,16 @@
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                         </div>
-                        <h3>Torta de chocolate</h3>
+                        <h3>Crema Reparadora La Roche Posay Cicaplast Baume B5+</h3>
                         <span class="add-cart">
                             <i class="fa-solid fa-basket-shopping"></i>
                         </span>
-                        <p class="price">$4.60 <span>$5.30</span></p>
+                        <p class="price">S/ 24.90 <span>S/.35.90</span></p>
                     </div>
                 </div>
                 <div class="card-product">
                     <div class="container-img">
-                        <img src="../recursos/imagenes/leche.webp" alt="Torta tres leches">
+                        <img src="../Imagenes/eucerin.jpg" alt="">
                         <span class="discount">80%</span>
                         <div class="button-group">
                         <span>
@@ -181,16 +198,16 @@
                             <i class="fa-regular fa-star"></i>
                             <i class="fa-regular fa-star"></i>
                         </div>
-                        <h3>Torta de Tres leches</h3>
+                        <h3>Sérum Eucerin Hyaluron-Filler + 3x Effect Epigenetic</h3>
                         <span class="add-cart">
                             <i class="fa-solid fa-basket-shopping"></i>
                         </span>
-                        <p class="price">$4.60 <span>$5.30</span></p>
+                        <p class="price">S/ 159.90 <span>S/ 224.90</span></p>
                     </div>
                 </div>
                 <div class="card-product">
                     <div class="container-img">
-                        <img src="../recursos/imagenes/fresa.png" alt="Soufflé de fresas">
+                        <img src="../Imagenes/pharamol.jpg" alt="Soufflé de fresas">
                         <span class="discount">80%</span>
                         <br>
                         <br>
@@ -215,16 +232,16 @@
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-regular fa-star"></i>
                         </div>
-                        <h3>Soufflé de fresas</h3>
+                        <h3>Pharamol Antigripal 500 mg + 5 mg + 2 mg Tableta Recubierta</h3>
                         <span class="add-cart">
                             <i class="fa-solid fa-basket-shopping"></i>
                         </span>
-                        <p class="price">$4.60 <span>$5.30</span></p>
+                        <p class="price">S/ 1.78 <span>S/.3.00</span></p>
                     </div>
                 </div>
                 <div class="card-product">
                     <div class="container-img">
-                        <img src="../recursos/imagenes/selva.webp" alt="Torta selva negra">
+                        <img src="../Imagenes/gel.jpg" alt="Torta selva negra">
                         <span class="discount">80%</span>
                         <div class="button-group">
                         <span>
@@ -246,11 +263,11 @@
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-regular fa-star"></i>
                         </div>
-                        <h3>Torta de selva negra</h3>
+                        <h3>Gel Facial Bepanthen Derma Limpieza Delicada</h3>
                         <span class="add-cart">
                             <i class="fa-solid fa-basket-shopping"></i>
                         </span>
-                        <p class="price">$4.60 <span>$5.30</span></p>
+                        <p class="price">S/ 45.80 <span>S/ 59.90</span></p>
                     </div>
                 </div>
             </div>
@@ -306,16 +323,16 @@
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                         </div>
-                        <h3>Guantes médicos</h3>
+                        <h3>Guantes de Vinyl Desechables Large</h3>
                         <span class="add-cart">
                             <i class="fa-solid fa-basket-shopping"></i>
                         </span>
-                        <p class="price">$4.60 <span>$5.30</span></p>
+                        <p class="price">S/.4.60 <span>S/.5.30</span></p>
                     </div>
                 </div>
                 <div class="card-product">
                     <div class="container-img">
-                        <img src="../Imagenes/mascarilla.webp" alt="Torta tres leches">
+                        <img src="../Imagenes/mas.jpg" alt="Torta tres leches">
                         <span class="discount">80%</span>
                         <div class="button-group">
                         <span>
@@ -337,11 +354,11 @@
                             <i class="fa-regular fa-star"></i>
                             <i class="fa-regular fa-star"></i>
                         </div>
-                        <h3 style="text-align: center;">mascarilla</h3>
+                        <h3 style="text-align: center;">Mascarilla  KN95 Bojji  Blanca Caja</h3>
                         <span class="add-cart">
                             <i class="fa-solid fa-basket-shopping"></i>
                         </span>
-                        <p class="price">$4.60 <span>$5.30</span></p>
+                        <p class="price">S/.4.60 <span>S/.5.30</span></p>
                     </div>
                 </div>
                 <div class="card-product">
@@ -371,11 +388,11 @@
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-regular fa-star"></i>
                         </div>
-                        <h3>cortauñas</h3>
+                        <h3>Corta Uñas de Mano Gift</h3>
                         <span class="add-cart">
                             <i class="fa-solid fa-basket-shopping"></i>
                         </span>
-                        <p class="price">$4.60 <span>$5.30</span></p>
+                        <p class="price">S/.4.60 <span>S/.5.30</span></p>
                     </div>
                 </div>
                 <div class="card-product">
@@ -402,21 +419,21 @@
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-regular fa-star"></i>
                         </div>
-                        <h3 style="text-align: center;">Durex</h3>
+                        <h3 style="text-align: center;">Preservativos Durex Clásico</h3>
                         <span class="add-cart">
                             <i class="fa-solid fa-basket-shopping"></i>
                         </span>
-                        <p class="price">$4.60 <span>$5.30</span></p>
+                        <p class="price">S/.4.60 <span>S/.5.30</span></p>
                     </div>
                 </div>
             </div>
         </section>
         <section class="container blogs">
-            <h1 class="heading-1">ÚLTIMOS BLOGS</h1>
+            <h1 class="heading-1">Del 10 al 16, encuentra DESCUENTOS para celebrar con PAPÁ</h1>
                 <div class="container-blogs">
                     <div class="card-blog">
                         <div class="container-img">
-                            <img src="../recursos/imagenes/ch1.jpg" alt="Imagen Blog 1">
+                            <img src="../Imagenes/ego.avif" alt="Imagen Blog 1">
                             <div class="button-group-blog">
                                 <span>
                                     <i class="fa-brands fa-searchengin"></i>
@@ -427,19 +444,12 @@
                             </div>
                         </div>
                         <div class="content-blog">
-                            <h3>Minicheesecakes con salsa de caramelo</h3>
-                            <span>3 enero 2024</span>
-                            <p>
-                                Aprende a preparar unas mini cheesecakes sin 
-                                horno, con salsa de caramelo y pecanas. Receta 
-                                fácil con vídeo, trucos y consejos.
-                            </p>
                             <div class="btn-read-more">Leer más</div>
                         </div>
                     </div>
                     <div class="card-blog">
                         <div class="container-img">
-                            <img src="../recursos/imagenes/helada.jpg" alt="Imagen Blog 2">
+                            <img src="../Imagenes/prote.avif" alt="Imagen Blog 2">
                             <div class="button-group-blog">
                                 <span>
                                     <i class="fa-brands fa-searchengin"></i>
@@ -450,19 +460,12 @@
                             </div>
                         </div>
                         <div class="content-blog">
-                            <h3>Cheesecake helada de chocolate y café</h3>
-                            <span>6 de agosto 2024</span>
-                            <p>
-                                Aprende a preparar esta deliciosa tarta fácil de 
-                                queso helada, de chocolate y café. Receta paso
-                                a paso en vídeo, con trucos y consejos.
-                            </p>
                             <div class="btn-read-more">Leer más</div>
                         </div>
                     </div>
                     <div class="card-blog">
                         <div class="container-img">
-                            <img src="../recursos/imagenes/cake.jpg" alt="Imagen Blog 3">
+                            <img src="../Imagenes/nosotras.avif" alt="Imagen Blog 3">
                             <div class="button-group-blog">
                                 <span>
                                     <i class="fa-brands fa-searchengin"></i>
@@ -473,14 +476,6 @@
                             </div>
                         </div>
                         <div class="content-blog">
-                            <h3>Bundt cake con frutas confitadas</h3>
-                            <span>10 de junio 2024</span>
-                            <p>
-                                Descubre cómo preparar este riquísimo bundt 
-                                cake con fruta confitada, perfecto para celebrar
-                                 el Día mundial del bundt cake, o incluso para 
-                                 Navidad.
-                            </p>
                             <div class="btn-read-more">Leer más</div>
                         </div>
                     </div>
@@ -490,15 +485,14 @@
             <div class="container container-footer">
                 <div class="menu-footer">
                     <div class="container-logo">
-                        <img src="../Imagenes/LOGO.png" alt="Logo">
-                        <h1 class="logo"><a href="FarmaTotal.html">Farmacia CentroFarma</a></h1>
+                        <img src="../Imagenes/logoC.png" alt="Logo">
                     </div>
                     <div class="contact-info">
                         <p class="title-footer">Informacion de contacto</p>
                         <ul>
                             <li>Dirección: Av.Arequipa-Lima Centro, Perú</li>
                             <li>Telefono: 979-486-180</li>
-                            <li>Correo electronico: xxxxxxxxxxx@gmail.com</li>
+                            <li>Correo electronico: centroFarma@gmail.com</li>
                         </ul>
                         <div class="social-icons">
                             <span class="facebook"><i class="fa-brands fa-facebook"></i></span>
@@ -532,7 +526,7 @@
                 </div>
                 <div class="copyright">
                     <p>
-                        Gabriel Ramos &copy; 2024
+                        Farmacias CentroFarma &copy; 2025
                     </p>
                     <img src="../Imagenes/payment.png" alt="">
                 </div>

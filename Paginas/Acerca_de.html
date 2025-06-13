@@ -3,141 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nosotros - CentroFarma</title>
+    <title>CentroFarma</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="../Estilos/estilos5.css">
 
-    <style>
-        :root {
-            --color-primary: #9e7443;
-            --color-secondary: #FFC0CB;
-            --color-background: #ffefd8;
-        }
-
-        body {
-            font-family: 'Quicksand', sans-serif;
-            background-color: var(--color-background);
-            color: #333;
-            line-height: 1.6;
-        }
-
-        .section-title {
-            font-weight: bold;
-            color: var(--color-primary);
-            text-align: center;
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background-color: var(--color-primary);
-        }
-
-        .hero-section {
-            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-            color: white;
-            padding: 100px 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml,%3Csvg width="100" height="100" xmlns="http://www.w3.org/2000/svg"%3E%3Cpattern id="pattern" patternUnits="userSpaceOnUse" width="50" height="50"%3E%3Cpath d="M25 0 L0 25 L25 50 L50 25 Z" fill="rgba(255,255,255,0.1)" /%3E%3C/pattern%3E%3Crect width="100%" height="100%" fill="url(%23pattern)" /%3E%3C/svg%3E');
-            opacity: 0.2;
-        }
-
-        .timeline {
-            position: relative;
-            padding: 50px 0;
-            background-color: transparent;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            width: 2px;
-            background-color: var(--color-primary);
-        }
-
-        .timeline-item {
-            margin-bottom: 30px;
-            position: relative;
-            padding: 20px;
-            border-radius: 10px;
-            background-color: #f9f9f9;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background-color: var(--color-primary);
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        .timeline-item:nth-child(even)::before {
-            left: -40px;
-        }
-
-        .timeline-item:nth-child(odd)::before {
-            right: -40px;
-        }
-
-        .testimonial-card {
-            background-color: white;
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .testimonial-card:hover {
-            transform: scale(1.05);
-        }
-
-        .achievement {
-            text-align: center;
-            padding: 30px;
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-            transition: all 0.3s ease;
-        }
-
-        .achievement:hover {
-            background-color: rgb(255, 219, 154);
-            transform: translateY(-10px);
-        }
-
-        .achievement i {
-            font-size: 48px;
-            color: var(--color-primary);
-            margin-bottom: 15px;
-        }
-    </style>
+   
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -153,17 +24,37 @@
                     </div>
                 </div>
                 <div class="container-logo">
-                    <img src="../Imagenes/LOGO.png">
-                    <h1 class="logo"><a href="index.html">Farmacia CentroFarma</a></h1>
+                    <img src="../Imagenes/logoC.png" alt="Logo">
                 </div>
-                
                 <div class="container-user">
-                    <a href="login-cliente.html"><i class="fa-solid fa-user"></i></a>
-                    <i class="fa-solid fa-basket-shopping"></i>
+                    <i class="fa-solid fa-user"></i>
+                    <i class="fa-solid fa-cart-shopping" id="cart-icon"></i>
                     <div class="content-shopping-cart">
                         <span class="text">Carrito</span>
                         <span class="number">(0)</span>
                     </div>
+                    <!-- Cuadro del carrito -->
+                    <!-- Dentro de <div class="container-user"> -->
+                        <div class="cart-dropdown" style="display: none;">
+                            <div class="header-carrito">
+                                <h2>Tu Carrito</h2>
+                            </div>
+                        
+                            <div class="carrito-items">
+                              
+                            </div>
+                            <div class="carrito-total">
+                                <div class="fila">
+                                    <strong>Tu Total</strong>
+                                    <span class="carrito-precio-total">
+                                        $41.40 <!-- Esto es 4.60 * 9 productos -->
+                                    </span>
+                                </div>
+                                <form action="http://localhost/HD_2025/PHP/guardar_detalle_venta.php" method="post">
+                                    <button type="submit" class="btn-pagar">Pagar<i class="fa-solid fa-bag-shopping"></i></button>
+                                </form>
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>
@@ -186,19 +77,40 @@
         </nav>
     </div>
     </header>
+<section class="banners">
+    <div style="position: relative; width: 100%; height: 0; padding-top: 30%;
+ padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: -1em; margin-bottom: 0.9em; overflow: hidden;
+ border-radius: 0px; will-change: transform;">
+  <img src="../Imagenes/noso.jpg" 
+  style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; object-fit: cover; z-index: -1;" 
+  alt="Interior de una farmacia">
 
-    <section class="container my-5">
-        <h2 class="section-title">MISIÓN</h2>
-        <p class="text-center" style="text-align: center; font-size: 13px;">Brindar productos farmacéuticos, de cuidado personal y bienestar con calidad y responsabilidad, ofreciendo una atención personalizada, confiable y accesible que contribuya a mejorar la salud y calidad de vida de nuestros clientes.</p>
-    </section>
+</div>
+<section class="nos">
+            <br><br><br><br><br>
+            <div class="n">
+                <div class="c1" onclick="">
+                    <br>
+                    <h1>Misión</h1>
+                    <p class="text-center" style="text-align: center; font-size: 13px;">Brindar productos farmacéuticos, de cuidado personal y bienestar con calidad y responsabilidad, ofreciendo una atención personalizada, confiable y accesible que contribuya a mejorar la salud y calidad de vida de nuestros clientes.</p>
 
-    <section class="container my-5">
-        <h2 class="section-title">VISIÓN</h2>
-        <p class="text-center" style="text-align: center; font-size: 13px;">Ser la farmacia líder en nuestra comunidad, reconocida por su compromiso con la salud, la innovación en el servicio y la excelencia en la atención, posicionándonos como la primera opción en productos farmacéuticos y cuidado integral.</p>
-    </section>
+                </div>  
+                <div class="c2">
+                    <br>
+                    <h1>Visión</h1>
+                    <p class="text-center" style="text-align: center; font-size: 13px;">Ser la farmacia líder en nuestra comunidad, reconocida por su compromiso con la salud, la innovación en el servicio y la excelencia en la atención, posicionándonos como la primera opción en productos farmacéuticos y cuidado integral.</p>
+
+                </div>  
+            </div>
+        </section>
+
+
+    
 
     <section class="container my-5" >
         <h2 class="section-title">NUESTRA HISTORIA</h2>
+                <img src="../Imagenes/" alt="">
+
         <div class="timeline">
             <div class="timeline-item">
                 <h3>2018: FUNDACIÓN</h3>
@@ -230,7 +142,7 @@
             <div class="col-md-4 mb-4">
                 <div class="testimonial-card">
                     <div class="text-center mb-3">
-                        <img src="../recursos/imagenes/dJ.jfif" alt="Daniel" class="rounded-circle" style="width: 200px; height: 200px; object-fit: cover;">
+                        <img src="../Imagenes/h1.png" alt="Daniel" class="rounded-circle" style="width: 200px; height: 200px; object-fit: cover;">
                     </div>
                     <h3 class="text-center">Daniel Calderón</h3>
                     <p class="text-center">FUNDADOR</p>
@@ -240,7 +152,7 @@
             <div class="col-md-4 mb-4">
                 <div class="testimonial-card">
                     <div class="text-center mb-3">
-                        <img src="../recursos/imagenes/cf.jpg" alt="Carla Martinez" class="rounded-circle" style="width: 200px; height: 200px; object-fit: cover;">
+                        <img src="../Imagenes/h2.png" alt="Carla Martinez" class="rounded-circle" style="width: 200px; height: 200px; object-fit: cover;">
                     </div>
                     <h3 class="text-center">Carla Martínez</h3>
                     <p class="text-center">DIRECTORA DE FARMACIA</p>
@@ -250,7 +162,7 @@
             <div class="col-md-4 mb-4">
                 <div class="testimonial-card">
                     <div class="text-center mb-3">
-                        <img src="../recursos/imagenes/r.jpeg" alt="José Perez" class="rounded-circle" style="width: 200px; height: 200px; object-fit: cover;">
+                        <img src="../Imagenes/h3.png" alt="José Perez" class="rounded-circle" style="width: 200px; height: 200px; object-fit: cover;">
                     </div>
                     <h3 class="text-center">José Pérez</h3>
                     <p class="text-center">TÉCNICO FARMACÉUTICO</p>
@@ -296,7 +208,7 @@
             <div class="col-md-4 mb-4">
                 <div class="testimonial-card">
                     <div class="text-center mb-3">
-                        <img src="../Imagenes/cli.png" alt="Cliente 1" class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover;">
+                        <img src="../Imagenes/h4.png" alt="Cliente 1" class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover;">
                     </div>
                     <h3 class="text-center">Ana López</h3>
                     <p class="text-center">"Siempre encuentro lo que necesito y a buen precio. El personal es muy amable y me explican con paciencia cómo tomar mis medicamentos. ¡Recomiendo esta farmacia 100%!"</p>
@@ -305,7 +217,7 @@
             <div class="col-md-4 mb-4">
                 <div class="testimonial-card">
                     <div class="text-center mb-3">
-                        <img src="../Imagenes/cli.png" alt="Cliente 2" class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover;">
+                        <img src="../Imagenes/h5.png" alt="Cliente 2" class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover;">
                     </div>
                     <h3 class="text-center">Javier Martínez</h3>
                     <p class="text-center">"Una farmacia de confianza. Me encanta que tienen delivery rápido y que puedo consultar por WhatsApp. Muy profesionales."</p>
@@ -314,7 +226,7 @@
             <div class="col-md-4 mb-4">
                 <div class="testimonial-card">
                     <div class="text-center mb-3">
-                        <img src="../Imagenes/cli.png" alt="Cliente 3" class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover;">
+                        <img src="../Imagenes/h6.png" alt="Cliente 3" class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover;">
                     </div>
                     <h3 class="text-center">Lucía Fernández</h3>
                     <p class="text-center">"He comparado precios con otras farmacias y aquí siempre encuentro opciones más económicas. Además, la atención es rápida y cordial."</p>
@@ -327,15 +239,14 @@
         <div class="container container-footer">
             <div class="menu-footer">
                 <div class="container-logo">
-                    <img src="../Imagenes/LOGO.png">
-                    <h1 class="logo"><a href="index.html">Farmacia CentroFarma</a></h1>
+                    <img src="../Imagenes/logoC.png" alt="Logo">
                 </div>
                 <div class="contact-info">
                     <p class="title-footer">Informacion de contacto</p>
                     <ul>
                         <li>Dirección: Av.Arequipa-Lima Centro, Perú</li>
                         <li>Telefono: 979-486-180</li>
-                        <li>Correo electronico: utepinos@gmail.com</li>
+                        <li>Correo electronico: centroFarma@gmail.com</li>
                     </ul>
                     <div class="social-icons">
                         <span class="facebook"><i class="fa-brands fa-facebook"></i></span>
@@ -369,7 +280,7 @@
             </div>
             <div class="copyright">
                 <p>
-                    Gabriel Ramos &copy; 2024
+                    Farmacias CentroFarma &copy; 2025
                 </p>
                 <img src="../Imagenes/payment.png" alt="">
             </div>
