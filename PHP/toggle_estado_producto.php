@@ -6,7 +6,7 @@ header('Content-Type: application/json');
 // Conexión directa sin include
 $servername = "localhost:3306";
 $username = "root";
-$password = "";
+$password = "G@bo1007";
 $dbname = "herramientas_desarrollo";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
