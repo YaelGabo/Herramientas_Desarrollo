@@ -1,27 +1,2 @@
 
 
-on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Clonar el repositorio
-        uses: actions/checkout@v3
-
-      - name: Verificar archivos PHP del proyecto
-        run: |
-          echo "🔍 Verificando archivos PHP importantes..."
-          test -f actualizar_stock.php && echo "✅ actualizar_stock.php existe." || (echo "❌ Falta actualizar_stock.php" && exit 1)
-          test -f editar_producto.php && echo "✅ editar_producto.php existe." || (echo "❌ Falta editar_producto.php" && exit 1)
-          test -f eliminar_producto.php && echo "✅ eliminar_producto.php existe." || (echo "❌ Falta eliminar_producto.php" && exit 1)
-          test -f "filtrar ventas.php" && echo "✅ filtrar ventas.php existe." || (echo "❌ Falta filtrar ventas.php" && exit 1)
-          echo "✔️ Todos los archivos PHP requeridos están presentes."
-
-      - name: Mostrar estructura del proyecto
-        run: ls -R
