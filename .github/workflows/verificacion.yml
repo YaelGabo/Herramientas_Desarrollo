@@ -1,0 +1,20 @@
+name: Verificación básica de archivos PHP
+
+on:
+  push:
+    branches: [ "master" ]  # Cambia "master" si tu rama tiene otro nombre
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar el proyecto
+        uses: actions/checkout@v3
+
+      - name: Verificar archivos
+        run: |
+          test -f actualizar_stock.php && echo "✅ actualizar_stock.php OK" || (echo "❌ Falta actualizar_stock.php" && exit 1)
+          test -f editar_producto.php && echo "✅ editar_producto.php OK" || (echo "❌ Falta editar_producto.php" && exit 1)
+          test -f eliminar_producto.php && echo "✅ eliminar_producto.php OK" || (echo "❌ Falta eliminar_producto.php" && exit 1)
+          test -f "filtrar ventas.php" && echo "✅ filtrar ventas.php OK" || (echo "❌ Falta filtrar ventas.php" && exit 1)
