@@ -1,4 +1,4 @@
-name: Verificación básica de archivos PHP
+name: Verificación archivos PHP en carpeta
 
 on:
   push:
@@ -9,12 +9,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clonar el proyecto
+      - name: Clonar el repositorio
         uses: actions/checkout@v3
 
-      - name: Verificar archivos
+      - name: Verificar archivos dentro de carpeta PHP
         run: |
-          test -f actualizar_stock.php && echo "✅ actualizar_stock.php OK" || (echo "❌ Falta actualizar_stock.php" && exit 1)
-          test -f editar_producto.php && echo "✅ editar_producto.php OK" || (echo "❌ Falta editar_producto.php" && exit 1)
-          test -f eliminar_producto.php && echo "✅ eliminar_producto.php OK" || (echo "❌ Falta eliminar_producto.php" && exit 1)
-        
+          echo "🔍 Verificando archivos PHP dentro de carpeta PHP/ ..."
+          test -f PHP/editar_producto.php && echo "✅ editar_producto.php OK" || (echo "❌ Falta PHP/editar_producto.php" && exit 1)
+          test -f PHP/eliminar_producto.php && echo "✅ eliminar_producto.php OK" || (echo "❌ Falta PHP/eliminar_producto.php" && exit 1)
+       
