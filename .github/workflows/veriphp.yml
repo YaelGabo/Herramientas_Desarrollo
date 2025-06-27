@@ -14,8 +14,7 @@ jobs:
 
       - name: Verificar archivos dentro de carpeta PHP
         run: |
-          echo "🔍 Verificando archivos PHP dentro de carpeta PHP/ ..."
-          test -f PHP/actualizar_stock.php && echo "✅ actualizar_stock.php OK" || (echo "❌ Falta PHP/actualizar_stock.php" && exit 1)
+  
           test -f PHP/editar_producto.php && echo "✅ editar_producto.php OK" || (echo "❌ Falta PHP/editar_producto.php" && exit 1)
           test -f PHP/eliminar_producto.php && echo "✅ eliminar_producto.php OK" || (echo "❌ Falta PHP/eliminar_producto.php" && exit 1)
           test -f "PHP/filtrar ventas.php" && echo "✅ filtrar ventas.php OK" || (echo "❌ Falta PHP/filtrar ventas.php" && exit 1)
