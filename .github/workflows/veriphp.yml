@@ -17,4 +17,4 @@ jobs:
   
           test -f PHP/editar_producto.php && echo "✅ editar_producto.php OK" || (echo "❌ Falta PHP/editar_producto.php" && exit 1)
           test -f PHP/eliminar_producto.php && echo "✅ eliminar_producto.php OK" || (echo "❌ Falta PHP/eliminar_producto.php" && exit 1)
-          test -f "PHP/filtrar ventas.php" && echo "✅ filtrar ventas.php OK" || (echo "❌ Falta PHP/filtrar ventas.php" && exit 1)
+          test -f "PHP/filtrar ventas.php" && echo "✅ filtrarVentas.php OK" || (echo "❌ Falta PHP/filtrar ventas.php" && exit 1)
