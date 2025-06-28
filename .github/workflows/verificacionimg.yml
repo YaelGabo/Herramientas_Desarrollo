@@ -1,0 +1,24 @@
+name: Verificar carpeta de imágenes
+
+on:
+  push:
+    branches: [ "master" ]  
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  verificar-imagenes:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v3
+
+      - name: ✅ Verificar que la carpeta Imagenes/ existe
+        run: |
+          if [ -d Imagenes ]; then
+            echo "✅ Carpeta Imagenes/ encontrada correctamente"
+          else
+            echo "❌ Carpeta Imagenes/ NO encontrada"
+            exit 1
+          fi
