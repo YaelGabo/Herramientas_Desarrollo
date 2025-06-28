@@ -8,11 +8,11 @@ if (session_status() == PHP_SESSION_NONE) {
 // Parámetros de conexión
 $servername = "localhost:3306";
 $username = "root";
-$password = "G@bo1007";
+$password = "";
 $dbname = "herramientas_desarrollo";
 
 // 1) Conectar al servidor
-$conexion = new mysqli($servername, $username, $password);
+$conexion = new mysqli($servername, $username, $password, $dbname);
 if ($conexion->connect_error) {
     die("Conexión fallida al servidor MySQL: " . $conexion->connect_error);
 }

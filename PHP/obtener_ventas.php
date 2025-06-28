@@ -7,7 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
 // Datos de conexión a la base de datos
 $servername = "localhost:3306";
 $username = "root";
-$password = "G@bo1007";
+$password = "";
 $dbname = "herramientas_desarrollo";
 
 // Crear conexión
