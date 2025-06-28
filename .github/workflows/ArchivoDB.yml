@@ -1,0 +1,25 @@
+name: Verificar archivos de base de datos
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  verificar-database:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v3
+
+      - name: ✅ Verificar carpeta Database y archivos .sql
+        run: |
+          if [ -d Database ]; then
+            echo "✅ Carpeta Database encontrada"
+            ls Database/*.sql || { echo "❌ No se encontraron archivos .sql en Database"; exit 1; }
+          else
+            echo "❌ Carpeta Database no encontrada"
+            exit 1
+          fi
