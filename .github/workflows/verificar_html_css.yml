@@ -1,0 +1,31 @@
+name: Verificar HTML y CSS
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  verificar-html-css:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v3
+
+      - name: Verificar estructura HTML y CSS
+        run: |
+          echo "🔍 Buscando archivos HTML..."
+          if ls Paginas/*.html >/dev/null 2>&1; then
+            echo "✅ Archivos HTML encontrados en Paginas/."
+          else
+            echo "❌ No se encontraron archivos HTML en Paginas/."
+            exit 1
+          fi
+
+          echo "🔍 Buscando archivos CSS..."
+          if ls Estilos/estilos*.css >/dev/null 2>&1; then
+            echo "✅ Archivos CSS encontrados correctamente."
+          else
+            echo "❌ Archivos CSS faltantes en Estilos/."
+            exit 1
+          fi
