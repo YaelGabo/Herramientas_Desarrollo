@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
 --
--- Host: localhost    Database: herramientas_desarrollo
+-- Host: localhost    Database: herramientas_d
 -- ------------------------------------------------------
 -- Server version	8.0.40
 
@@ -16,35 +16,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `venta`
+-- Table structure for table `detalle_venta`
 --
 
-DROP TABLE IF EXISTS `venta`;
+DROP TABLE IF EXISTS `detalle_venta`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `venta` (
-  `id_venta` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `detalle_venta` (
+  `id_detalle` int NOT NULL AUTO_INCREMENT,
+  `id_venta` int NOT NULL,
   `id_producto` int NOT NULL,
   `cantidad` int NOT NULL,
   `precio` decimal(10,2) NOT NULL,
-  `total` decimal(10,2) NOT NULL,
-  `fecha` date NOT NULL,
-  `id_usuario` int NOT NULL,
-  PRIMARY KEY (`id_venta`),
+  `subtotal` decimal(10,2) GENERATED ALWAYS AS ((`cantidad` * `precio`)) STORED,
+  PRIMARY KEY (`id_detalle`),
+  KEY `id_venta` (`id_venta`),
   KEY `id_producto` (`id_producto`),
-  KEY `fk_venta_usuario` (`id_usuario`),
-  CONSTRAINT `fk_venta_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`),
-  CONSTRAINT `venta_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CONSTRAINT `detalle_venta_ibfk_1` FOREIGN KEY (`id_venta`) REFERENCES `venta` (`id_venta`),
+  CONSTRAINT `detalle_venta_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `venta`
+-- Dumping data for table `detalle_venta`
 --
 
-LOCK TABLES `venta` WRITE;
-/*!40000 ALTER TABLE `venta` DISABLE KEYS */;
-/*!40000 ALTER TABLE `venta` ENABLE KEYS */;
+LOCK TABLES `detalle_venta` WRITE;
+/*!40000 ALTER TABLE `detalle_venta` DISABLE KEYS */;
+/*!40000 ALTER TABLE `detalle_venta` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -56,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-09 15:38:20
+-- Dump completed on 2025-07-07 11:11:37
