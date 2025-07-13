@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Estilos/estilos6.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <script src="../JS/index.js"></script>
+    <script src="../js/index.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -89,15 +89,344 @@
         <br>
         <img src="../Imagenes/dscnt.avif" alt="">
         <div class="container-options">
-            <span class="active" id="btnMedicamentos">Medicamentos</span>
-            <span id="btnAccesorios">Accesorios</span>
+            <span class="active">Medicamentos</span>
+            <span onclick="funcion()">Accesorios</span>
         </div>
         <div class="container-products">
-            <div id="productos-medicamentos">
-                <!-- ...existing medicamentos cards... -->
+            <div class="card-product" data-id="1">
+                <div class="container-img">
+                    <img src="../Imagenes/Omeprazol.jpg" alt="Omeprazol">
+                    <span class="discount">80%</span>
+                    <div class="button-group">
+                        <span><i class="fa-regular fa-eye"></i></span> 
+                        <span><i class="fa-regular fa-heart"></i></span> 
+                        <span><i class="fa-solid fa-code-compare"></i></span>
+                    </div>
+                </div>
+                <div class="content-card-product">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <h3>Omeprazol</h3>
+                    <button id="btnTortaChocolate">
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping add-to-cart" data-product-id="1"></i>
+                        </span>
+                    </button>
+                    <p class="price">26 <span>S/30</span></p>
+                </div>
             </div>
-            <div id="productos-accesorios" style="display:none;">
-                <!-- Aquí puedes agregar los productos de accesorios -->
+
+            <div class="card-product" data-id="2">
+                <div class="container-img">
+                    <img src="../Imagenes/Amoxicilina.png" alt="Amoxicilina">
+                    <span class="discount">80%</span>
+                    <div class="button-group">
+                        <span><i class="fa-regular fa-eye"></i></span> 
+                        <span><i class="fa-regular fa-heart"></i></span> 
+                        <span><i class="fa-solid fa-code-compare"></i></span>
+                    </div>
+                </div>
+                <div class="content-card-product">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <h3>Amoxicilina</h3>
+                    <button id="btnTortaTresLeches">
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping add-to-cart" data-product-id="2"></i>
+                        </span>
+                    </button>
+                    <p class="price">14 <span>S/20</span></p>
+                </div>
+            </div>
+
+            <div class="card-product" data-id="3">
+                <div class="container-img">
+                    <img src="../Imagenes/Diclofenaco.jpg" alt="Diclofenaco">
+                    <span class="discount">80%</span>
+                    <div class="button-group">
+                        <span><i class="fa-regular fa-eye"></i></span> 
+                        <span><i class="fa-regular fa-heart"></i></span> 
+                        <span><i class="fa-solid fa-code-compare"></i></span>
+                    </div>
+                </div>
+                <div class="content-card-product">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <h3>Diclofenaco</h3>
+                    <button id="btnSouffleDeFresa">
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping add-to-cart" data-product-id="3"></i>
+                        </span>
+                    </button>
+                    <p class="price">S/7 <span>S/21</span></p>
+                </div>
+            </div>
+
+            <div class="card-product" data-id="4">
+                <div class="container-img">
+                    <img src="../Imagenes/Loratadina.png" alt="Loratadina">
+                    <span class="discount">80%</span>
+                    <div class="button-group">
+                        <span><i class="fa-regular fa-eye"></i></span> 
+                        <span><i class="fa-regular fa-heart"></i></span> 
+                        <span><i class="fa-solid fa-code-compare"></i></span>
+                    </div>
+                </div>
+                <div class="content-card-product">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <h3>Loratadina</h3>
+                    <button id="btnTortaSelvaNegra">
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping add-to-cart" data-product-id="4"></i>
+                        </span>
+                    </button>
+                    <p class="price">S/12 <span>S/20</span></p>
+                </div>
+            </div>
+
+            <div class="card-product" data-id="5">
+                <div class="container-img">
+                    <img src="../Imagenes/Azitromicina.jpg" alt="Azitromicina">
+                    <span class="discount">80%</span>
+                    <div class="button-group">
+                        <span><i class="fa-regular fa-eye"></i></span> 
+                        <span><i class="fa-regular fa-heart"></i></span> 
+                        <span><i class="fa-solid fa-code-compare"></i></span>
+                    </div>
+                </div>
+                <div class="content-card-product">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <h3>Azitromicina</h3>
+                    <button id="btnChocolate">
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping add-to-cart" data-product-id="5"></i>
+                        </span>
+                    </button>
+                    <p class="price">S/26 <span>S/28</span></p>
+                </div>
+            </div>
+
+            <div class="card-product" data-id="6">
+                <div class="container-img">
+                    <img src="../Imagenes/Cetirizina.jpg" alt="Cetirizina">
+                    <span class="discount">80%</span>
+                    <div class="button-group">
+                        <span><i class="fa-regular fa-eye"></i></span> 
+                        <span><i class="fa-regular fa-heart"></i></span> 
+                        <span><i class="fa-solid fa-code-compare"></i></span>
+                    </div>
+                </div>
+                <div class="content-card-product">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <h3>Cetirizina</h3>
+                    <button id="btnStrawberry">
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping add-to-cart" data-product-id="6"></i>
+                        </span>
+                    </button>
+                    <p class="price">S/16 <span>S/22</span></p>
+                </div>
+            </div>
+
+            <div class="card-product" data-id="7">
+                <div class="container-img">
+                    <img src="../Imagenes/Ibuprofeno.png" alt="Ibuprofeno">
+                    <span class="discount">80%</span>
+                    <div class="button-group">
+                        <span><i class="fa-regular fa-eye"></i></span> 
+                        <span><i class="fa-regular fa-heart"></i></span> 
+                        <span><i class="fa-solid fa-code-compare"></i></span>
+                    </div>
+                </div>
+                <div class="content-card-product">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <h3>Ibuprofeno</h3>
+                    <button id="btnStrawberryAntoinette">
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping add-to-cart" data-product-id="7"></i>
+                        </span>
+                    </button>
+                    <p class="price">S/10 <span>S/20</span></p>
+                </div>
+            </div>
+
+            <div class="card-product" data-id="8">
+                <div class="container-img">
+                    <img src="../Imagenes/Metformina.jpg" alt="Metformina">
+                    <span class="discount">80%</span>
+                    <div class="button-group">
+                        <span><i class="fa-regular fa-eye"></i></span> 
+                        <span><i class="fa-regular fa-heart"></i></span> 
+                        <span><i class="fa-solid fa-code-compare"></i></span>
+                    </div>
+                </div>
+                <div class="content-card-product">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <h3>Metformina</h3>
+                    <button id="btnMariposa">
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping add-to-cart" data-product-id="8"></i>
+                        </span>
+                    </button>
+                    <p class="price">S/12 <span>S/15</span></p>
+                </div>
+            </div>
+
+            <div class="card-product" data-id="9">
+                <div class="container-img">
+                    <img src="../Imagenes/Paracetamol.png" alt="Paracetamol">
+                    <span class="discount">80%</span>
+                    <div class="button-group">
+                        <span><i class="fa-regular fa-eye"></i></span> 
+                        <span><i class="fa-regular fa-heart"></i></span> 
+                        <span><i class="fa-solid fa-code-compare"></i></span>
+                    </div>
+                </div>
+                <div class="content-card-product">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <h3>Paracetamol</h3>
+                    <button id="btnRosetas">
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping add-to-cart" data-product-id="9"></i>
+                        </span>
+                    </button>
+                    <p class="price">S/25 <span>S/28</span></p>
+                </div>
+            </div>
+
+            <div class="card-product" data-id="10">
+                <div class="container-img">
+                    <img src="../Imagenes/Salbutamol.jpg" alt="Salbutamol">
+                    <span class="discount">80%</span>
+                    <div class="button-group">
+                        <span><i class="fa-regular fa-eye"></i></span> 
+                        <span><i class="fa-regular fa-heart"></i></span> 
+                        <span><i class="fa-solid fa-code-compare"></i></span>
+                    </div>
+                </div>
+                <div class="content-card-product">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <h3>Salbutamol</h3>
+                    <button id="btnStand">
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping add-to-cart" data-product-id="10"></i>
+                        </span>
+                    </button>
+                    <p class="price">S/18 <span>S/25</span></p>
+                </div>
+            </div>
+
+            <div class="card-product" data-id="11">
+                <div class="container-img">
+                    <img src="../Imagenes/alcohol.jpg" alt="alcohol">
+                    <span class="discount">80%</span>
+                    <div class="button-group">
+                        <span><i class="fa-regular fa-eye"></i></span> 
+                        <span><i class="fa-regular fa-heart"></i></span> 
+                        <span><i class="fa-solid fa-code-compare"></i></span>
+                    </div>
+                </div>
+                <div class="content-card-product">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <h3>Alcohol</h3>
+                    <button id="btnStrawberryAntoinette2">
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping add-to-cart" data-product-id="11"></i>
+                        </span>
+                    </button>
+                    <p class="price">S/10 <span>S/20</span></p>
+                </div>
+            </div>
+
+            <div class="card-product" data-id="12">
+                <div class="container-img">
+                    <img src="../Imagenes/algodon.jpg" alt="algodon">
+                    <span class="discount">50%</span>
+                    <div class="button-group">
+                        <span><i class="fa-regular fa-eye"></i></span> 
+                        <span><i class="fa-regular fa-heart"></i></span> 
+                        <span><i class="fa-solid fa-code-compare"></i></span>
+                    </div>
+                </div>
+                <div class="content-card-product">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <h3>Algodon</h3>
+                    <button id="btnTortaDeAjedrez">
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping add-to-cart" data-product-id="12"></i>
+                        </span>
+                    </button>
+                    <p class="price">S/15 <span>S/20</span></p>
+                </div>
             </div>
 
         </div>
@@ -166,34 +495,10 @@
     document.addEventListener("DOMContentLoaded", function () {
         const menuIcon = document.querySelector(".fa-bars");
         const menu = document.querySelector(".menu");
+
         menuIcon.addEventListener("click", function () {
             menu.classList.toggle("responsive");
         });
-
-        // Depuración: log para saber si el JS se carga
-        console.log('index.js cargado correctamente');
-
-        // Si los botones existen, loguear y forzar visibilidad
-        const btnMedicamentos = document.getElementById('btnMedicamentos');
-        const btnAccesorios = document.getElementById('btnAccesorios');
-        const productosMedicamentos = document.getElementById('productos-medicamentos');
-        const productosAccesorios = document.getElementById('productos-accesorios');
-        if (btnMedicamentos && btnAccesorios && productosMedicamentos && productosAccesorios) {
-            btnMedicamentos.addEventListener('click', function() {
-                productosMedicamentos.style.display = 'block';
-                productosAccesorios.style.display = 'none';
-                btnMedicamentos.classList.add('active');
-                btnAccesorios.classList.remove('active');
-                console.log('Mostrando medicamentos');
-            });
-            btnAccesorios.addEventListener('click', function() {
-                productosMedicamentos.style.display = 'none';
-                productosAccesorios.style.display = 'block';
-                btnAccesorios.classList.add('active');
-                btnMedicamentos.classList.remove('active');
-                console.log('Mostrando accesorios');
-            });
-        }
     });
 </script>
 

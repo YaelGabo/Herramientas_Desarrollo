@@ -6,26 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const payButton = cartDropdown.querySelector('.btn-pagar');
     const API_URL = 'http://localhost/PROYECTO_HD/PHP/guardar_detalle_venta.php';
 
-    // Mostrar/ocultar productos
-    const btnMedicamentos = document.getElementById('btnMedicamentos');
-    const btnAccesorios = document.getElementById('btnAccesorios');
-    const productosMedicamentos = document.getElementById('productos-medicamentos');
-    const productosAccesorios = document.getElementById('productos-accesorios');
-
-    btnMedicamentos.addEventListener('click', () => {
-        productosMedicamentos.style.display = 'block';
-        productosAccesorios.style.display = 'none';
-        btnMedicamentos.classList.add('active');
-        btnAccesorios.classList.remove('active');
-    });
-
-    btnAccesorios.addEventListener('click', () => {
-        productosMedicamentos.style.display = 'none';
-        productosAccesorios.style.display = 'block';
-        btnAccesorios.classList.add('active');
-        btnMedicamentos.classList.remove('active');
-    });
-
     // Mostrar/ocultar el carrito
     cartIcon.addEventListener('click', () => {
         cartDropdown.style.display = cartDropdown.style.display === 'none' ? 'block' : 'none';

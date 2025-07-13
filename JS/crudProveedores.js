@@ -35,7 +35,6 @@
         };
     }
 document.addEventListener("DOMContentLoaded", function () {
-    console.log('crudProveedores.js cargado correctamente');
     const btnMostrarProveedores = document.getElementById("btnMostrarProveedores");
     const tablaProveedores = document.getElementById("tablaProveedores");
     const proveedoresBody = document.getElementById("tablaProveedoresBody");
@@ -121,16 +120,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Mostrar el modal
                 var modal = new bootstrap.Modal(document.getElementById('modalEditarProveedor'));
                 modal.show();
-                console.log('Modal de edición abierto');
-                // Asegurar que el botón Cancelar/Cerrar cierra el modal
-                const btnCerrar = document.querySelector('#modalEditarProveedor .btn-secondary');
-                if (btnCerrar) {
-                    btnCerrar.onclick = function() {
-                        var modalInst = bootstrap.Modal.getInstance(document.getElementById('modalEditarProveedor'));
-                        if (modalInst) modalInst.hide();
-                        console.log('Modal de edición cerrado por Cancelar');
-                    };
-                }
             };
         });
     }
@@ -159,7 +148,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     // Ocultar el modal
                     var modal = bootstrap.Modal.getInstance(document.getElementById('modalEditarProveedor'));
                     if (modal) modal.hide();
-                    console.log('Modal de edición cerrado por Actualizar');
                     // Recargar la tabla
                     cargarProveedores();
                     mostrarToast('Proveedor actualizado correctamente');
