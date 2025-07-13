@@ -43,73 +43,82 @@ $errores = [];
 
 $conexion->begin_transaction();
 
+
 try {
+    // Validar stock de todos los productos antes de registrar la venta
     foreach ($data as $item) {
-        if (!isset($item['id_producto'], $item['cantidad'], $item['precio'], $item['total'], $item['fecha'])) {
+        if (!isset($item['id_producto'], $item['cantidad'], $item['precio'])) {
             $errores[] = 'Faltan campos en uno o más productos.';
             continue;
         }
-
-        $id_producto = (int) $item['id_producto'];
-        $cantidad = (int) $item['cantidad'];
-        $precio = (float) $item['precio'];
-        $total = (float) $item['total'];
-        $fecha = $item['fecha'];
-
-        // Verificar stock disponible
-        $consulta_stock = $conexion->prepare("SELECT stock FROM producto WHERE id_producto = ?");
-        $consulta_stock->bind_param("i", $id_producto);
-        $consulta_stock->execute();
-        $resultado = $consulta_stock->get_result();
-
-        if ($resultado->num_rows === 0) {
-            $errores[] = "Producto con ID $id_producto no encontrado.";
+        $stmt = $conexion->prepare("SELECT stock FROM producto WHERE id_producto = ?");
+        $stmt->bind_param("i", $item['id_producto']);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        $producto = $resultado->fetch_assoc();
+        if (!$producto) {
+            $errores[] = "El producto con ID {$item['id_producto']} no existe.";
             continue;
         }
-
-        $fila = $resultado->fetch_assoc();
-        $stock_actual = (int) $fila['stock'];
-
-        if ($stock_actual < $cantidad) {
-            $errores[] = "Stock insuficiente para el producto ID $id_producto. Disponible: $stock_actual, requerido: $cantidad.";
+        if ($producto['stock'] < $item['cantidad']) {
+            $errores[] = "Stock insuficiente para el producto con ID {$item['id_producto']}.";
             continue;
         }
-
-        // Insertar venta
-        $stmt = $conexion->prepare("INSERT INTO venta (id_producto, cantidad, precio, total, fecha, id_usuario) VALUES (?, ?, ?, ?, ?, ?)");
-        if (!$stmt) {
-            $errores[] = "Error al preparar la consulta: " . $conexion->error;
-            continue;
-        }
-
-        $stmt->bind_param("iiddsi", $id_producto, $cantidad, $precio, $total, $fecha, $id_usuario);
-
-        if (!$stmt->execute()) {
-            $errores[] = "Error al insertar producto ID $id_producto: " . $stmt->error;
-        }
-
-        $stmt->close();
-
-        // Actualizar stock
-        $stmt_stock = $conexion->prepare("UPDATE producto SET stock = stock - ? WHERE id_producto = ?");
-        $stmt_stock->bind_param("ii", $cantidad, $id_producto);
-        if (!$stmt_stock->execute()) {
-            $errores[] = "Error al actualizar stock del producto ID $id_producto: " . $stmt_stock->error;
-        }
-        $stmt_stock->close();
     }
 
-    if (!empty($errores)) {
+    if (count($errores) > 0) {
+        $conexion->rollback();
+        http_response_code(400);
+        echo json_encode(['error' => $errores]);
+        exit;
+    }
+
+    // Calcular el total de la venta
+    $total_venta = 0;
+    foreach ($data as $item) {
+        $total_venta += $item['precio'] * $item['cantidad'];
+    }
+
+    // Insertar la venta (una sola vez)
+    $fecha = date('Y-m-d');
+    $stmt = $conexion->prepare("INSERT INTO venta (total, fecha, id_usuario) VALUES (?, ?, ?)");
+    $stmt->bind_param("dsi", $total_venta, $fecha, $id_usuario);
+    if (!$stmt->execute()) {
         $conexion->rollback();
         http_response_code(500);
-        echo json_encode([
-            'error' => 'Error al procesar una o más ventas.',
-            'detalles' => $errores
-        ]);
-    } else {
-        $conexion->commit();
-        echo json_encode(['success' => true, 'message' => 'Todos los productos se registraron y el stock fue actualizado.']);
+        echo json_encode(['error' => 'Error al guardar la venta: ' . $stmt->error]);
+        exit;
     }
+    $id_venta = $conexion->insert_id;
+
+    // Insertar los detalles de la venta y actualizar el stock
+    foreach ($data as $item) {
+        $stmt = $conexion->prepare("INSERT INTO detalle_venta (id_venta, id_producto, cantidad, precio) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("iiid", $id_venta, $item['id_producto'], $item['cantidad'], $item['precio']);
+        if (!$stmt->execute()) {
+            $conexion->rollback();
+            http_response_code(500);
+            echo json_encode(['error' => 'Error al guardar el detalle de venta: ' . $stmt->error]);
+            exit;
+        }
+        // Actualizar stock del producto
+        $stmt2 = $conexion->prepare("UPDATE producto SET stock = stock - ? WHERE id_producto = ?");
+        $stmt2->bind_param("ii", $item['cantidad'], $item['id_producto']);
+        if (!$stmt2->execute()) {
+            $conexion->rollback();
+            http_response_code(500);
+            echo json_encode(['error' => 'Error al actualizar el stock: ' . $stmt2->error]);
+            exit;
+        }
+    }
+
+    // Si todo salió bien, confirmar la transacción
+    $conexion->commit();
+    echo json_encode([
+        'success' => true,
+        'message' => 'Venta registrada correctamente',
+        'id_venta' => $id_venta
+    ]);
 
 } catch (Exception $e) {
     $conexion->rollback();

@@ -65,7 +65,9 @@
             <div class="card-footer text-end">
               
           
-              <button type="button" class="btn btn-primary" id="btnMostrarProveedores">Mostrar  Provedor </button>
+              <button type="button" class="btn btn-primary" id="btnMostrarProveedores">
+                <i class="fa fa-eye"></i> Mostrar Proveedores
+              </button>
             </div>
           </div>
         </form>
@@ -73,19 +75,112 @@
         <table id="tablaProveedores" class="table table-striped table-bordered">
           <thead class="table-dark">
             <tr>
-              <th>id_proveedor</th>
-              <th >nombre </th>
-              <th>ruc</th>
-              <th>direccion</th>
-              <th>telefono</th>
-            
-              
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>RUC</th>
+              <th>Dirección</th>
+              <th>Teléfono</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody id="tablaProveedoresBody">
-            <!-- Los productos se cargarán aquí -->
           </tbody>
         </table>
+
+        <!-- Modal para registrar nuevo proveedor -->
+        <div class="modal fade" id="modalProveedor" tabindex="-1" aria-labelledby="modalProveedorLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalProveedorLabel">Registrar Nuevo Proveedor</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+              </div>
+              <div class="modal-body">
+                <form id="formularioProveedor">
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label for="proveedorNombre" class="form-label">Nombre</label>
+                      <input type="text" class="form-control" id="proveedorNombre" name="proveedorNombre" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="proveedorRuc" class="form-label">RUC</label>
+                      <input type="text" class="form-control" id="proveedorRuc" name="proveedorRuc" required>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label for="proveedorDireccion" class="form-label">Dirección</label>
+                      <input type="text" class="form-control" id="proveedorDireccion" name="proveedorDireccion" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="proveedorTelefono" class="form-label">Teléfono</label>
+                      <input type="text" class="form-control" id="proveedorTelefono" name="proveedorTelefono">
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="btnGuardarProveedor">Guardar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal para editar proveedor -->
+        <div class="modal fade" id="modalEditarProveedor" tabindex="-1" aria-labelledby="modalEditarProveedorLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalEditarProveedorLabel">Editar Proveedor</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+              </div>
+              <div class="modal-body">
+                <form id="formularioEditarProveedor">
+                  <input type="hidden" id="editProveedorId" name="editProveedorId">
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label for="editProveedorNombre" class="form-label">Nombre</label>
+                      <input type="text" class="form-control" id="editProveedorNombre" name="editProveedorNombre" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="editProveedorRuc" class="form-label">RUC</label>
+                      <input type="text" class="form-control" id="editProveedorRuc" name="editProveedorRuc" required>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label for="editProveedorDireccion" class="form-label">Dirección</label>
+                      <input type="text" class="form-control" id="editProveedorDireccion" name="editProveedorDireccion" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="editProveedorTelefono" class="form-label">Teléfono</label>
+                      <input type="text" class="form-control" id="editProveedorTelefono" name="editProveedorTelefono">
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="btnActualizarProveedor">Actualizar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Toast notifications -->
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+          <div id="notificationToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+              <strong class="me-auto">Notificación</strong>
+              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+            </div>
+          </div>
+        </div>
+
+        <button type="button" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#modalProveedor">Nuevo Proveedor</button>
       </main>
     </div>
   </div>
@@ -98,9 +193,12 @@
       
     </div>
   </div>
-  <script src="../JS/crudProvedor.js"></script>
+  <script src="../JS/crudProveedores.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../JS/main.js"></script>
+  <script>
+    // Elimina el autoload de mostrar proveedores para que solo funcione con el botón
+  </script>
 </body>
 </html>
 

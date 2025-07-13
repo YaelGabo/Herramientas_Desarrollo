@@ -48,8 +48,9 @@ document.addEventListener("DOMContentLoaded", function () {
         productosBody.innerHTML = "";
 
         data.forEach((producto) => {
-            const estadoActivo = producto.estado == 1 || producto.estado === "Activo";
+            const estadoActivo = producto.estado === "Activo";
             const estadoTexto = estadoActivo ? "Activo" : "Inactivo";
+            const proveedores = producto.proveedores || '';
 
             const row = `
                 <tr data-id="${producto.id_producto}">
@@ -57,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <td>${producto.nombre_producto}</td>
                     <td>S/. ${producto.precio}</td>
                     <td id="stock-${producto.id_producto}">${producto.stock}</td>
-                    <td>${producto.id_proveedor}</td>
+                    <td>${proveedores}</td>
                     <td>${estadoTexto}</td>
                     <td><img src="../Imagenes/${producto.imagen}" alt="${producto.nombre_producto}" style="width: 80px;"></td>
                     <td>
@@ -168,17 +169,38 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     };
 
-    window.editarProducto = function (idProducto) {
+    window.editarProducto = async function (idProducto) {
         const fila = document.querySelector(`tr[data-id='${idProducto}']`);
         const celdas = fila.querySelectorAll("td");
 
         const nombre = celdas[1].innerText;
         const precio = celdas[2].innerText.replace("S/. ", "");
         const stock = celdas[3].innerText;
+        const proveedorActual = celdas[4].innerText;
+
+        // Obtener proveedores para el select
+        let proveedores = [];
+        try {
+            const resp = await fetch("../PHP/obtener_proveedores_select.php");
+            const data = await resp.json();
+            if (data.success && data.proveedores) {
+                proveedores = data.proveedores;
+            }
+        } catch (e) {
+            proveedores = [];
+        }
+
+        let selectHtml = `<select class='form-control' id='edit_proveedor'>`;
+        proveedores.forEach(p => {
+            const selected = proveedorActual.includes(p.nombre) ? 'selected' : '';
+            selectHtml += `<option value='${p.id_proveedor}' ${selected}>${p.nombre}</option>`;
+        });
+        selectHtml += `</select>`;
 
         celdas[1].innerHTML = `<input type="text" class="form-control" value="${nombre}">`;
         celdas[2].innerHTML = `<input type="number" class="form-control" value="${precio}">`;
         celdas[3].innerHTML = `<input type="number" class="form-control" value="${stock}">`;
+        celdas[4].innerHTML = selectHtml;
 
         celdas[7].innerHTML = `
             <button class="btn btn-success" onclick="guardarEdicion(${idProducto})">Guardar</button>
@@ -193,6 +215,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const nuevoNombre = celdas[1].querySelector("input").value;
         const nuevoPrecio = celdas[2].querySelector("input").value;
         const nuevoStock = celdas[3].querySelector("input").value;
+        const nuevoProveedor = celdas[4].querySelector("select") ? celdas[4].querySelector("select").value : null;
 
         fetch("../PHP/editar_producto.php", {
             method: "POST",
@@ -204,6 +227,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 nombre_producto: nuevoNombre,
                 precio: nuevoPrecio,
                 stock: nuevoStock,
+                id_proveedor: nuevoProveedor
             }),
         })
         .then((res) => res.json())
@@ -247,33 +271,56 @@ document.addEventListener("DOMContentLoaded", function () {
     // ✅ GUARDAR NUEVO PRODUCTO
     if (btnGuardarProducto) {
         btnGuardarProducto.addEventListener("click", function () {
-            if (!formNuevoProducto.checkValidity()) {
-                formNuevoProducto.classList.add("was-validated");
+            const form = document.getElementById('formProducto');
+            const alertDiv = document.getElementById('alertMessages');
+            
+            if (!form || !alertDiv) return;
+
+            if (!form.checkValidity()) {
+                form.classList.add("was-validated");
                 return;
             }
 
-            const formData = new FormData(formNuevoProducto);
+            // Show loading state
+            const spinner = btnGuardarProducto.querySelector('.spinner-border');
+            spinner.classList.remove('d-none');
+            btnGuardarProducto.disabled = true;
+
+            const formData = new FormData(form);
 
             fetch("../PHP/insertar_producto.php", {
                 method: "POST",
                 body: formData
             })
-            .then(response => response.json())
-            .then(data => {
+            .then(async response => {
+                let data;
+                try {
+                    data = await response.json();
+                } catch (e) {
+                    const text = await response.text();
+                    console.error("Respuesta inesperada:", text);
+                    showAlert("Error inesperado del servidor: " + text, "danger");
+                    return;
+                }
                 if (data.success) {
-                    alert("Producto guardado exitosamente");
-                    formNuevoProducto.reset();
-                    formNuevoProducto.classList.remove("was-validated");
-                    const modal = bootstrap.Modal.getInstance(document.getElementById("myModal"));
-                    if (modal) modal.hide();
+                    showAlert("Producto guardado exitosamente", "success");
+                    resetForm();
+                    setTimeout(() => {
+                        const modal = bootstrap.Modal.getInstance(myModal);
+                        if (modal) modal.hide();
+                    }, 1500);
                     cargarProductos();
                 } else {
-                    alert("Error al guardar el producto: " + (data.message || "Respuesta desconocida"));
+                    showAlert(data.error || "Error al guardar el producto", "danger");
                 }
             })
             .catch(error => {
                 console.error("Error al guardar producto:", error);
-                alert("Error al guardar el producto.");
+                showAlert("Error al guardar el producto", "danger");
+            })
+            .finally(() => {
+                spinner.classList.add('d-none');
+                btnGuardarProducto.disabled = false;
             });
         });
     }
@@ -377,6 +424,158 @@ document.addEventListener("DOMContentLoaded", function () {
     })
         .catch(error => {
             console.error('Error al filtrar ventas:', error);
+        });
+    }
+
+    const myModal = document.getElementById('myModal');
+    const imageInput = document.getElementById('imagen');
+    const imagePreview = document.getElementById('imagePreview');
+    const previewImg = imagePreview?.querySelector('img');
+    
+    // Load providers when modal is opened
+    if (myModal) {
+        myModal.addEventListener('show.bs.modal', function () {
+            cargarProveedores();
+            resetForm();
+        });
+    }
+
+    function cargarProveedores() {
+        const selectProveedor = document.getElementById('id_proveedor');
+        if (!selectProveedor) return;
+
+        fetch("../PHP/obtener_proveedores_select.php")
+            .then(response => response.json())
+            .then(data => {
+                if (data.success && data.proveedores) {
+                    selectProveedor.innerHTML = '<option value="">Seleccione un proveedor</option>';
+                    data.proveedores.forEach(proveedor => {
+                        selectProveedor.innerHTML += `<option value="${proveedor.id_proveedor}">${proveedor.nombre}</option>`;
+                    });
+                } else {
+                    selectProveedor.innerHTML = '<option value="">No hay proveedores disponibles</option>';
+                }
+            })
+            .catch(error => {
+                console.error("Error al cargar proveedores:", error);
+                showAlert("Error al cargar la lista de proveedores", "danger");
+            });
+    }
+
+    function resetForm() {
+        const form = document.getElementById('formProducto');
+        if (form) {
+            form.reset();
+            form.classList.remove('was-validated');
+            
+            const alertDiv = document.getElementById('alertMessages');
+            if (alertDiv) {
+                alertDiv.classList.add('d-none');
+                alertDiv.innerHTML = '';
+            }
+
+            if (imagePreview) {
+                imagePreview.style.display = 'none';
+                if (previewImg) previewImg.src = '';
+            }
+        }
+    }
+
+    function showAlert(message, type = 'danger') {
+        const alertDiv = document.getElementById('alertMessages');
+        if (alertDiv) {
+            alertDiv.className = `alert alert-${type}`;
+            alertDiv.textContent = message;
+            alertDiv.classList.remove('d-none');
+        }
+    }
+
+    // Image preview handler
+    if (imageInput && previewImg) {
+        imageInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) {
+                imagePreview.style.display = 'none';
+                return;
+            }
+
+            // Validate file size (2MB max)
+            if (file.size > 2 * 1024 * 1024) {
+                showAlert("La imagen no debe superar los 2MB", "danger");
+                this.value = '';
+                imagePreview.style.display = 'none';
+                return;
+            }
+
+            // Validate file type
+            const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+            if (!validTypes.includes(file.type)) {
+                showAlert("Por favor seleccione una imagen en formato JPG, JPEG, PNG o WEBP", "danger");
+                this.value = '';
+                imagePreview.style.display = 'none';
+                return;
+            }
+
+            // Show preview
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImg.src = e.target.result;
+                imagePreview.style.display = 'block';
+            }
+            reader.readAsDataURL(file);
+        });
+    }
+
+    // Submit handler for new product
+    if (btnGuardarProducto) {
+        btnGuardarProducto.addEventListener("click", function () {
+            const form = document.getElementById('formProducto');
+            const alertDiv = document.getElementById('alertMessages');
+            
+            if (!form || !alertDiv) return;
+
+            if (!form.checkValidity()) {
+                form.classList.add("was-validated");
+                return;
+            }
+
+            // Show loading state
+            const spinner = btnGuardarProducto.querySelector('.spinner-border');
+            spinner.classList.remove('d-none');
+            btnGuardarProducto.disabled = true;
+
+            const formData = new FormData(form);
+
+            fetch("../PHP/insertar_producto.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showAlert("Producto guardado exitosamente", "success");
+                    resetForm();
+                    
+                    // Close modal after a short delay
+                    setTimeout(() => {
+                        const modal = bootstrap.Modal.getInstance(myModal);
+                        if (modal) modal.hide();
+                    }, 1500);
+                    
+                    cargarProductos();
+                } else {
+                    showAlert(data.error || "Error al guardar el producto", "danger");
+                }
+            })
+            .catch(error => {
+                console.error("Error al guardar producto:", error);
+                showAlert("Error al guardar el producto", "danger");
+            })
+            .finally(() => {
+                // Reset loading state
+                spinner.classList.add('d-none');
+                btnGuardarProducto.disabled = false;
+            });
         });
     }
 

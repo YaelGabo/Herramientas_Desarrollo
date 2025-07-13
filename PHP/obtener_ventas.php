@@ -8,7 +8,7 @@ if (session_status() === PHP_SESSION_NONE) {
 $servername = "localhost:3306";
 $username = "root";
 $password = "G@bo1007";
-$dbname = "herramientas_desarrollo";
+$dbname = "herramientas_d";
 
 // Crear conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -19,7 +19,12 @@ if ($conn->connect_error) {
 }
 
 // Consulta para obtener todas las ventas
-$sql = "SELECT id_venta, id_producto, cantidad, precio, total, fecha, id_usuario FROM venta";
+$sql = "SELECT v.id_venta, dv.id_producto, p.nombre as nombre_producto, dv.cantidad, 
+        dv.precio, v.total, v.fecha, v.id_usuario, u.nombre as nombre_usuario 
+        FROM venta v 
+        INNER JOIN detalle_venta dv ON v.id_venta = dv.id_venta 
+        INNER JOIN producto p ON dv.id_producto = p.id_producto 
+        INNER JOIN usuarios u ON v.id_usuario = u.id";
 $result = $conn->query($sql);
 
 $ventas = [];

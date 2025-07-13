@@ -8,7 +8,7 @@ if (session_status() === PHP_SESSION_NONE) {
 $servername = "localhost:3306";
 $username = "root";
 $password = "G@bo1007";
-$dbname = "herramientas_desarrollo";
+$dbname = "herramientas_d";
 
 // Crear conexión
 $conn = new mysqli($servername, $username, $password, $dbname);

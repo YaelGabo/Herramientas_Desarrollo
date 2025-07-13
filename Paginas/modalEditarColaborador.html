@@ -1,0 +1,71 @@
+<!-- MODAL DE EDICIÓN DE COLABORADOR (PÉGALO AL FINAL DE TU BODY) -->
+<div class="modal fade" id="modalEditarColaborador" tabindex="-1" aria-labelledby="modalEditarColaboradorLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalEditarColaboradorLabel">Editar Colaborador</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formularioEditarColaborador">
+          <input type="hidden" id="editId" name="id">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="editNombre" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="editNombre" name="nombre" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="editPrimerApellido" class="form-label">Primer Apellido</label>
+              <input type="text" class="form-control" id="editPrimerApellido" name="primerApellido" required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="editDni" class="form-label">DNI</label>
+              <input type="text" class="form-control" id="editDni" name="dni" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="editDireccion" class="form-label">Dirección</label>
+              <input type="text" class="form-control" id="editDireccion" name="direccion" required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="editNumeroTelefonico" class="form-label">Teléfono</label>
+              <input type="text" class="form-control" id="editNumeroTelefonico" name="numeroTelefonico" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="editCorreoElectronico" class="form-label">Correo Electrónico</label>
+              <input type="email" class="form-control" id="editCorreoElectronico" name="correoElectronico" required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="editNombreUsuario" class="form-label">Usuario</label>
+              <input type="text" class="form-control" id="editNombreUsuario" name="nombreUsuario" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="editTipoUsuario" class="form-label">Tipo Usuario</label>
+              <input type="text" class="form-control" id="editTipoUsuario" name="tipoUsuario" required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="editContrasena" class="form-label">Nueva Contraseña</label>
+              <input type="password" class="form-control" id="editContrasena" name="contrasena">
+            </div>
+            <div class="col-md-6 mb-3" id="rowContrasenaActual">
+              <label for="editContrasenaActual" class="form-label">Contraseña Actual</label>
+              <input type="password" class="form-control" id="editContrasenaActual" name="contrasenaActual">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" id="btnActualizarColaborador">Actualizar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- FIN MODAL DE EDICIÓN DE COLABORADOR -->

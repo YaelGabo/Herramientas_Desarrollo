@@ -3,7 +3,7 @@
 $servername = "localhost:3306";
 $username = "root";
 $password = "G@bo1007";
-$dbname = "herramientas_desarrollo";
+$dbname = "herramientas_d";
 
 // Crear conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -19,7 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $contrasena = $_POST['password'];
 
     // Verificar si el usuario existe en la base de datos
-    $sql = "SELECT contrasena FROM usuarios WHERE nombreUsuario = ?";
+
+    $sql = "SELECT id, contrasena FROM usuarios WHERE nombreUsuario = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $nombreUsuario);
     $stmt->execute();
@@ -27,11 +28,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($stmt->num_rows > 0) {
         // Usuario encontrado, verificar contraseña
-        $stmt->bind_result($hashedPassword);
+        $stmt->bind_result($idUsuario, $hashedPassword);
         $stmt->fetch();
 
         if (password_verify($contrasena, $hashedPassword)) {
-            // Contraseña correcta, redirigir según el tipo de usuario
+            // Guardar id en la sesión
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+            $_SESSION['id'] = $idUsuario;
+            $_SESSION['nombreUsuario'] = $nombreUsuario;
+
+            // Redirigir según el tipo de usuario
             if (strpos($nombreUsuario, 'U') === 0) {
                 header("Location: ../paginas/FarmaTotal.html"); // Ruta relativa para usuarios
             } elseif (strpos($nombreUsuario, 'A') === 0) {

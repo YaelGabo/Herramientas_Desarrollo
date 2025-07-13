@@ -55,111 +55,210 @@
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <h1 class="h2 mt-3">Dashboard</h1>
 
-        <form id="frmProductos" autocomplete="off">
-          <div class="card mb-2">
-            <div class="card-body">
-              <input type="hidden" id="id_product" name="id_product">
-              <div class="row">
-                
-                <input type="text" id="buscador" class="form-control mb-3" placeholder="Buscar usuario...">
+
+        <div class="card mb-2">
+          <div class="card-body">
+            <input type="text" id="buscador" class="form-control mb-3" placeholder="Buscar usuario...">
             <div class="card-footer text-end">
-              
-          
               <button type="button" class="btn btn-primary" id="btnMostrarUsuarios">Mostrar Usuarios</button>
+              <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalColaborador">Nuevo Colaborador</button>
             </div>
           </div>
-        </form>
+        </div>
 
-        <table id="tablaUsuarios" class="table table-striped table-bordered">
+        <table class="table table-striped table-bordered" id="tablaUsuarios">
           <thead class="table-dark">
             <tr>
-              <th>id </th>
-              <th>nombre </th>
-              <th>primerApellido</th>
-              <th>dni</th>
-              <th>direccion</th>
-              <th>numeroTelefonico</th>
-              <th>correoElectronico</th>
-              <th>nombreUsuario</th>
-              <th>contrasena</th>
-              <th>tipoUsuario</th>
-              
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Primer Apellido</th>
+              <th>DNI</th>
+              <th>Dirección</th>
+              <th>Teléfono</th>
+              <th>Correo</th>
+              <th>Usuario</th>
+              <th>Contraseña</th>
+              <th>Tipo</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody id="tablaUsuariosBody">
-            <!-- Los productos se cargarán aquí -->
+            <!-- Los usuarios se cargarán aquí -->
           </tbody>
         </table>
       </main>
     </div>
   </div>
 
-  <!-- Modal para registrar nuevo producto -->
-  <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="modalProductoLabel" aria-hidden="true">
+             
+  <!-- Modal para registrar nuevo colaborador -->
+  <div class="modal fade" id="modalColaborador" tabindex="-1" aria-labelledby="modalColaboradorLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-
         <div class="modal-header">
-          <h5 class="modal-title" id="modalProductoLabel">Registrar Nuevo Producto</h5>
+          <h5 class="modal-title" id="modalColaboradorLabel">Registrar Nuevo Colaborador</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
         </div>
-
         <div class="modal-body">
-          <form id="formProducto" enctype="multipart/form-data" novalidate>
+          <form id="formularioColaborador">
             <div class="row">
               <div class="col-md-6 mb-3">
-                <label for="nombre_producto" class="form-label">Nombre del Producto</label>
-                <input type="text" class="form-control" id="nombre_producto" name="nombre_producto" required>
-                <div class="invalid-feedback">Este campo es obligatorio.</div>
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" required>
               </div>
-
-              <div class="col-md-3 mb-3">
-                <label for="precio" class="form-label">Precio</label>
-                <input type="number" class="form-control" id="precio" name="precio" step="0.01" min="0.01" required>
-                <div class="invalid-feedback">Ingrese un precio válido.</div>
-              </div>
-
-              <div class="col-md-3 mb-3">
-                <label for="modal_stock" class="form-label">Stock</label>
-                <input type="number" class="form-control" id="modal_stock" name="stock" min="1" required>
-                <div class="invalid-feedback">Ingrese el stock disponible.</div>
-              </div>
-
               <div class="col-md-6 mb-3">
-                <label for="id_proveedor" class="form-label">ID Proveedor</label>
-                <input type="number" class="form-control" id="id_proveedor" name="id_proveedor" min="1" required>
-                <div class="invalid-feedback">Este campo es obligatorio.</div>
+                <label for="primerApellido" class="form-label">Primer Apellido</label>
+                <input type="text" class="form-control" id="primerApellido" name="primerApellido" required>
               </div>
-
+            </div>
+            <div class="row">
               <div class="col-md-6 mb-3">
-                <label for="estado" class="form-label">Estado</label>
-                <select class="form-control" id="estado" name="estado" required>
-                  <option value="">Seleccione</option>
-                  <option value="Activo">Activo</option>
-                  <option value="Inactivo">Inactivo</option>
+                <label for="dni" class="form-label">DNI</label>
+                <input type="text" class="form-control" id="dni" name="dni" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="direccion" class="form-label">Dirección</label>
+                <input type="text" class="form-control" id="direccion" name="direccion" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="numeroTelefonico" class="form-label">Teléfono</label>
+                <input type="tel" class="form-control" id="numeroTelefonico" name="numeroTelefonico" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="correoElectronico" class="form-label">Correo Electrónico</label>
+                <input type="email" class="form-control" id="correoElectronico" name="correoElectronico" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="nombreUsuario" class="form-label">Nombre de Usuario</label>
+                <input type="text" class="form-control" id="nombreUsuario" name="nombreUsuario" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="contrasena" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" id="contrasena" name="contrasena" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="tipoUsuario" class="form-label">Tipo de Usuario</label>
+                <select class="form-control" id="tipoUsuario" name="tipoUsuario" required>
+                  <option value="">Seleccione...</option>
+                  <option value="Usuario">Usuario</option>
+                  <option value="Administrador">Administrador</option>
                 </select>
-                <div class="invalid-feedback">Seleccione un estado.</div>
-              </div>
-
-              <div class="col-md-12 mb-3">
-                <label for="imagen" class="form-label">Imagen del Medicamento</label>
-                <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" required>
-                <div class="invalid-feedback">Debe subir una imagen válida.</div>
               </div>
             </div>
           </form>
         </div>
-
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar Registro</button>
-          <button type="button" class="btn btn-success" id="btnGuardarProducto">Guardar Producto</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" id="btnGuardarColaborador">Guardar</button>
         </div>
-
       </div>
     </div>
   </div>
+
+  <!-- Modal para editar colaborador -->
+  <div class="modal fade" id="modalEditarColaborador" tabindex="-1" aria-labelledby="modalEditarColaboradorLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalEditarColaboradorLabel">Editar Colaborador</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <form id="formularioEditarColaborador">
+            <input type="hidden" id="editId" name="id">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="editNombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="editNombre" name="nombre" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="editPrimerApellido" class="form-label">Primer Apellido</label>
+                <input type="text" class="form-control" id="editPrimerApellido" name="primerApellido" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="editDni" class="form-label">DNI</label>
+                <input type="text" class="form-control" id="editDni" name="dni" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="editDireccion" class="form-label">Dirección</label>
+                <input type="text" class="form-control" id="editDireccion" name="direccion" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="editNumeroTelefonico" class="form-label">Teléfono</label>
+                <input type="tel" class="form-control" id="editNumeroTelefonico" name="numeroTelefonico" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="editCorreoElectronico" class="form-label">Correo Electrónico</label>
+                <input type="email" class="form-control" id="editCorreoElectronico" name="correoElectronico" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="editNombreUsuario" class="form-label">Nombre de Usuario</label>
+                <input type="text" class="form-control" id="editNombreUsuario" name="nombreUsuario" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="editContrasena" class="form-label">Nueva Contraseña (dejar en blanco para mantener la actual)</label>
+                <input type="password" class="form-control" id="editContrasena" name="contrasena">
+              </div>
+            </div>
+            <div class="row" id="rowContrasenaActual" style="display:none;">
+              <div class="col-md-6 mb-3">
+                <label for="editContrasenaActual" class="form-label">Contraseña Actual (obligatoria para cambiar la contraseña)</label>
+                <input type="password" class="form-control" id="editContrasenaActual" name="contrasenaActual">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="editTipoUsuario" class="form-label">Tipo de Usuario</label>
+                <select class="form-control" id="editTipoUsuario" name="tipoUsuario" required>
+                  <option value="">Seleccione...</option>
+                  <option value="Usuario">Usuario</option>
+                  <option value="Administrador">Administrador</option>
+                </select>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" id="btnActualizarColaborador">Actualizar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast notifications -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="notificationToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <strong class="me-auto">Notificación</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+      </div>
+    </div>
+  </div>
+
   <script src="../JS/crudUsuarios.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../JS/main.js"></script>
 </body>
 </html>
+
+        <script>
+        // Cargar usuarios automáticamente al abrir la página
+        document.addEventListener('DOMContentLoaded', function() {
+          document.getElementById('btnMostrarUsuarios').click();
+        });
+        </script>

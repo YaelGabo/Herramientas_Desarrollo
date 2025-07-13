@@ -5,15 +5,15 @@
 
       doc.text("Reporte de Ventas por Fecha", 14, 10);
 
-      const columns = ["ID Venta", "Producto", "Cantidad", "Precio", "Total", "Fecha", "Usuario"];
+      const columns = ["ID Venta", "Producto", "Cantidad", "Precio Unit.", "Subtotal", "Fecha", "Usuario"];
       const rows = ventas.map(venta => [
           venta.id_venta,
-          venta.id_producto,
+          venta.nombre_producto,
           venta.cantidad,
           `S/. ${venta.precio}`,
           `S/. ${venta.total}`,
           venta.fecha,
-          venta.id_usuario
+          venta.nombre_usuario
       ]);
 
       doc.autoTable({ head: [columns], body: rows, startY: 20 });

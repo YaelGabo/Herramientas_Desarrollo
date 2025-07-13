@@ -1,27 +1,30 @@
+
 <?php
-// mostrar_usuarios.php
-
-// 1) Incluir y ejecutar la lógica de conexión/importación
-include __DIR__ . '/importar_db.php';
-
-// 2) Ejecutar la consulta de usuarios
-$sql = "SELECT id, nombre, primerApellido, dni, direccion, numeroTelefonico, correoElectronico, nombreUsuario, contrasena, tipoUsuario FROM usuarios";
-$resultado = $conexion->query($sql);
-
-if ($resultado === false) {
-    http_response_code(500);
-    die(json_encode([ 'error' => "Error en la consulta SQL: " . $conexion->error]));
-}
-
-// 3) Recolectar resultados
-$data = [];
-while ($row = $resultado->fetch_assoc()) {
-    $data[] = $row;
-}
-
-// 4) Devolver JSON
 header('Content-Type: application/json');
-echo json_encode($data);
 
-// 5) Cerrar conexión
-$conexion->close();
+try {
+    require_once 'importar_db.php';
+
+    // Usar la variable correcta de conexión: $conexion
+    $sql = "SELECT id, nombre, primerApellido, dni, direccion, numeroTelefonico, correoElectronico, nombreUsuario, tipoUsuario FROM usuarios";
+    $result = $conexion->query($sql);
+    if ($result === false) {
+        throw new Exception("Error en la consulta SQL: " . $conexion->error);
+    }
+    $usuarios = [];
+    while ($row = $result->fetch_assoc()) {
+        $usuarios[] = $row;
+    }
+    echo json_encode($usuarios);
+
+} catch (Exception $e) {
+    http_response_code(400);
+    echo json_encode(['success' => false, 'error' => $e->getMessage()]);
+} finally {
+    if (isset($result) && $result instanceof mysqli_result) {
+        $result->free();
+    }
+    if (isset($conexion)) {
+        $conexion->close();
+    }
+}

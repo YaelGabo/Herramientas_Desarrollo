@@ -9,7 +9,7 @@ if (session_status() == PHP_SESSION_NONE) {
 $servername = "localhost:3306";
 $username = "root";
 $password = "G@bo1007";
-$dbname = "herramientas_desarrollo";
+$dbname = "herramientas_d";
 
 // 1) Conectar al servidor
 $conexion = new mysqli($servername, $username, $password);
@@ -19,7 +19,12 @@ if ($conexion->connect_error) {
 
 // 2) Si la base de datos no existe, crearla e importar el SQL
 if (!$conexion->select_db($dbname)) {
-    $sql = file_get_contents(__DIR__ . '/database/registro_usuario.sql');
+    $sql = file_get_contents(__DIR__ . '/../Database/herramientas_d_usuarios.sql') . "\n" .
+           file_get_contents(__DIR__ . '/../Database/herramientas_d_producto.sql') . "\n" .
+           file_get_contents(__DIR__ . '/../Database/herramientas_d_producto_proveedor.sql') . "\n" .
+           file_get_contents(__DIR__ . '/../Database/herramientas_d_proveedores.sql') . "\n" .
+           file_get_contents(__DIR__ . '/../Database/herramientas_d_venta.sql') . "\n" .
+           file_get_contents(__DIR__ . '/../Database/herramientas_d_detalle_venta.sql');
     if (!$conexion->multi_query($sql)) {
         die("Error al importar la base de datos: " . $conexion->error);
     }
