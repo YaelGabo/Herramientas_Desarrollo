@@ -1,30 +1,27 @@
-    // Registrar nuevo proveedor
-    const btnGuardarProveedor = document.getElementById('btnGuardarProveedor');
-    if (btnGuardarProveedor) {
-        btnGuardarProveedor.onclick = function() {
-            const nombre = document.getElementById('proveedorNombre').value;
-            const ruc = document.getElementById('proveedorRuc').value;
-            const direccion = document.getElementById('proveedorDireccion').value;
-            const telefono = document.getElementById('proveedorTelefono').value;
-            if (!nombre || !ruc || !direccion) {
-                mostrarToast('Por favor, completa todos los campos obligatorios.');
-                return;
-            }
-            const proveedor = { nombre, ruc, direccion, telefono };
-            fetch('../PHP/insertar_proveedor.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(proveedor)
-            })
+// Registrar nuevo proveedor
+const btnGuardarProveedor = document.getElementById('btnGuardarProveedor');
+if (btnGuardarProveedor) {
+    btnGuardarProveedor.onclick = function () {
+        const nombre = document.getElementById('proveedorNombre').value;
+        const ruc = document.getElementById('proveedorRuc').value;
+        const direccion = document.getElementById('proveedorDireccion').value;
+        const telefono = document.getElementById('proveedorTelefono').value;
+        if (!nombre || !ruc || !direccion) {
+            mostrarToast('Por favor, completa todos los campos obligatorios.');
+            return;
+        }
+        const proveedor = { nombre, ruc, direccion, telefono };
+        fetch('../PHP/insertar_proveedor.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(proveedor)
+        })
             .then(r => r.json())
             .then(res => {
                 if (res.success) {
-                    // Ocultar el modal
                     var modal = bootstrap.Modal.getInstance(document.getElementById('modalProveedor'));
                     if (modal) modal.hide();
-                    // Limpiar formulario
                     document.getElementById('formularioProveedor').reset();
-                    // Recargar la tabla
                     cargarProveedores();
                     mostrarToast('Proveedor registrado correctamente');
                 } else {
@@ -32,24 +29,23 @@
                 }
             })
             .catch(() => mostrarToast('Error de conexión al registrar proveedor.'));
-        };
-    }
+    };
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     const btnMostrarProveedores = document.getElementById("btnMostrarProveedores");
     const tablaProveedores = document.getElementById("tablaProveedores");
     const proveedoresBody = document.getElementById("tablaProveedoresBody");
 
-    // Ocultar tabla al cargar
     if (tablaProveedores) {
         tablaProveedores.style.display = "none";
     }
 
-    // Mostrar tabla y cargar proveedores al cargar la página
     if (tablaProveedores) {
         tablaProveedores.style.display = "table";
         cargarProveedores();
     }
-    // Mostrar/ocultar tabla con el botón y cambiar ícono
+
     if (btnMostrarProveedores && tablaProveedores) {
         btnMostrarProveedores.innerHTML = '<i class="fa fa-eye"></i> Mostrar Proveedores';
         btnMostrarProveedores.addEventListener("click", function () {
@@ -70,10 +66,10 @@ document.addEventListener("DOMContentLoaded", function () {
             const row = `
                 <tr data-id="${proveedor.id_proveedor}">
                     <td>${proveedor.id_proveedor}</td>
-                    <td contenteditable="false">${proveedor.nombre}</td>
-                    <td contenteditable="false">${proveedor.ruc}</td>
-                    <td contenteditable="false">${proveedor.direccion}</td>
-                    <td contenteditable="false">${proveedor.telefono}</td>
+                    <td>${proveedor.nombre}</td>
+                    <td>${proveedor.ruc}</td>
+                    <td>${proveedor.direccion}</td>
+                    <td>${proveedor.telefono}</td>
                     <td>
                         <button class="btn btn-warning btn-sm btn-editar">Editar</button>
                         <button class="btn btn-danger btn-sm btn-eliminar">Eliminar</button>
@@ -86,9 +82,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function agregarEventosCRUDProveedores() {
-        // Eliminar proveedor
         document.querySelectorAll('.btn-eliminar').forEach(btn => {
-            btn.onclick = function() {
+            btn.onclick = function () {
                 const fila = this.closest('tr');
                 const id = fila.getAttribute('data-id');
                 if (confirm('¿Seguro que deseas eliminar este proveedor?')) {
@@ -97,69 +92,80 @@ document.addEventListener("DOMContentLoaded", function () {
                         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                         body: 'id_proveedor=' + encodeURIComponent(id)
                     })
-                    .then(r => r.json())
-                    .then(res => {
-                        if (res.success) fila.remove();
-                        else alert('Error: ' + (res.error || 'No se pudo eliminar.'));
-                    });
+                        .then(r => r.json())
+                        .then(res => {
+                            if (res.success) fila.remove();
+                            else alert('Error: ' + (res.error || 'No se pudo eliminar.'));
+                        });
                 }
             };
         });
 
-        // Editar proveedor con modal
         document.querySelectorAll('.btn-editar').forEach(btn => {
-            btn.onclick = function() {
+            btn.onclick = function () {
                 const fila = this.closest('tr');
                 const tds = fila.querySelectorAll('td');
-                // Rellenar el modal con los datos del proveedor
-                document.getElementById('editProveedorId').value = tds[0].textContent;
-                document.getElementById('editProveedorNombre').value = tds[1].textContent;
-                document.getElementById('editProveedorRuc').value = tds[2].textContent;
-                document.getElementById('editProveedorDireccion').value = tds[3].textContent;
-                document.getElementById('editProveedorTelefono').value = tds[4].textContent;
-                // Mostrar el modal
-                var modal = new bootstrap.Modal(document.getElementById('modalEditarProveedor'));
-                modal.show();
+                const valoresOriginales = Array.from(tds).slice(1, 5).map(td => td.textContent);
+                fila.dataset.original = JSON.stringify(valoresOriginales);
+
+                for (let i = 1; i <= 4; i++) {
+                    const valor = tds[i].textContent;
+                    tds[i].innerHTML = `<input type="text" class="form-control form-control-sm" value="${valor}">`;
+                }
+
+                tds[5].innerHTML = `
+                    <button class="btn btn-success btn-sm btn-guardar">Guardar</button>
+                    <button class="btn btn-secondary btn-sm btn-cancelar">Cancelar</button>
+                `;
             };
+        });
+
+        // Evento delegado para guardar cambios
+        proveedoresBody.addEventListener('click', function (e) {
+            if (e.target.classList.contains('btn-guardar')) {
+                const fila = e.target.closest('tr');
+                const id = fila.getAttribute('data-id');
+                const inputs = fila.querySelectorAll('input');
+                const nombre = inputs[0].value;
+                const ruc = inputs[1].value;
+                const direccion = inputs[2].value;
+                const telefono = inputs[3].value;
+
+                const proveedor = { id_proveedor: id, nombre, ruc, direccion, telefono };
+
+                fetch('../PHP/editar_proveedor.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(proveedor)
+                })
+                    .then(r => r.json())
+                    .then(res => {
+                        if (res.success) {
+                            cargarProveedores();
+                            mostrarToast('Proveedor actualizado correctamente');
+                        } else {
+                            mostrarToast('Error: ' + (res.error || 'No se pudo editar.'));
+                        }
+                    })
+                    .catch(() => mostrarToast('Error de conexión al editar proveedor.'));
+            }
+
+            if (e.target.classList.contains('btn-cancelar')) {
+                const fila = e.target.closest('tr');
+                const tds = fila.querySelectorAll('td');
+                const originales = JSON.parse(fila.dataset.original);
+                for (let i = 1; i <= 4; i++) {
+                    tds[i].textContent = originales[i - 1];
+                }
+                tds[5].innerHTML = `
+                    <button class="btn btn-warning btn-sm btn-editar">Editar</button>
+                    <button class="btn btn-danger btn-sm btn-eliminar">Eliminar</button>
+                `;
+                agregarEventosCRUDProveedores(); // volver a enganchar los eventos
+            }
         });
     }
 
-    // Evento robusto para actualizar proveedor desde el modal
-    document.addEventListener('click', function(e) {
-        if (e.target && e.target.id === 'btnActualizarProveedor') {
-            const id = document.getElementById('editProveedorId').value;
-            const nombre = document.getElementById('editProveedorNombre').value.trim();
-            const ruc = document.getElementById('editProveedorRuc').value.trim();
-            const direccion = document.getElementById('editProveedorDireccion').value.trim();
-            const telefono = document.getElementById('editProveedorTelefono').value.trim();
-            if (!nombre || !ruc || !direccion) {
-                mostrarToast('Por favor, completa todos los campos obligatorios.');
-                return;
-            }
-            const proveedor = { id_proveedor: id, nombre, ruc, direccion, telefono };
-            fetch('../PHP/editar_proveedor.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(proveedor)
-            })
-            .then(r => r.json())
-            .then(res => {
-                if (res.success) {
-                    // Ocultar el modal
-                    var modal = bootstrap.Modal.getInstance(document.getElementById('modalEditarProveedor'));
-                    if (modal) modal.hide();
-                    // Recargar la tabla
-                    cargarProveedores();
-                    mostrarToast('Proveedor actualizado correctamente');
-                } else {
-                    mostrarToast('Error: ' + (res.error || 'No se pudo editar.'));
-                }
-            })
-            .catch(() => mostrarToast('Error de conexión al editar proveedor.'));
-        }
-    });
-
-    // Toast de notificación
     function mostrarToast(mensaje) {
         const toastEl = document.getElementById('notificationToast');
         if (toastEl) {

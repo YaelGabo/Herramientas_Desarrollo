@@ -3,7 +3,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Datos de conexión a la base de datos
     $servername = "localhost:3306";
     $username = "root";
-    $password = "G@bo1007";
+    $password = "";
     $dbname = "herramientas_d";
 
     // Crear conexión
@@ -24,6 +24,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nombreUsuario = $_POST['nombreUsuario'];
     $contrasena = $_POST['contrasena'];
     $confirmarContrasena = $_POST['confirmarContrasena'];
+
+    // Validar tipo por la letra inicial del nombre de usuario
+    $letraInicial = strtoupper(substr($nombreUsuario, 0, 1));
+    if ($letraInicial === 'A') {
+        $tipoUsuario = 'Administrador';
+    } elseif ($letraInicial === 'U') {
+        $tipoUsuario = 'Usuario';
+    } else {
+        // Si no empieza con A o U, redirige al formulario sin registrar
+        header('Location: ../Paginas/register.html');
+        exit();
+    }
 
     // Verificar si las contraseñas coinciden
     if ($contrasena !== $confirmarContrasena) {
@@ -72,10 +84,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         // Insertar los datos en la base de datos
         $hashedPassword = password_hash($contrasena, PASSWORD_BCRYPT); // Encriptar la contraseña
-        $sql = "INSERT INTO usuarios (nombre, primerApellido, dni, direccion, numeroTelefonico, correoElectronico, nombreUsuario, contrasena) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO usuarios (nombre, primerApellido, dni, direccion, numeroTelefonico, correoElectronico, nombreUsuario, contrasena, tipoUsuario) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssssssss", $nombre, $primerApellido, $dni, $direccion, $numeroTelefonico, $correoElectronico, $nombreUsuario, $hashedPassword);
+        $stmt->bind_param("sssssssss", $nombre, $primerApellido, $dni, $direccion, $numeroTelefonico, $correoElectronico, $nombreUsuario, $hashedPassword, $tipoUsuario);
 
         if ($stmt->execute()) {
             // Mostrar los datos registrados

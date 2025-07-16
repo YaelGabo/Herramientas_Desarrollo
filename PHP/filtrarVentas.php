@@ -10,7 +10,7 @@ header('Content-Type: application/json');
 // Datos de conexión a la base de datos
 $servername = "localhost:3306";
 $username = "root";
-$password = "G@bo1007";
+$password = "";
 $dbname = "herramientas_d";
 
 // Crear conexión
@@ -32,7 +32,12 @@ if (!$de || !$hasta) {
     exit;
 }
 
-$sql = "SELECT * FROM venta WHERE fecha BETWEEN ? AND ?";
+// Consulta con JOIN para traer los datos completos
+$sql = "SELECT v.id_venta, dv.id_producto, dv.cantidad, dv.precio, v.total, v.fecha, v.id_usuario
+        FROM venta v
+        INNER JOIN detalle_venta dv ON v.id_venta = dv.id_venta
+        WHERE v.fecha BETWEEN ? AND ?";
+
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ss", $de, $hasta);
 $stmt->execute();
